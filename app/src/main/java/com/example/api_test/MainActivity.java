@@ -46,9 +46,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         city_name = intent.getStringExtra("city_name");
         gu_name = intent.getStringExtra("gu_name");
+
+
         if(city_name != null && gu_name != null){
             Btn_region.setText(city_name + " - " + gu_name);
         }
+
 
 
     }
@@ -136,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sidoCd = "390000";
             }
         }
-        String queryUrl="http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey;
+        String queryUrl="http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=20";
         if(sidoCd != null){
             queryUrl += "&sidoCd=" + sidoCd;
         }
