@@ -184,7 +184,6 @@
         <item>음성군</item>
         <item>제천시</item>
         <item>진천군</item>
-        <item>청원군</item>
         <item>청주시</item>
         <item>충주시</item>
         <item>증평군</item>
@@ -300,8 +299,6 @@
     </string-array>
     <string-array name="jeaju_middle">
         <item>전체</item>
-        <item>남제주군</item>
-        <item>북제주군</item>
         <item>서귀포시</item>
         <item>제주시</item>
     </string-array>
