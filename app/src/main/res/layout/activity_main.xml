@@ -25,16 +25,16 @@
         />
 
     <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_result"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:layout_height="wrap_content"/>
 
     </ScrollView>
+
 
 </LinearLayout>

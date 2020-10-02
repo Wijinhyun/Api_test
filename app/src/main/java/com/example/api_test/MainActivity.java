@@ -1,16 +1,21 @@
 package com.example.api_test;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Movie;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.api_test.R;
+import com.example.api_test.Region_listview;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -19,6 +24,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -29,7 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String city_name;
     private String gu_name;
 
+    private RecyclerView recyclerView;
+    private CustomAdapter adapter;
+    private LinearLayoutManager manager;
 
+    ArrayList<HospitalItem> list = null;
+    HospitalItem item = null;
     XmlPullParser xpp;
     private TextView Tv_result;
     private String mykey = "%2BHeQuB3%2FCasGAbmRnedYca%2B6ESWu%2FcHnzFBtykDvwHZZLfz0ZTTJ2mANSme5%2Blr1DgBnQ4WJnmLXPwxsatF3Pw%3D%3D";
@@ -39,6 +50,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
+        manager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
+
+
 
         init();
 
@@ -67,19 +84,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        data=getXmlData();
+
+                        getXmlData();
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Tv_result.setText(data);
+
+                                if(list.isEmpty() == false || list.size() != 0) {
+                                    Log.d("list_check", list.size() + "");
+                                    adapter = new CustomAdapter(getApplicationContext(), list);
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
                             }
                         });
                     }
                 }).start();
+
+
+
                 break;
+
             default:
                 break;
+
         }
 
     }
@@ -88,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void init(){
         Btn_region = (Button) findViewById(R.id.btn_region);
         Btn_search = (Button) findViewById(R.id.btn_search);
-        Tv_result = (TextView) findViewById(R.id.tv_result);
 
         Btn_region.setOnClickListener(this);
         Btn_search.setOnClickListener(this);
@@ -97,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    String getXmlData(){
+    private void getXmlData(){
         StringBuffer buffer=new StringBuffer();
 
         String sidoCd = null;
@@ -144,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             queryUrl += "&sidoCd=" + sidoCd;
         }
 
+        Log.d("TAG",queryUrl);
         try{
             URL url= new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
             InputStream is= url.openStream(); //url위치로 입력스트림 연결
@@ -153,92 +182,98 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             xpp.setInput( new InputStreamReader(is, "UTF-8") ); //inputstream 으로부터 xml 입력받기
 
             String tag;
-
-            xpp.next();
             int eventType= xpp.getEventType();
+
+
+
+
             while( eventType != XmlPullParser.END_DOCUMENT ){
+
                 switch( eventType ){
                     case XmlPullParser.START_DOCUMENT:
-                        buffer.append("파싱 시작...\n\n");
+                        list = new ArrayList<HospitalItem>();
                         break;
 
                     case XmlPullParser.START_TAG:
                         tag= xpp.getName();//테그 이름 얻어오기
-
-                        if(tag.equals("item")) ;// 첫번째 검색결과
-                        else if(tag.equals("addr")){
-                            buffer.append("주소 : ");
-                            xpp.next();
-                            buffer.append(xpp.getText());//title 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n"); //줄바꿈 문자 추가
+                        String test = xpp.getText();
+                        if (tag.equals("item")) {
+                            item = new HospitalItem();
                         }
-                        else if(tag.equals("clCdNm")){
-                            buffer.append("병원종류 : ");
+                        else if (tag.equals("addr")) {
                             xpp.next();
+                            item.setAddr(xpp.getText());
                             buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n");//줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("estbDd")){
-                            buffer.append("설립일 :");
+                            buffer.append("\n");
+                            Log.d("item_check_address", item.getAddr());
+
+                        } else if (tag.equals("clCdNm")) {
+
                             xpp.next();
+                            item.setClCdNm(xpp.getText());
                             buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n");//줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("gdrCnt")){
-                            buffer.append("일반의 수 :");
+                            buffer.append("\n");
+
+                        } else if (tag.equals("estbDd")) {
                             xpp.next();
-                            buffer.append(xpp.getText());//telephone 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n");//줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("hospUrl")){
-                            buffer.append("홈페이지 :");
+                            item.setEstbDd(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
+                        } else if (tag.equals("gdrCnt")) {
                             xpp.next();
-                            buffer.append(xpp.getText());//address 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n");//줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("intnCnt")){
-                            buffer.append("인턴 수 :");
+                            item.setGdrCnt(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
+                        } else if (tag.equals("hospUrl")) {
+
                             xpp.next();
-                            buffer.append(xpp.getText());//mapx 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n"); //줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("postNo")){
-                            buffer.append("우편번호 :");
+                            item.setHospUrl(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
+                        } else if (tag.equals("intnCnt")) {
+
                             xpp.next();
-                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n"); //줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("resdntCnt")){
-                            buffer.append("레지턴트 수 :");
+                            item.setIntnCnt(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
+                        } else if (tag.equals("postNo")) {
+
                             xpp.next();
-                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n"); //줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("sdrCnt")){
-                            buffer.append("전문의 수 :");
+                            item.setPostNo(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
+                        } else if (tag.equals("resdntCnt")) {
+
                             xpp.next();
-                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n"); //줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("telno")){
-                            buffer.append("전화번호 :");
+                            item.setResdntCnt(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
+                        } else if (tag.equals("sdrCnt")) {
                             xpp.next();
-                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n"); //줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("yadmNm")){
-                            buffer.append("병원 이름 :");
+                            item.setSdrCnt(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
+                        } else if (tag.equals("telno")) {
                             xpp.next();
-                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n"); //줄바꿈 문자 추가
-                        }
-                        else if(tag.equals("ykiho")){
-                            buffer.append("병원암호코드 :");
+                            item.setTelno(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
+
+                        } else if (tag.equals("yadmNm")) {
                             xpp.next();
-                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-                            buffer.append("\n"); //줄바꿈 문자 추가
+                            item.setYadmNm(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
+
+                        } else if (tag.equals("ykiho")) {
+
+                            xpp.next();
+                            item.setYkiho(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
                         }
                         break;
+
 
                     case XmlPullParser.TEXT:
                         break;
@@ -246,7 +281,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case XmlPullParser.END_TAG:
                         tag= xpp.getName(); //테그 이름 얻어오기
 
-                        if(tag.equals("item")) buffer.append("\n");// 첫번째 검색결과종료..줄바꿈
+                        if(tag.equals("item") && item != null){
+                            Log.d("adapter_address_check", item.getAddr());
+                            //Trial1
+                            list.add(item);
+
+                        }
                         break;
                 }
 
@@ -256,9 +296,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception e){
             e.printStackTrace();
         }
-
-        buffer.append("파싱 끝\n");
-        return buffer.toString();//StringBuffer 문자열 객체 반환
 
     }
 }
