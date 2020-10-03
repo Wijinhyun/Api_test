@@ -84,9 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-
                         getXmlData();
-
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -794,7 +792,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 eventType= xpp.next();
             }
-
+            Log.d("TAG", list.size() + "");
         } catch (Exception e){
             e.printStackTrace();
         }
