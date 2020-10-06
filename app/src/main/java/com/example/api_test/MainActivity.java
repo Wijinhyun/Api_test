@@ -11,6 +11,7 @@ import android.graphics.Movie;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -65,12 +66,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onScrolled(@NonNull final RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
+
+
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             Datanumber += 10;
                             list.clear();
-                            getXmlData();
+                            //list.add(new HospitalItem("1","1","1","1","1","1","1","1","1","1","1","1"));
+
+
+                            //여기에 데이터 추가하기
+
+                           getXmlData();
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -79,8 +87,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         adapter = new CustomAdapter(getApplicationContext(), list);
                                         recyclerView.setAdapter(adapter);
                                         //adapter.notifyItemRangeChanged(Datanumber-10,Datanumber-1);
+                                        //Parcelable temp;
+                                        //temp =recyclerView.getLayoutManager().onSaveInstanceState();
                                         adapter.notifyDataSetChanged();
-                                        Toast.makeText(MainActivity.this, Datanumber + "개", Toast.LENGTH_SHORT).show();
+                                        //recyclerView.setAdapter(adapter);
+                                        //recyclerView.getLayoutManager().onRestoreInstanceState(temp);
+                                        Toast.makeText(MainActivity.this, list.size() + "개", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
