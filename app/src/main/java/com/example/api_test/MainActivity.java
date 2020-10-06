@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String mykey = "%2BHeQuB3%2FCasGAbmRnedYca%2B6ESWu%2FcHnzFBtykDvwHZZLfz0ZTTJ2mANSme5%2Blr1DgBnQ4WJnmLXPwxsatF3Pw%3D%3D";
     private String data;
     private int Datanumber = 10;
-
+    private int Pagenumber = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +71,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Datanumber += 10;
-                            list.clear();
+                            //Datanumber += 10;
+                            Pagenumber +=1;
+                            //list.clear();
                             //list.add(new HospitalItem("1","1","1","1","1","1","1","1","1","1","1","1"));
 
 
                             //여기에 데이터 추가하기
 
-                           getXmlData();
+                            getXmlData();
+
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -160,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         Datanumber = 10;
+                        list = new ArrayList<HospitalItem>();
                         getXmlData();
                         runOnUiThread(new Runnable() {
                             @Override
@@ -193,8 +196,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Btn_region.setOnClickListener(this);
         Btn_search.setOnClickListener(this);
-
-
     }
 
     private void getXmlData() {
@@ -202,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String sidoCd = null;
         String sgguCd = null;
-        String queryUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=" + Datanumber;
+        String queryUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=20" + "&pageNo="+Pagenumber;
         if (city_name != null) {
             if (city_name.equals("서울")) {
                 sidoCd = "110000";
@@ -763,7 +764,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (eventType) {
                     case XmlPullParser.START_DOCUMENT:
-                        list = new ArrayList<HospitalItem>();
+                        Log.d("TAG", queryUrl);
                         break;
 
                     case XmlPullParser.START_TAG:
@@ -777,7 +778,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             buffer.append("\n");
                             Log.d("item_check_address", item.getAddr());
-
                         } else if (tag.equals("clCdNm")) {
 
                             xpp.next();
