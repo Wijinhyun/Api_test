@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String data;
     private int Datanumber = 10;
     private int Pagenumber = 1;
+    private int overallXScroll = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,21 +65,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(@NonNull final RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(final RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
 
+                if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
 
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            //Datanumber += 10;
                             Pagenumber +=1;
-                            //list.clear();
-                            //list.add(new HospitalItem("1","1","1","1","1","1","1","1","1","1","1","1"));
-
-
-                            //여기에 데이터 추가하기
 
                             getXmlData();
 
@@ -86,14 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 public void run() {
                                     if (list.isEmpty() == false || list.size() != 0) {
                                         Log.d("list_check", list.size() + "");
-                                        adapter = new CustomAdapter(getApplicationContext(), list);
-                                        recyclerView.setAdapter(adapter);
-                                        //adapter.notifyItemRangeChanged(Datanumber-10,Datanumber-1);
-                                        //Parcelable temp;
-                                        //temp =recyclerView.getLayoutManager().onSaveInstanceState();
                                         adapter.notifyDataSetChanged();
-                                        //recyclerView.setAdapter(adapter);
-                                        //recyclerView.getLayoutManager().onRestoreInstanceState(temp);
                                         Toast.makeText(MainActivity.this, list.size() + "개", Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -103,35 +92,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
             }
-
-
-
-            /*@Override
-            public void onScrollStateChanged(@NonNull final RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
-
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Datanumber+=10;
-                            getXmlData();
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if(list.isEmpty() == false || list.size() != 0) {
-                                        Log.d("list_check", list.size() + "");
-                                        adapter = new CustomAdapter(getApplicationContext(), list);
-                                        recyclerView.setAdapter(adapter);
-                                        adapter.notifyDataSetChanged();
-                                        Toast.makeText(MainActivity.this, Datanumber+"개", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                        }
-                    }).start();
-                }
-            }*/
         });
 
 
@@ -146,8 +106,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (city_name != null && gu_name != null) {
             Btn_region.setText(city_name + " - " + gu_name);
         }
-
-
     }
 
     @Override
@@ -179,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }).start();
 
-
                 break;
 
             default:
@@ -188,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
 
     private void init() {
         Btn_region = (Button) findViewById(R.id.btn_region);
@@ -203,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String sidoCd = null;
         String sgguCd = null;
-        String queryUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=20" + "&pageNo="+Pagenumber;
+        String queryUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=10" + "&pageNo="+Pagenumber;
         if (city_name != null) {
             if (city_name.equals("서울")) {
                 sidoCd = "110000";
