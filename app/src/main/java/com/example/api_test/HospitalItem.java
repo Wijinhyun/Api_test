@@ -1,10 +1,30 @@
 package com.example.api_test;
 
+import java.util.ArrayList;
+
 public class HospitalItem {
 
-    String addr, clCdNm, estbDd, gdrCnt, hospUrl, intnCnt, postNo, resdntCnt, sdrCnt, telno, yadmNm, ykiho;
+    private String addr, clCdNm, estbDd, gdrCnt, hospUrl, intnCnt, postNo, resdntCnt, sdrCnt, telno, yadmNm, ykiho;
+    private ArrayList<String> dgsbjtCdNm = new ArrayList<String>(), dgsbjtPrSdrCnt = new ArrayList<String>();
 
-    public HospitalItem(String addr, String clCdNm, String estbDd, String gdrCnt, String hospUrl, String intnCnt, String postNo, String resdntCnt, String sdrCnt, String telno, String yadmNm, String ykiho) {
+
+    public ArrayList<String> getDgsbjtCdNm() {
+        return dgsbjtCdNm;
+    }
+
+    public void setDgsbjtCdNm(String temp) {
+        this.dgsbjtCdNm.add(temp);
+    }
+
+    public ArrayList<String> getDgsbjtPrSdrCnt() {
+        return dgsbjtPrSdrCnt;
+    }
+
+    public void setDgsbjtPrSdrCnt(String temp) {
+        this.dgsbjtPrSdrCnt.add(temp);
+    }
+
+    public HospitalItem(String addr, String clCdNm, String estbDd, String gdrCnt, String hospUrl, String intnCnt, String postNo, String resdntCnt, String sdrCnt, String telno, String yadmNm, String ykiho, ArrayList<String> dgsbjtCdNm, ArrayList<String> dgsbjtPrSdrCnt) {
         this.addr = addr; //주소
         this.clCdNm = clCdNm; //종별코드명
         this.estbDd = estbDd; //개설일자
@@ -17,6 +37,8 @@ public class HospitalItem {
         this.telno = telno; //전화번호
         this.yadmNm = yadmNm; //병원명
         this.ykiho = ykiho;
+        this.dgsbjtCdNm = dgsbjtCdNm;
+        this.dgsbjtPrSdrCnt = dgsbjtPrSdrCnt;
     }
 
     public HospitalItem() {
