@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button Btn_region;
     private Button Btn_search;
+    private Button Btn_Internal_Medicine;
 
     private String city_name;
     private String gu_name;
@@ -45,14 +46,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayoutManager manager;
 
     ArrayList<HospitalItem> list = null;
+    ArrayList<HospitalItemDetail> list2=null;
     HospitalItem item = null;
-    XmlPullParser xpp;
+    HospitalItemDetail item2 =null;
+
+    XmlPullParser xpp, xpp2;
     private TextView Tv_result;
     private String mykey = "%2BHeQuB3%2FCasGAbmRnedYca%2B6ESWu%2FcHnzFBtykDvwHZZLfz0ZTTJ2mANSme5%2Blr1DgBnQ4WJnmLXPwxsatF3Pw%3D%3D";
     private String data;
     private int Datanumber = 10;
     private int Pagenumber = 1;
     private int overallXScroll = 0;
+    private String hospitalCode;
+    private StringBuffer buffer = new StringBuffer();
+    private StringBuffer buffer2 = new StringBuffer();
+    private int MedicalsubNm=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void run() {
                             Pagenumber +=1;
-
                             getXmlData();
-
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -138,6 +144,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }).start();
 
                 break;
+            case R.id.btn_Internal_Medicine:
+                MedicalsubNm=1;
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        list = new ArrayList<HospitalItem>();
+                        getXmlData();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (list.isEmpty() == false || list.size() != 0) {
+                                    Log.d("list_check", list.size() + "");
+                                    adapter = new CustomAdapter(getApplicationContext(), list);
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+                break;
 
             default:
                 break;
@@ -149,13 +176,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void init() {
         Btn_region = (Button) findViewById(R.id.btn_region);
         Btn_search = (Button) findViewById(R.id.btn_search);
+        Btn_Internal_Medicine = (Button) findViewById(R.id.btn_Internal_Medicine);
 
         Btn_region.setOnClickListener(this);
         Btn_search.setOnClickListener(this);
+        Btn_Internal_Medicine.setOnClickListener(this);
     }
 
     private void getXmlData() {
-        StringBuffer buffer = new StringBuffer();
+        //StringBuffer buffer = new StringBuffer();
 
         String sidoCd = null;
         String sgguCd = null;
@@ -703,6 +732,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (sgguCd != null) {
             queryUrl += "&sgguCd=" + sgguCd;
         }
+
         Log.d("TAG", queryUrl);
         try {
             URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
@@ -792,10 +822,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             buffer.append("\n");
 
-                        } else if (tag.equals("ykiho")) {
-
+                        }
+                        else if (tag.equals("ykiho")) {
                             xpp.next();
                             item.setYkiho(xpp.getText());
+                            hospitalCode=xpp.getText();
+                            Log.d("Tag", hospitalCode);
+                            getXmlData2(MedicalsubNm);
                             buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             buffer.append("\n");
                         }
@@ -812,7 +845,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Log.d("adapter_address_check", item.getAddr());
                             //Trial1
                             list.add(item);
-
+                            //getXmlData2();
                         }
                         break;
                 }
@@ -820,6 +853,74 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 eventType = xpp.next();
             }
             Log.d("TAG", list.size() + "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void getXmlData2(int HospitalCode) {
+        //StringBuffer buffer = new StringBuffer();
+
+        String ykihoUrl="http://apis.data.go.kr/B551182/medicInsttDetailInfoService/getMdlrtSbjectInfoList?ykiho="+hospitalCode+"&ServiceKey="+mykey;
+        //Log.d("TAG", "in getData2");
+        //Log.d("TAG", ykihoUrl);
+        try {
+            URL url2 = new URL(ykihoUrl);//문자열로 된 요청 url2을 URL 객체로 생성.
+            InputStream is2 = url2.openStream(); //url2위치로 입력스트림 연결
+            XmlPullParserFactory factory2 = XmlPullParserFactory.newInstance();//xml파싱을 위한
+            XmlPullParser xpp2 = factory2.newPullParser();
+            xpp2.setInput(new InputStreamReader(is2, "UTF-8")); //inputstream 으로부터 xml 입력받기
+
+            String tag2;
+            int eventType2 = xpp2.getEventType();
+
+            while (eventType2 != XmlPullParser.END_DOCUMENT) {
+                switch (eventType2) {
+                    case XmlPullParser.START_DOCUMENT:
+                        Log.d("TAG", ykihoUrl);
+                        break;
+
+                    case XmlPullParser.START_TAG:
+                        tag2 = xpp2.getName();//테그 이름 얻어오기
+                        if (tag2.equals("item")) {
+                            item2 = new HospitalItemDetail();  //다시
+                        } else if (tag2.equals("dgsbjtCdNm")) {
+                            xpp2.next();
+                            item2.setDgsbjtCdNm(xpp2.getText());  //
+                            Log.d("Tag", xpp2.getText());
+                            buffer2.append(xpp2.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer2.append("\n");
+                            //Log.d("Tag", item2.getDgsbjtCdNm());
+                        } else if (tag2.equals("dgsbjtPrSdrCnt")) {
+                            xpp2.next();
+                            item2.setDgsbjtPrSdrCnt(xpp2.getText());
+                            Log.d("Tag", xpp2.getText());
+                            buffer2.append(xpp2.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer2.append("\n");
+
+                        }
+                        break;
+
+
+                    case XmlPullParser.TEXT:
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        tag2 = xpp2.getName(); //테그 이름 얻어오기
+
+                        if (tag2.equals("item") && item2 != null) {
+                            Log.d("adapter_address_check", item2.getDgsbjtCdNm());
+                            //Trial1
+                            list2.add(item2);
+                            //getXmlData2();
+                        }
+                        break;
+                }
+
+                eventType2 = xpp2.next();
+            }
+            Log.d("TAG", "ykiho : "+list2.size() + "");
         } catch (Exception e) {
             e.printStackTrace();
         }
