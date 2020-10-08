@@ -37,6 +37,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private boolean isCameraAnimated = false;
     private Button Btn_tolist;
     private List<Marker> markerList = new ArrayList<>();
+    int a; // push용
 
     ArrayList<HospitalItem> list = null;
     HospitalItem item = null;
