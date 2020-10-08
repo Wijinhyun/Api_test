@@ -5,17 +5,17 @@ public class HospitalItem {
     String addr, clCdNm, estbDd, gdrCnt, hospUrl, intnCnt, postNo, resdntCnt, sdrCnt, telno, yadmNm, ykiho;
 
     public HospitalItem(String addr, String clCdNm, String estbDd, String gdrCnt, String hospUrl, String intnCnt, String postNo, String resdntCnt, String sdrCnt, String telno, String yadmNm, String ykiho) {
-        this.addr = addr;
-        this.clCdNm = clCdNm;
-        this.estbDd = estbDd;
-        this.gdrCnt = gdrCnt;
-        this.hospUrl = hospUrl;
-        this.intnCnt = intnCnt;
-        this.postNo = postNo;
-        this.resdntCnt = resdntCnt;
-        this.sdrCnt = sdrCnt;
-        this.telno = telno;
-        this.yadmNm = yadmNm;
+        this.addr = addr; //주소
+        this.clCdNm = clCdNm; //종별코드명
+        this.estbDd = estbDd; //개설일자
+        this.gdrCnt = gdrCnt; //선택진료 의사수
+        this.hospUrl = hospUrl; //홈페이지
+        this.intnCnt = intnCnt; //인턴 수
+        this.postNo = postNo; //우편번호
+        this.resdntCnt = resdntCnt; //레지던트 의사수
+        this.sdrCnt = sdrCnt; //전문의 수
+        this.telno = telno; //전화번호
+        this.yadmNm = yadmNm; //병원명
         this.ykiho = ykiho;
     }
 
@@ -116,6 +116,8 @@ public class HospitalItem {
     }
 
     public void setYkiho(String ykiho) {
+
+
         this.ykiho = ykiho;
     }
 }
