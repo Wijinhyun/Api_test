@@ -1,10 +1,11 @@
 package com.example.api_test;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class HospitalItem {
+public class HospitalItem implements Serializable {
 
-    private String addr, clCdNm, estbDd, gdrCnt, hospUrl, intnCnt, postNo, resdntCnt, sdrCnt, telno, yadmNm, ykiho;
+    private String addr, clCdNm, estbDd, gdrCnt, hospUrl, intnCnt, postNo, resdntCnt, sdrCnt, telno, yadmNm, ykiho, XPos, YPos,distance, drTotCnt;
     private ArrayList<String> dgsbjtCdNm = new ArrayList<String>(), dgsbjtPrSdrCnt = new ArrayList<String>();
 
 
@@ -39,6 +40,10 @@ public class HospitalItem {
         this.ykiho = ykiho;
         this.dgsbjtCdNm = dgsbjtCdNm;
         this.dgsbjtPrSdrCnt = dgsbjtPrSdrCnt;
+        this.distance = distance;
+        this.drTotCnt = drTotCnt;
+        this.XPos = XPos;
+        this.YPos = YPos;
     }
 
     public HospitalItem() {
@@ -141,5 +146,37 @@ public class HospitalItem {
 
 
         this.ykiho = ykiho;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public String getDrTotCnt() {
+        return drTotCnt;
+    }
+
+    public void setDrTotCnt(String drTotCnt) {
+        this.drTotCnt = drTotCnt;
+    }
+
+    public String getXpos() {
+        return XPos;
+    }
+
+    public void setXpos(String XPos) {
+        this.XPos = XPos;
+    }
+
+    public String getYpos() {
+        return YPos;
+    }
+
+    public void setYpos(String YPos) {
+        this.YPos = YPos;
     }
 }

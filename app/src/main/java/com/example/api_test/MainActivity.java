@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button Btn_region;
     private Button Btn_search;
     private Button Btn_Internal_Medicine;
+    private Button Btn_tomap;       // 버튼 추가
 
     private String city_name;
     private String gu_name;
@@ -164,6 +165,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }).start();
                 break;
+            case R.id.show_map:     // 지도 뷰로 넘어가는 intent
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                }).start();
+                break;
 
             default:
                 break;
@@ -176,10 +191,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Btn_region = (Button) findViewById(R.id.btn_region);
         Btn_search = (Button) findViewById(R.id.btn_search);
         Btn_Internal_Medicine = (Button) findViewById(R.id.btn_Internal_Medicine);
+        Btn_tomap = (Button) findViewById(R.id.show_map);
 
         Btn_region.setOnClickListener(this);
         Btn_search.setOnClickListener(this);
         Btn_Internal_Medicine.setOnClickListener(this);
+        Btn_tomap.setOnClickListener(this);
     }
 
     private void getXmlData() {
