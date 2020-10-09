@@ -17,25 +17,6 @@
         />
 
 
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="검 색"
-        />
-
-    <ScrollView
-        android:id="@+id/scrollview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </ScrollView>
 
 
     <LinearLayout
@@ -49,19 +30,20 @@
             android:orientation="horizontal" >
             <Button
                 android:id="@+id/btn_Dermatology"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="피부과"/>
             <Button
                 android:id="@+id/btn_Ophthalmology"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="안과" />
 
             <Button
                 android:id="@+id/btn_Cosmetic_Surgery"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="성형외과" />
@@ -73,19 +55,19 @@
             android:orientation="horizontal" >
             <Button
                 android:id="@+id/btn_Orthopedics"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="정형외과"/>
             <Button
                 android:id="@+id/btn_Dental"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="치과"/>
             <Button
                 android:id="@+id/btn_Surgical"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="외과" />
@@ -97,30 +79,25 @@
             android:orientation="horizontal" >
             <Button
                 android:id="@+id/btn_Internal_Medicine"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="내과" />
             <Button
                 android:id="@+id/btn_Urology"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="비뇨기과"/>
             <Button
                 android:id="@+id/btn_Obstetrics_Gynecology"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="산부인과" />
 
 
         </LinearLayout>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/show_map"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="지도로 보기"
-        />
 
 </LinearLayout>

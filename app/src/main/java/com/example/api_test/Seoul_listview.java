@@ -17,23 +17,40 @@ public class Seoul_listview extends AppCompatActivity {
     private ListView Lv_gu;
     private TextView Tv_precity;
     private String city_name;
+    private String Imfrom;
+    private String MedicalsubCd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seoul_listview);
         Intent intent = getIntent();
         city_name = intent.getStringExtra("city_name");
+        Imfrom = intent.getStringExtra("Imfrom");
+        MedicalsubCd = intent.getStringExtra("MedicalsubCd");
+
         init();
 
         Lv_gu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                if(Imfrom.equals("recyclerview")) {
+                    Intent intent = new Intent(getApplicationContext(), Recyclerview_HospitalList.class);
 
-                intent.putExtra("city_name", city_name);
-                intent.putExtra("gu_name", (String) Lv_gu.getAdapter().getItem(position)); /*송신*/
+                    intent.putExtra("city_name", city_name);
+                    intent.putExtra("gu_name", (String) Lv_gu.getAdapter().getItem(position)); /*송신*/
+                    intent.putExtra("MedicalsubCd", MedicalsubCd);
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                    intent.putExtra("city_name", city_name);
+                    intent.putExtra("gu_name", (String) Lv_gu.getAdapter().getItem(position)); /*송신*/
+
+                    startActivity(intent);
+                }
             }
         });
     }
