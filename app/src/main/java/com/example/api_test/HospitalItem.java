@@ -5,27 +5,13 @@ import java.util.ArrayList;
 
 public class HospitalItem implements Serializable {
 
-    private String addr, clCdNm, estbDd, gdrCnt, hospUrl, intnCnt, postNo, resdntCnt, sdrCnt, telno, yadmNm, ykiho, XPos, YPos,distance, drTotCnt;
-    private ArrayList<String> dgsbjtCdNm = new ArrayList<String>(), dgsbjtPrSdrCnt = new ArrayList<String>();
+    private String addr, clCdNm, estbDd, gdrCnt, hospUrl, intnCnt, postNo, resdntCnt, sdrCnt, telno, yadmNm, ykiho, XPos, YPos,distance, drTotCnt, medical_list;
+    private ArrayList<String> dgsbjtCdNm = new ArrayList<String>(), dgsbjtPrSdrCnt = new ArrayList<String>(), dgsbjtCd = new ArrayList<String>();
 
 
-    public ArrayList<String> getDgsbjtCdNm() {
-        return dgsbjtCdNm;
-    }
 
-    public void setDgsbjtCdNm(String temp) {
-        this.dgsbjtCdNm.add(temp);
-    }
 
-    public ArrayList<String> getDgsbjtPrSdrCnt() {
-        return dgsbjtPrSdrCnt;
-    }
-
-    public void setDgsbjtPrSdrCnt(String temp) {
-        this.dgsbjtPrSdrCnt.add(temp);
-    }
-
-    public HospitalItem(String addr, String clCdNm, String estbDd, String gdrCnt, String hospUrl, String intnCnt, String postNo, String resdntCnt, String sdrCnt, String telno, String yadmNm, String ykiho, ArrayList<String> dgsbjtCdNm, ArrayList<String> dgsbjtPrSdrCnt) {
+    public HospitalItem(String addr, String clCdNm, String estbDd, String gdrCnt, String hospUrl, String intnCnt, String postNo, String resdntCnt, String sdrCnt, String telno, String yadmNm, String ykiho, ArrayList<String> dgsbjtCdNm, ArrayList<String> dgsbjtPrSdrCnt, String medical_list, ArrayList<String> dgsbjtCd) {
         this.addr = addr; //주소
         this.clCdNm = clCdNm; //종별코드명
         this.estbDd = estbDd; //개설일자
@@ -38,12 +24,33 @@ public class HospitalItem implements Serializable {
         this.telno = telno; //전화번호
         this.yadmNm = yadmNm; //병원명
         this.ykiho = ykiho;
-        this.dgsbjtCdNm = dgsbjtCdNm;
-        this.dgsbjtPrSdrCnt = dgsbjtPrSdrCnt;
+        this.dgsbjtCdNm = dgsbjtCdNm; //진료과목 번호
+        this.dgsbjtPrSdrCnt = dgsbjtPrSdrCnt; //의사수
         this.distance = distance;
         this.drTotCnt = drTotCnt;
         this.XPos = XPos;
         this.YPos = YPos;
+        this.medical_list = medical_list;
+        this.dgsbjtCd=dgsbjtCd;
+    }
+
+    public ArrayList<String> getDgsbjtCd() {
+        return dgsbjtCd;
+    }
+
+    public void setDgsbjtCd(ArrayList<String> dgsbjtCd) {
+        this.dgsbjtCd = dgsbjtCd;
+    }
+
+    public String getMedical_list() {
+        return medical_list;
+    }
+
+    public void setMedical_list(String medical_list) {
+        if(this.medical_list == null)
+            this.medical_list = medical_list;
+        else
+            this.medical_list = this.medical_list + ", " + medical_list;
     }
 
     public HospitalItem() {
@@ -56,6 +63,14 @@ public class HospitalItem implements Serializable {
 
     public void setAddr(String addr) {
         this.addr = addr;
+    }
+
+    public void setDgsbjtCdNm(ArrayList<String> dgsbjtCdNm) {
+        this.dgsbjtCdNm = dgsbjtCdNm;
+    }
+
+    public void setDgsbjtPrSdrCnt(ArrayList<String> dgsbjtPrSdrCnt) {
+        this.dgsbjtPrSdrCnt = dgsbjtPrSdrCnt;
     }
 
     public String getClCdNm() {
@@ -143,8 +158,6 @@ public class HospitalItem implements Serializable {
     }
 
     public void setYkiho(String ykiho) {
-
-
         this.ykiho = ykiho;
     }
 
@@ -178,5 +191,21 @@ public class HospitalItem implements Serializable {
 
     public void setYpos(String YPos) {
         this.YPos = YPos;
+    }
+
+    public ArrayList<String> getDgsbjtCdNm() {
+        return dgsbjtCdNm;
+    }
+
+    public void setDgsbjtCdNm(String temp) {
+        this.dgsbjtCdNm.add(temp);
+    }
+
+    public ArrayList<String> getDgsbjtPrSdrCnt() {
+        return dgsbjtPrSdrCnt;
+    }
+
+    public void setDgsbjtPrSdrCnt(String temp) {
+        this.dgsbjtPrSdrCnt.add(temp);
     }
 }

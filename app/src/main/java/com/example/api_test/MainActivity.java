@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button Btn_region;
     private Button Btn_search;
-    private Button Btn_Internal_Medicine;
+    private Button Btn_Internal_Medicine,Btn_Dermatology,Btn_Ophthalmology,Btn_Cosmetic_Surgery,Btn_Orthopedics,Btn_Dental,Btn_Surgical,Btn_Urology,Btn_Obstetrics_Gynecology;
     private Button Btn_tomap;       // 버튼 추가
 
     private String city_name;
@@ -60,8 +60,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String hospitalCode;
     private StringBuffer buffer = new StringBuffer();
     private StringBuffer buffer2 = new StringBuffer();
-    private int MedicalsubNm=0;
-
+    private String MedicalsubCd=null;
+    private String temp, temp2;
+    private String temp_cnt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,7 +146,173 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btn_Internal_Medicine:
-                MedicalsubNm=1;
+                MedicalsubCd="01";
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        list = new ArrayList<HospitalItem>();
+                        getXmlData();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (list.isEmpty() == false || list.size() != 0) {
+                                    Log.d("list_check", list.size() + "");
+                                    adapter = new CustomAdapter(getApplicationContext(), list);
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+                break;
+            case R.id.btn_Dermatology:
+                MedicalsubCd="14";
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        list = new ArrayList<HospitalItem>();
+                        getXmlData();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (list.isEmpty() == false || list.size() != 0) {
+                                    Log.d("list_check", list.size() + "");
+                                    adapter = new CustomAdapter(getApplicationContext(), list);
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+                break;
+            case R.id.btn_Ophthalmology:
+                MedicalsubCd="12";
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        list = new ArrayList<HospitalItem>();
+                        getXmlData();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (list.isEmpty() == false || list.size() != 0) {
+                                    Log.d("list_check", list.size() + "");
+                                    adapter = new CustomAdapter(getApplicationContext(), list);
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+                break;
+            case R.id.btn_Cosmetic_Surgery:
+                MedicalsubCd="08";
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        list = new ArrayList<HospitalItem>();
+                        getXmlData();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (list.isEmpty() == false || list.size() != 0) {
+                                    Log.d("list_check", list.size() + "");
+                                    adapter = new CustomAdapter(getApplicationContext(), list);
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+                break;
+            case R.id.btn_Orthopedics:
+                MedicalsubCd="05";
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        list = new ArrayList<HospitalItem>();
+                        getXmlData();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (list.isEmpty() == false || list.size() != 0) {
+                                    Log.d("list_check", list.size() + "");
+                                    adapter = new CustomAdapter(getApplicationContext(), list);
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+                break;
+            case R.id.btn_Dental:
+                MedicalsubCd="49";
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        list = new ArrayList<HospitalItem>();
+                        getXmlData();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (list.isEmpty() == false || list.size() != 0) {
+                                    Log.d("list_check", list.size() + "");
+                                    adapter = new CustomAdapter(getApplicationContext(), list);
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+                break;
+            case R.id.btn_Surgical:
+                MedicalsubCd="04";
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        list = new ArrayList<HospitalItem>();
+                        getXmlData();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (list.isEmpty() == false || list.size() != 0) {
+                                    Log.d("list_check", list.size() + "");
+                                    adapter = new CustomAdapter(getApplicationContext(), list);
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+            case R.id.btn_Urology:
+                MedicalsubCd="15";
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        list = new ArrayList<HospitalItem>();
+                        getXmlData();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (list.isEmpty() == false || list.size() != 0) {
+                                    Log.d("list_check", list.size() + "");
+                                    adapter = new CustomAdapter(getApplicationContext(), list);
+                                    recyclerView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+            case R.id.btn_Obstetrics_Gynecology:
+                MedicalsubCd="10";
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -192,11 +359,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Btn_search = (Button) findViewById(R.id.btn_search);
         Btn_Internal_Medicine = (Button) findViewById(R.id.btn_Internal_Medicine);
         Btn_tomap = (Button) findViewById(R.id.show_map);
+        Btn_Dermatology =(Button)findViewById(R.id.btn_Dermatology);
+        Btn_Ophthalmology =(Button)findViewById(R.id.btn_Ophthalmology);
+        Btn_Cosmetic_Surgery=(Button)findViewById(R.id.btn_Cosmetic_Surgery);
+        Btn_Orthopedics=(Button)findViewById(R.id.btn_Orthopedics);
+        Btn_Dental=(Button)findViewById(R.id.btn_Dental);
+        Btn_Surgical=(Button)findViewById(R.id.btn_Surgical);
+        Btn_Urology=(Button)findViewById(R.id.btn_Urology);
+        Btn_Obstetrics_Gynecology=(Button)findViewById(R.id.btn_Obstetrics_Gynecology);
+
 
         Btn_region.setOnClickListener(this);
         Btn_search.setOnClickListener(this);
         Btn_Internal_Medicine.setOnClickListener(this);
         Btn_tomap.setOnClickListener(this);
+        Btn_Dermatology.setOnClickListener(this);
+        Btn_Ophthalmology.setOnClickListener(this);
+        Btn_Cosmetic_Surgery.setOnClickListener(this);
+        Btn_Orthopedics.setOnClickListener(this);
+        Btn_Dental.setOnClickListener(this);
+        Btn_Surgical.setOnClickListener(this);
+        Btn_Urology.setOnClickListener(this);
+        Btn_Obstetrics_Gynecology.setOnClickListener(this);
+
     }
 
     private void getXmlData() {
@@ -204,7 +389,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String sidoCd = null;
         String sgguCd = null;
-        String queryUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=10" + "&pageNo="+Pagenumber;
+        String queryUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=10" + "&pageNo="+Pagenumber+"&dgsbjtCd="+MedicalsubCd;
         if (city_name != null) {
             if (city_name.equals("서울")) {
                 sidoCd = "110000";
@@ -844,7 +1029,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             item.setYkiho(xpp.getText());
                             hospitalCode=xpp.getText();
                             Log.d("Tag", hospitalCode);
-                            getXmlData2(MedicalsubNm);
+                            getXmlData2();
                             buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             buffer.append("\n");
                         }
@@ -875,12 +1060,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void getXmlData2(int HospitalCode) {
+    private void getXmlData2() {
         //StringBuffer buffer = new StringBuffer();
 
         String ykihoUrl="http://apis.data.go.kr/B551182/medicInsttDetailInfoService/getMdlrtSbjectInfoList?ykiho="+hospitalCode+"&ServiceKey="+mykey;
-        //Log.d("TAG", "in getData2");
-        //Log.d("TAG", ykihoUrl);
+
         try {
             URL url2 = new URL(ykihoUrl);//문자열로 된 요청 url2을 URL 객체로 생성.
             InputStream is2 = url2.openStream(); //url2위치로 입력스트림 연결
@@ -890,7 +1074,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             String tag2;
             int eventType2 = xpp2.getEventType();
-
             while (eventType2 != XmlPullParser.END_DOCUMENT) {
                 switch (eventType2) {
                     case XmlPullParser.START_DOCUMENT:
@@ -899,17 +1082,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     case XmlPullParser.START_TAG:
                         tag2 = xpp2.getName();//테그 이름 얻어오기
-                       if (tag2.equals("dgsbjtCdNm")) {
+                        if (tag2.equals("dgsbjtCdNm")) {
                             xpp2.next();
-                           item.setDgsbjtCdNm(xpp2.getText());  //
-                            Log.d("Tag", xpp2.getText());
+                            temp = xpp2.getText();
 
-                        } else if (tag2.equals("dgsbjtPrSdrCnt")) {
+                        }  else if(tag2.equals("dgsbjtCd")){
                             xpp2.next();
-                            item.setDgsbjtPrSdrCnt(xpp2.getText());
-                            Log.d("Tag", xpp2.getText());
+                            temp2 = xpp2.getText();
 
+                        }else if (tag2.equals("dgsbjtPrSdrCnt")) {
+                            xpp2.next();
+                            temp_cnt = xpp2.getText();
+                            if(!temp_cnt.equals("0") && temp2.equals(MedicalsubCd) ) {
+                                item.setMedical_list(temp);
+                                item.setDgsbjtCdNm(temp);
+                                item.setDgsbjtPrSdrCnt(temp_cnt);
+                            }
+                            Log.d("Tag2", xpp2.getText());
                         }
+
                         break;
 
 

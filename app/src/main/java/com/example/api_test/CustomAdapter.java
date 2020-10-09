@@ -25,7 +25,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView addrtxt,clCdNmtxt,estbDdtxt,gdrCnttxt,hospUrltxt,intnCnttxt,postNotxt,resdntCnttxt,sdrCnttxt,telnotxt,yadmNmtxt,ykihotxt;
+        private TextView addrtxt,clCdNmtxt,estbDdtxt,gdrCnttxt,hospUrltxt,intnCnttxt,postNotxt,resdntCnttxt,sdrCnttxt,telnotxt,yadmNmtxt,ykihotxt, Tv_list, Code_list;
 
         public CustomViewHolder(View view) {
             super(view);
@@ -41,6 +41,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
             this.telnotxt = (TextView) view.findViewById(R.id.telno);
             this.yadmNmtxt = (TextView) view.findViewById(R.id.yadmNm);
             this.ykihotxt = (TextView) view.findViewById(R.id.ykiho);
+            this.Tv_list = (TextView) view.findViewById(R.id.tv_list);
 
         }
     }
@@ -77,7 +78,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
         viewholder.telnotxt.setText(mList.get(position).getTelno());
         viewholder.yadmNmtxt.setText(mList.get(position).getYadmNm());
         viewholder.ykihotxt.setText(mList.get(position).getYkiho());
-
+        viewholder.Tv_list.setText(mList.get(position).getMedical_list());
     }
 
     @Override
