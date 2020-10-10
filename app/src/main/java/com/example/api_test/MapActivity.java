@@ -1,6 +1,7 @@
 package com.example.api_test;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.MapFragment;
@@ -20,6 +22,7 @@ import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
+import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -38,11 +41,13 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
     private boolean isCameraAnimated = false;
-    private Button Btn_tolist;
+    private FloatingActionButton Fb_tolist;
     private String MedicalsubCd;
     private List<Marker> markerList = new ArrayList<>();
     private InfoWindow infoWindow;
-    int a; // push용
+    private String hospitalCode;
+    private String temp, temp2;
+    private String temp_cnt;
 
     ArrayList<HospitalItem> list = null;
     HospitalItem item = null;
@@ -59,8 +64,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         Intent intent = getIntent();
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
 
-        Btn_tolist = (Button) findViewById(R.id.show_list);
-        Btn_tolist.setOnClickListener(new Button.OnClickListener() {
+        Fb_tolist = findViewById(R.id.fb_tolist);
+        Fb_tolist.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),Recyclerview_HospitalList.class);
@@ -98,18 +103,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
 
         LatLng mapCenter = naverMap.getCameraPosition().target;
 
-//        Xpos = mapCenter.longitude;
-//        Ypos = mapCenter.latitude;
-
         Xpos = mapCenter.longitude;
         Ypos = mapCenter.latitude;
-
-//        Xpos = 128.6121750;
-//        Ypos = 35.8906490;
-
-//        Marker marker = new Marker();
-//        marker.setPosition(new LatLng(Ypos,Xpos));
-//        marker.setMap(naverMap);
 
         new Thread(new Runnable() {
             @Override
@@ -130,36 +125,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 });
             }
         }).start();
-//
-//        getXmlData();
-//
-//        Log.d("TAG", list.size() + "");
-//        if(list.isEmpty() == false || list.size() != 0) {
-//            Log.d("list_check", list.size() + "");
-//            updateMapMarkers();
-//        }
-
-
-//        naverMap.addOnCameraChangeListener(new NaverMap.OnCameraChangeListener() {
-//            @Override
-//            public void onCameraChange(int i, boolean b) {
-//                freeActiveMarkers();
-//                // 정의된 마커위치들중 가시거리 내에있는것들만 마커 생성
-//                LatLng currentPosition = getCurrentPosition(naverMap);
-//                for (LatLng markerPosition: markersPosition) {
-//                    if (!withinSightMarker(currentPosition, markerPosition))
-//                        continue;
-//                    Marker marker = new Marker();
-//                    marker.setPosition(markerPosition);
-//                    marker.setMap(naverMap);
-//                    activeMarkers.add(marker);
-//                }
-//            }
-//        });
-
     }
-
-
 
     @Override
     public boolean onClick(@NonNull Overlay overlay) {
@@ -185,6 +151,25 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 marker.setTag(list.get(i).getYadmNm());
 //                marker.setPosition(new LatLng(Double.parseDouble(list.get(i).YPos), Double.parseDouble(list.get(i).XPos)));
                 marker.setPosition(new LatLng(Double.parseDouble(list.get(i).getYpos()), Double.parseDouble(list.get(i).getXpos())));
+
+//                String percent = "0.0";
+//                if(list.get(i).getSdrdgsCnt() != null && !list.get(i).getDrTotCnt().equals("0")) {
+//                    percent = String.format("%.1f", Double.parseDouble(list.get(i).getSdrdgsCnt()) / Double.parseDouble(list.get(i).getDrTotCnt()) * 100);
+//                }
+//                else{
+//                    percent = "0.0";
+//                }
+//                if(Double.parseDouble(percent) >= 66.6){
+//                    marker.setIcon(OverlayImage.fromResource(R.drawable.green));
+//                }else if(Double.parseDouble(percent) >= 33.3){
+//                    marker.setIcon(OverlayImage.fromResource(R.drawable.yellow));
+//                }else if(Double.parseDouble(percent) >= 0.1){          // 전문의가 아예 없으면 지도에 띄우지 않음
+//                    marker.setIcon(OverlayImage.fromResource(R.drawable.red));
+//                }else{
+//                    marker.setIcon(OverlayImage.fromResource(R.drawable.purple));
+//                }
+
+                marker.setAnchor(new PointF(0.5f,1.0f));
                 marker.setMap(naverMap);
                 marker.setOnClickListener(this);
                 markerList.add(marker);
@@ -247,36 +232,15 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                     });
                 }
             }).start();
-            //updateMapMarkers();
         }
     }
 
-//    // 현재 카메라가 보고있는 위치
-//    public LatLng getCurrentPosition(NaverMap naverMap) {
-//        CameraPosition cameraPosition = naverMap.getCameraPosition();
-//        return new LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude);
-//    }
-//
-//    public final static double REFERANCE_LAT = 1 / 109.958489129649955;
-//    public final static double REFERANCE_LNG = 1 / 88.74;
-//    public final static double REFERANCE_LAT_X3 = 3 / 109.958489129649955;
-//    public final static double REFERANCE_LNG_X3 = 3 / 88.74;
-//    public boolean withinSightMarker(LatLng currentPosition, LatLng markerPosition) {
-//        boolean withinSightMarkerLat = Math.abs(currentPosition.latitude - markerPosition.latitude) <= REFERANCE_LAT_X3;
-//        boolean withinSightMarkerLng = Math.abs(currentPosition.longitude - markerPosition.longitude) <= REFERANCE_LNG_X3;
-//        return withinSightMarkerLat && withinSightMarkerLng;
-//    }
-//
-//    private void freeActiveMarkers() {
-//        if (activeMarkers == null) {
-//            activeMarkers = new Vector<Marker>();
-//            return;
-//        }
-//        for (Marker activeMarker: activeMarkers) {
-//            activeMarker.setMap(null);
-//        }
-//        activeMarkers = new Vector<Marker>();
-//    }
+    @Override
+    public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
+        if (infoWindow.getMarker() != null){
+            infoWindow.close();
+        }
+    }
 
     private void getXmlData() {
         StringBuffer buffer = new StringBuffer();
@@ -357,9 +321,11 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                             buffer.append("\n");
 
                         } else if (tag.equals("ykiho")) {
-
                             xpp.next();
                             item.setYkiho(xpp.getText());
+                            hospitalCode=xpp.getText();
+                            Log.d("Tag", hospitalCode);
+                            getXmlData2();
                             buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             buffer.append("\n");
                         }
@@ -390,10 +356,69 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
 
     }
 
-    @Override
-    public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
-        if (infoWindow.getMarker() != null){
-            infoWindow.close();
+    private void getXmlData2() {
+        //StringBuffer buffer = new StringBuffer();
+
+        String ykihoUrl="http://apis.data.go.kr/B551182/medicInsttDetailInfoService/getMdlrtSbjectInfoList?ykiho="+hospitalCode+"&ServiceKey="+mykey+ "&numOfRows=50";
+
+        try {
+            URL url2 = new URL(ykihoUrl);//문자열로 된 요청 url2을 URL 객체로 생성.
+            InputStream is2 = url2.openStream(); //url2위치로 입력스트림 연결
+            XmlPullParserFactory factory2 = XmlPullParserFactory.newInstance();//xml파싱을 위한
+            XmlPullParser xpp2 = factory2.newPullParser();
+            xpp2.setInput(new InputStreamReader(is2, "UTF-8")); //inputstream 으로부터 xml 입력받기
+
+            String tag2;
+            int eventType2 = xpp2.getEventType();
+            while (eventType2 != XmlPullParser.END_DOCUMENT) {
+                switch (eventType2) {
+                    case XmlPullParser.START_DOCUMENT:
+                        Log.d("TAG", ykihoUrl);
+                        break;
+
+                    case XmlPullParser.START_TAG:
+                        tag2 = xpp2.getName();//테그 이름 얻어오기
+                        if (tag2.equals("dgsbjtCdNm")) {
+                            xpp2.next();
+                            temp = xpp2.getText();
+                        }else if(tag2.equals("dgsbjtCd")){      // 진료과목 코드
+                            xpp2.next();
+                            temp2 = xpp2.getText();
+
+                        } else if (tag2.equals("dgsbjtPrSdrCnt")) {     // 의사 수
+                            xpp2.next();
+                            temp_cnt = xpp2.getText();
+                            if(temp2.equals(MedicalsubCd)){             // 해당 진료과목 의사라면
+                                item.setSdrdgsCnt(temp_cnt);
+                            }
+                            if(!temp_cnt.equals("0")) {
+                                item.setMedical_list(temp);
+                                item.setDgsbjtCdNm(temp);
+                                item.setDgsbjtPrSdrCnt(temp_cnt);
+                            }
+                            Log.d("Tag2", xpp2.getText());
+                        }
+
+                        break;
+
+
+                    case XmlPullParser.TEXT:
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        tag2 = xpp2.getName(); //테그 이름 얻어오기
+
+                        break;
+                    default:
+                        break;
+                }
+
+                eventType2 = xpp2.next();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }

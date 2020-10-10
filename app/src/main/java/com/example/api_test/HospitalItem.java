@@ -25,10 +25,10 @@ public class HospitalItem implements Serializable {
         this.ykiho = ykiho;
         this.dgsbjtCdNm = dgsbjtCdNm; //진료과목 번호
         this.dgsbjtPrSdrCnt = dgsbjtPrSdrCnt; //의사수
-        this.distance = distance;
-        this.drTotCnt = drTotCnt;
-        this.XPos = XPos;
-        this.YPos = YPos;
+        this.distance = distance;   // 거리
+        this.drTotCnt = drTotCnt;   // 전체 의사 수
+        this.XPos = XPos;   // x좌표
+        this.YPos = YPos;   // y좌표
         this.medical_list = medical_list;
         this.dgsbjtCd=dgsbjtCd;
         this.sdrdgsCnt=sdrdgsCnt;
