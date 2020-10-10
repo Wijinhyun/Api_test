@@ -7,11 +7,10 @@ public class HospitalItem implements Serializable {
 
     private String addr, clCdNm, estbDd, gdrCnt, hospUrl, intnCnt, postNo, resdntCnt, sdrCnt, telno, yadmNm, ykiho, XPos, YPos,distance, drTotCnt, medical_list;
     private ArrayList<String> dgsbjtCdNm = new ArrayList<String>(), dgsbjtPrSdrCnt = new ArrayList<String>(), dgsbjtCd = new ArrayList<String>();
+    private String sdrdgsCnt;
 
 
-
-
-    public HospitalItem(String addr, String clCdNm, String estbDd, String gdrCnt, String hospUrl, String intnCnt, String postNo, String resdntCnt, String sdrCnt, String telno, String yadmNm, String ykiho, ArrayList<String> dgsbjtCdNm, ArrayList<String> dgsbjtPrSdrCnt, String medical_list, ArrayList<String> dgsbjtCd) {
+    public HospitalItem(String addr, String clCdNm, String estbDd, String gdrCnt, String hospUrl, String intnCnt, String postNo, String resdntCnt, String sdrCnt, String telno, String yadmNm, String ykiho, ArrayList<String> dgsbjtCdNm, ArrayList<String> dgsbjtPrSdrCnt, String medical_list, ArrayList<String> dgsbjtCd, String sdrdgsCnt) {
         this.addr = addr; //주소
         this.clCdNm = clCdNm; //종별코드명
         this.estbDd = estbDd; //개설일자
@@ -32,6 +31,14 @@ public class HospitalItem implements Serializable {
         this.YPos = YPos;
         this.medical_list = medical_list;
         this.dgsbjtCd=dgsbjtCd;
+        this.sdrdgsCnt=sdrdgsCnt;
+    }
+    public String getSdrdgsCnt() {
+        return sdrdgsCnt;
+    }
+
+    public void setSdrdgsCnt(String sdrdgsCnt) {
+        this.sdrdgsCnt = sdrdgsCnt;
     }
 
     public ArrayList<String> getDgsbjtCd() {

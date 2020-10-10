@@ -34,14 +34,14 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private String city_name;
     private String gu_name;
     private String hospitalCode;
-    private String temp;
+    private String temp, temp2;
     private String temp_cnt;
     private String mykey = "%2BHeQuB3%2FCasGAbmRnedYca%2B6ESWu%2FcHnzFBtykDvwHZZLfz0ZTTJ2mANSme5%2Blr1DgBnQ4WJnmLXPwxsatF3Pw%3D%3D";
     private String MedicalsubCd;
-    private String queryUrl;
 
     private FloatingActionButton Fb_tomap;
     private Button Btn_region_in_list, Btn_medical_subject;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             Btn_medical_subject.setText("안과");
         }else if(MedicalsubCd.equals("08")){
             Btn_medical_subject.setText("성형외과");
+        }else if(MedicalsubCd.equals("05")) {
+            Btn_medical_subject.setText("정형외과");
         }else if(MedicalsubCd.equals("49")){
             Btn_medical_subject.setText("치과");
         }else if(MedicalsubCd.equals("04")){
@@ -724,7 +726,6 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
                 switch (eventType) {
                     case XmlPullParser.START_DOCUMENT:
-                        Log.d("TAG", queryUrl);
                         break;
 
                     case XmlPullParser.START_TAG:
@@ -739,10 +740,12 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                         } else if (tag.equals("clCdNm")) {
                             xpp.next();
                             item.setClCdNm(xpp.getText());
-                        } else if (tag.equals("estbDd")) {
+                        } else if (tag.equals("drTotCnt")) {
+                            xpp.next();
+                            item.setDrTotCnt(xpp.getText());
+                        }else if (tag.equals("estbDd")) {
                             xpp.next();
                             item.setEstbDd(xpp.getText());
-
                         } else if (tag.equals("gdrCnt")) {
                             xpp.next();
                             item.setGdrCnt(xpp.getText());
@@ -805,7 +808,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private void getXmlData2() {
         //StringBuffer buffer = new StringBuffer();
 
-        String ykihoUrl="http://apis.data.go.kr/B551182/medicInsttDetailInfoService/getMdlrtSbjectInfoList?ykiho="+hospitalCode+"&ServiceKey="+mykey;
+        String ykihoUrl="http://apis.data.go.kr/B551182/medicInsttDetailInfoService/getMdlrtSbjectInfoList?ykiho="+hospitalCode+"&ServiceKey="+mykey+ "&numOfRows=50";
 
         try {
             URL url2 = new URL(ykihoUrl);//문자열로 된 요청 url2을 URL 객체로 생성.
@@ -827,9 +830,16 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                         if (tag2.equals("dgsbjtCdNm")) {
                             xpp2.next();
                             temp = xpp2.getText();
+                        }else if(tag2.equals("dgsbjtCd")){
+                            xpp2.next();
+                            temp2 = xpp2.getText();
+
                         } else if (tag2.equals("dgsbjtPrSdrCnt")) {
                             xpp2.next();
                             temp_cnt = xpp2.getText();
+                            if(temp2.equals(MedicalsubCd)){
+                                item.setSdrdgsCnt(temp_cnt);
+                            }
                             if(!temp_cnt.equals("0")) {
                                 item.setMedical_list(temp);
                                 item.setDgsbjtCdNm(temp);
