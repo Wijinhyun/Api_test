@@ -24,6 +24,7 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
+import com.naver.maps.map.util.MarkerIcons;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -152,27 +153,55 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
 //                marker.setPosition(new LatLng(Double.parseDouble(list.get(i).YPos), Double.parseDouble(list.get(i).XPos)));
                 marker.setPosition(new LatLng(Double.parseDouble(list.get(i).getYpos()), Double.parseDouble(list.get(i).getXpos())));
 
-//                String percent = "0.0";
-//                if(list.get(i).getSdrdgsCnt() != null && !list.get(i).getDrTotCnt().equals("0")) {
-//                    percent = String.format("%.1f", Double.parseDouble(list.get(i).getSdrdgsCnt()) / Double.parseDouble(list.get(i).getDrTotCnt()) * 100);
-//                }
-//                else{
-//                    percent = "0.0";
-//                }
-//                if(Double.parseDouble(percent) >= 66.6){
-//                    marker.setIcon(OverlayImage.fromResource(R.drawable.green));
-//                }else if(Double.parseDouble(percent) >= 33.3){
-//                    marker.setIcon(OverlayImage.fromResource(R.drawable.yellow));
-//                }else if(Double.parseDouble(percent) >= 0.1){          // 전문의가 아예 없으면 지도에 띄우지 않음
-//                    marker.setIcon(OverlayImage.fromResource(R.drawable.red));
+                Log.d("list_getSdrdgs", list.get(i).getSdrCnt() + "");
+                Log.d("list_getDrTotCnt", list.get(i).getDrTotCnt() + "");
+                String percent = "0.0";
+                //if(list.get(i).getSdrdgsCnt() != null && !list.get(i).getDrTotCnt().equals("0")) {
+                if(list.get(i).getSdrdgsCnt() != null && list.get(i).getDrTotCnt() != null) {
+                    percent = String.format("%.1f", Double.parseDouble(list.get(i).getSdrdgsCnt()) / Double.parseDouble(list.get(i).getDrTotCnt()) * 100);
+                }
+                else{
+                    percent = "0.0";
+                }
+
+                if(percent == "0.0"){
+                    continue;
+                }
+
+                Log.d("percent", percent + "");
+
+                if(Double.parseDouble(percent) >= 66.6){
+                    //marker.setIcon(OverlayImage.fromResource(R.drawable.green));
+                    marker.setIcon(MarkerIcons.GREEN);
+                    marker.setIconTintColor(Color.GREEN);
+                    marker.setAnchor(new PointF(0.5f,1.0f));
+                    marker.setMap(naverMap);
+                    marker.setOnClickListener(this);
+                    markerList.add(marker);
+                }else if(Double.parseDouble(percent) >= 33.3){
+                    //marker.setIcon(OverlayImage.fromResource(R.drawable.yellow));
+                    marker.setIcon(MarkerIcons.YELLOW);
+                    marker.setIconTintColor(Color.YELLOW);
+                    marker.setAnchor(new PointF(0.5f,1.0f));
+                    marker.setMap(naverMap);
+                    marker.setOnClickListener(this);
+                    markerList.add(marker);
+                }else if(Double.parseDouble(percent) >= 0.1) {          // 전문의가 아예 없으면 지도에 띄우지 않음
+                    //marker.setIcon(OverlayImage.fromResource(R.drawable.red));
+                    marker.setIcon(MarkerIcons.RED);
+                    marker.setIconTintColor(Color.RED);
+                    marker.setAnchor(new PointF(0.5f, 1.0f));
+                    marker.setMap(naverMap);
+                    marker.setOnClickListener(this);
+                    markerList.add(marker);
+                }
 //                }else{
-//                    marker.setIcon(OverlayImage.fromResource(R.drawable.purple));
+//                    //marker.setIcon(OverlayImage.fromResource(R.drawable.purple));
+//                    marker.setIcon(MarkerIcons.BLACK);
+//                    marker.setIconTintColor(Color.GRAY);
 //                }
 
-                marker.setAnchor(new PointF(0.5f,1.0f));
-                marker.setMap(naverMap);
-                marker.setOnClickListener(this);
-                markerList.add(marker);
+
             }
         }
     }
@@ -245,7 +274,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private void getXmlData() {
         StringBuffer buffer = new StringBuffer();
 
-        String queryUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=30"
+        String queryUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=50"
                 + "&dgsbjtCd=" + MedicalsubCd + "&xPos=" + Xpos + "&yPos=" + Ypos + "&radius=" + 1000;
         Log.d("TAG", queryUrl);  // 일단 test 용으로 피부과 코드 14 넣어서 피부과만 받음, 반경은 1.5km로 설정
         try {
@@ -282,6 +311,13 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
 
                             xpp.next();
                             item.setClCdNm(xpp.getText());
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");
+
+                        } else if (tag.equals("drTotCnt")) {
+
+                            xpp.next();
+                            item.setDrTotCnt(xpp.getText());
                             buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             buffer.append("\n");
 
