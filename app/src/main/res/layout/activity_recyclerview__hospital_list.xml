@@ -11,18 +11,23 @@
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="5sp"
         android:orientation="horizontal">
         <Button
             android:id="@+id/btn_region_in_list"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30sp"
             android:layout_weight="1"
-            android:text="버튼을 눌러 위치를 지정" />
+            android:background="@drawable/location_toolbar"
+            android:fontFamily="@font/hangeulnurib"
+            android:text="지역 설정" />
         <Button
             android:id="@+id/btn_medical_subject"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30sp"
             android:layout_weight="1"
+            android:fontFamily="@font/hangeulnurib"
+            android:background="@drawable/location_toolbar"
             android:text="" />
 
     </LinearLayout>

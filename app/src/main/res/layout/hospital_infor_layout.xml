@@ -25,8 +25,9 @@
                     android:id="@+id/yadmNm"
                     android:layout_width="0dp"
                     android:layout_weight="3"
-                    android:layout_height="wrap_content"
-                    android:textSize="25sp"
+                    android:layout_height="70sp"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/hangeulnurib"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -40,13 +41,12 @@
                     android:textColor="#ffffff"/>
 
             </LinearLayout>
-            <TextView
-                android:id="@+id/estbDd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+
+
 
             <TextView
                 android:id="@+id/tv_list"
+                android:fontFamily="@font/hangeulnurir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -57,6 +57,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/hangeulnurir"
                     android:text="관련 전문의 : "
                     android:textColor="#000000"/>
 
@@ -64,11 +65,13 @@
                     android:id="@+id/tv_sdrdgsCnt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/hangeulnurir"
                     android:textColor="#000000"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/hangeulnurir"
                     android:text=" / 전체 의사 : "
                     android:textColor="#000000"
                     />
@@ -77,6 +80,7 @@
                     android:id="@+id/tv_drTotCnt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/hangeulnurir"
                     android:textColor="#000000"/>
 
             </LinearLayout>

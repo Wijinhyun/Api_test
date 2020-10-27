@@ -63,12 +63,12 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             Btn_medical_subject.setText("성형외과");
         }else if(MedicalsubCd.equals("05")) {
             Btn_medical_subject.setText("정형외과");
-        }else if(MedicalsubCd.equals("49")){
-            Btn_medical_subject.setText("치과");
+        }else if(MedicalsubCd.equals("13")){
+            Btn_medical_subject.setText("이비인후과");
         }else if(MedicalsubCd.equals("04")){
             Btn_medical_subject.setText("외과");
         }else if(MedicalsubCd.equals("15")){
-            Btn_medical_subject.setText("비뇨기과");
+            Btn_medical_subject.setText("비뇨기의학과");
         }else if(MedicalsubCd.equals("10")){
             Btn_medical_subject.setText("산부인과");
         }

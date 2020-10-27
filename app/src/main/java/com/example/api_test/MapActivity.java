@@ -107,25 +107,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         Xpos = mapCenter.longitude;
         Ypos = mapCenter.latitude;
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                resetlist();
-                getXmlData();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        if(list.isEmpty() == false || list.size() != 0) {
-                            Log.d("list_check", list.size() + "");
-                            updateMapMarkers();
-                        }
-                        else
-                            Log.d("list_check", list.size() + "");
-                    }
-                });
-            }
-        }).start();
+        findHospital();
     }
 
     @Override
@@ -195,11 +177,6 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                     marker.setOnClickListener(this);
                     markerList.add(marker);
                 }
-//                }else{
-//                    //marker.setIcon(OverlayImage.fromResource(R.drawable.purple));
-//                    marker.setIcon(MarkerIcons.BLACK);
-//                    marker.setIconTintColor(Color.GRAY);
-//                }
 
 
             }
@@ -218,6 +195,28 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         if(list != null && list.size() > 0){
             list.clear();
         }
+    }
+
+    private void findHospital(){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                resetlist();
+                getXmlData();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(list.isEmpty() == false || list.size() != 0) {
+                            Log.d("list_check", list.size() + "");
+                            updateMapMarkers();
+                        }
+                        else
+                            Log.d("list_check", list.size() + "");
+                    }
+                });
+            }
+        }).start();
     }
 
     @Override
@@ -242,25 +241,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
             LatLng mapCenter = naverMap.getCameraPosition().target;
             Xpos = mapCenter.longitude;
             Ypos = mapCenter.latitude;
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    resetlist();
-                    getXmlData();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            if(list.isEmpty() == false || list.size() != 0) {
-                                Log.d("list_check", list.size() + "");
-                                updateMapMarkers();
-                            }
-                            else
-                                Log.d("list_check", list.size() + "");
-                        }
-                    });
-                }
-            }).start();
+            findHospital();
         }
     }
 
@@ -387,6 +368,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
             }
             Log.d("TAG", list.size() + "");
         } catch (Exception e) {
+            getXmlData();
             e.printStackTrace();
         }
 
@@ -453,7 +435,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            getXmlData2();
+            //e.printStackTrace();
         }
 
     }

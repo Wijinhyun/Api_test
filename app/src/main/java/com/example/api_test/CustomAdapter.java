@@ -32,7 +32,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
         public CustomViewHolder(View view) {
             super(view);
 
-            this.estbDdtxt = (TextView) view.findViewById(R.id.estbDd);
+            //this.estbDdtxt = (TextView) view.findViewById(R.id.estbDd);
             this.yadmNmtxt = (TextView) view.findViewById(R.id.yadmNm);
             this.Tv_list = (TextView) view.findViewById(R.id.tv_list);
             this.Tv_percent = (TextView) view.findViewById(R.id.tv_percent);
@@ -62,7 +62,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
     public void onBindViewHolder(@NonNull CustomViewHolder viewholder, int position) {
 
 
-        viewholder.estbDdtxt.setText(mList.get(position).getEstbDd());
+        //viewholder.estbDdtxt.setText(mList.get(position).getEstbDd());
         viewholder.yadmNmtxt.setText(mList.get(position).getYadmNm());
         if(mList.get(position).getMedical_list() != null) {
             viewholder.Tv_list.setText(mList.get(position).getMedical_list());
@@ -75,11 +75,11 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
         }
         viewholder.Tv_percent.setText(percent + "%");
         if(Double.parseDouble(percent) >= 66.6){
-            viewholder.Tv_percent.setBackgroundColor(Color.parseColor("#00ff00"));
+            viewholder.Tv_percent.setBackgroundColor(Color.parseColor("#0A640A"));
         }else if(Double.parseDouble(percent) >= 33.3){
-            viewholder.Tv_percent.setBackgroundColor(Color.parseColor("#f7e600"));
+            viewholder.Tv_percent.setBackgroundColor(Color.parseColor("#FFCC42"));
         }else{
-            viewholder.Tv_percent.setBackgroundColor(Color.parseColor("#ff0000"));
+            viewholder.Tv_percent.setBackgroundColor(Color.parseColor("#BF3813"));
         }
     }
 
