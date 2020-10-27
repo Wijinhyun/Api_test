@@ -24,17 +24,18 @@
     <LinearLayout
         android:paddingTop="230sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="horizontal" >
             <Button
                 android:id="@+id/btn_Dermatology"
-                android:layout_width="0dp"
-                android:layout_height="120sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/hangeulnurib"
                 android:background="@drawable/icon_dermatology"
@@ -42,8 +43,8 @@
                 />
             <Button
                 android:id="@+id/btn_Ophthalmology"
-                android:layout_width="0dp"
-                android:layout_height="120sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/hangeulnurib"
                 android:background="@drawable/icon_ophthalmology"
@@ -51,8 +52,8 @@
 
             <Button
                 android:id="@+id/btn_Cosmetic_Surgery"
-                android:layout_width="0dp"
-                android:layout_height="120sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/hangeulnurib"
                 android:background="@drawable/icon_cosmetic"
@@ -60,14 +61,16 @@
                  />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="horizontal" >
             <Button
                 android:id="@+id/btn_Orthopedics"
-                android:layout_width="0dp"
-                android:layout_height="120sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/hangeulnurib"
                 android:background="@drawable/icon_orthopedics"
@@ -75,8 +78,8 @@
 
             <Button
                 android:id="@+id/btn_Otolaryngology"
-                android:layout_width="0dp"
-                android:layout_height="120sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/hangeulnurib"
                 android:background="@drawable/icon_ent"
@@ -85,8 +88,8 @@
 
             <Button
                 android:id="@+id/btn_Surgical"
-                android:layout_width="0dp"
-                android:layout_height="120sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/hangeulnurib"
                 android:background="@drawable/icon_surgical"
@@ -96,13 +99,14 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:layout_weight="1"
             android:layout_marginBottom="10sp">
             <Button
                 android:id="@+id/btn_Internal_Medicine"
-                android:layout_width="0dp"
-                android:layout_height="120sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/hangeulnurib"
                 android:background="@drawable/icon_internal_medicine"
@@ -112,8 +116,8 @@
                  />
             <Button
                 android:id="@+id/btn_Urology"
-                android:layout_width="0dp"
-                android:layout_height="120sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/hangeulnurib"
                 android:background="@drawable/icon_urology"
@@ -123,8 +127,8 @@
                />
             <Button
                 android:id="@+id/btn_Obstetrics_Gynecology"
-                android:layout_width="0dp"
-                android:layout_height="120sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/hangeulnurib"
                 android:background="@drawable/icon_obstetrics"
