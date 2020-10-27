@@ -59,12 +59,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="정형외과"/>
+
             <Button
-                android:id="@+id/btn_Dental"
+                android:id="@+id/btn_Otolaryngology"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="치과"/>
+                android:text="이비인후과" />
+
             <Button
                 android:id="@+id/btn_Surgical"
                 android:layout_width="0dp"

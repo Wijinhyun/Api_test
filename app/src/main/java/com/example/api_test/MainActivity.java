@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button Btn_region;
-    private Button Btn_Internal_Medicine, Btn_Dermatology, Btn_Ophthalmology, Btn_Cosmetic_Surgery, Btn_Orthopedics, Btn_Dental, Btn_Surgical, Btn_Urology, Btn_Obstetrics_Gynecology;
+    private Button Btn_Internal_Medicine, Btn_Dermatology, Btn_Ophthalmology, Btn_Cosmetic_Surgery, Btn_Orthopedics, Btn_Otolaryngology, Btn_Surgical, Btn_Urology, Btn_Obstetrics_Gynecology;
 
     private String city_name;
     private String gu_name;
@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent05.putExtra("gu_name", gu_name);
                 startActivity(intent05);
                 break;
-            case R.id.btn_Dental:
-                MedicalsubCd = "49";
+            case R.id.btn_Otolaryngology:
+                MedicalsubCd = "13";
                 Intent intent49 = new Intent(MainActivity.this, Recyclerview_HospitalList.class);
                 intent49.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent49.putExtra("city_name", city_name);
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Btn_Ophthalmology = (Button) findViewById(R.id.btn_Ophthalmology);
         Btn_Cosmetic_Surgery = (Button) findViewById(R.id.btn_Cosmetic_Surgery);
         Btn_Orthopedics = (Button) findViewById(R.id.btn_Orthopedics);
-        Btn_Dental = (Button) findViewById(R.id.btn_Dental);
+        Btn_Otolaryngology = (Button) findViewById(R.id.btn_Otolaryngology);
         Btn_Surgical = (Button) findViewById(R.id.btn_Surgical);
         Btn_Urology = (Button) findViewById(R.id.btn_Urology);
         Btn_Obstetrics_Gynecology = (Button) findViewById(R.id.btn_Obstetrics_Gynecology);
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Btn_Ophthalmology.setOnClickListener(this);
         Btn_Cosmetic_Surgery.setOnClickListener(this);
         Btn_Orthopedics.setOnClickListener(this);
-        Btn_Dental.setOnClickListener(this);
+        Btn_Otolaryngology.setOnClickListener(this);
         Btn_Surgical.setOnClickListener(this);
         Btn_Urology.setOnClickListener(this);
         Btn_Obstetrics_Gynecology.setOnClickListener(this);
