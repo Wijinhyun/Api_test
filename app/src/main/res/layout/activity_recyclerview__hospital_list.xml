@@ -66,14 +66,22 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.github.edsergeev.TextFloatingActionButton
             android:id="@+id/fb_tomap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            app:backgroundTint="#000000"
-            />
-
+            android:backgroundTint="#F87D4B"
+            android:fontFamily="@font/hangeulnurib"
+            android:foregroundGravity="bottom"
+            android:text="MAP"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:borderWidth="0dp"
+            app:fabCustomSize="70dp"
+            app:text_y_offset="6dp"
+            app:useCompatPadding="true"
+            tools:ignore="smallSp" />
     </LinearLayout>
 
 
