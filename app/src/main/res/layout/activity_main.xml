@@ -45,7 +45,7 @@
                 android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icon_dermatology" />
+                android:src="@drawable/icon_dermatology3" />
 
             <com.example.api_test.SquareButton
                 android:id="@+id/btn_Ophthalmology"
@@ -97,7 +97,7 @@
                 android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icon_ent" />
+                android:src="@drawable/icon_ent2" />
 
             <com.example.api_test.SquareButton
                 android:id="@+id/btn_Surgical"
