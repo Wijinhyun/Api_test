@@ -43,6 +43,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private NaverMap naverMap;
     private boolean isCameraAnimated = false;
     private FloatingActionButton Fb_tolist;
+    private String city_name;
+    private String gu_name;
     private String MedicalsubCd;
     private List<Marker> markerList = new ArrayList<>();
     private InfoWindow infoWindow;
@@ -63,6 +65,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         setContentView(R.layout.maplayout);
 
         Intent intent = getIntent();
+        city_name = intent.getStringExtra("city_name");
+        gu_name = intent.getStringExtra("gu_name");
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
 
         Fb_tolist = findViewById(R.id.fb_tolist);
@@ -70,6 +74,9 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),Recyclerview_HospitalList.class);
+                intent.putExtra("MedicalsubCd", MedicalsubCd);
+                intent.putExtra("city_name", city_name);
+                intent.putExtra("gu_name", gu_name);
                 startActivity(intent);
             }
         });
