@@ -1,144 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
-
+    tools:context=".MainActivity">
 
 
     <Button
-        android:layout_marginTop="15sp"
         android:id="@+id/btn_region"
-        android:layout_width="wrap_content"
-        android:layout_height="40sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="지역"
-        android:background="@drawable/location_toolbar"
-         />
-
-
+        android:background="@drawable/btn_top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
 
 
     <LinearLayout
-        android:paddingTop="230sp"
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal" >
-            <Button
-                android:id="@+id/btn_Dermatology"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/hangeulnurib"
-                android:background="@drawable/icon_dermatology"
-                android:gravity="bottom|center"
-                />
-            <Button
-                android:id="@+id/btn_Ophthalmology"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/hangeulnurib"
-                android:background="@drawable/icon_ophthalmology"
-                android:gravity="bottom|center" />
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_Cosmetic_Surgery"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <com.example.api_test.SquareButton
+                android:id="@+id/btn_Dermatology"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
+                android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
-                android:background="@drawable/icon_cosmetic"
-                android:gravity="bottom|center"
-                 />
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_dermatology" />
+
+            <com.example.api_test.SquareButton
+                android:id="@+id/btn_Ophthalmology"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_layout"
+                android:fontFamily="@font/hangeulnurib"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_ophthalmology" />
+
+            <com.example.api_test.SquareButton
+                android:id="@+id/btn_Cosmetic_Surgery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_layout"
+                android:fontFamily="@font/hangeulnurib"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_cosmetic" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal" >
-            <Button
+            android:orientation="horizontal">
+
+            <com.example.api_test.SquareButton
                 android:id="@+id/btn_Orthopedics"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/border_layout"
+                android:layout_margin="3dp"
                 android:fontFamily="@font/hangeulnurib"
-                android:background="@drawable/icon_orthopedics"
-                android:gravity="bottom|center"/>
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_orthopedics" />
 
-            <Button
+            <com.example.api_test.SquareButton
                 android:id="@+id/btn_Otolaryngology"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
-                android:background="@drawable/icon_ent"
-                android:gravity="bottom|center"
-                 />
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_ent" />
 
-            <Button
+            <com.example.api_test.SquareButton
                 android:id="@+id/btn_Surgical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
+                android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
-                android:background="@drawable/icon_surgical"
-                android:gravity="bottom|center"
-                />
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_surgical" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10sp"
             android:layout_weight="1"
-            android:layout_marginBottom="10sp">
-            <Button
+            android:orientation="horizontal">
+
+            <com.example.api_test.SquareButton
                 android:id="@+id/btn_Internal_Medicine"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
-                android:background="@drawable/icon_internal_medicine"
-                android:minHeight="0sp"
-                android:minWidth="0sp"
-                android:gravity="bottom|center"
-                 />
-            <Button
+                android:scaleType="fitCenter"
+                android:layout_margin="3dp"
+                android:src="@drawable/icon_internal_medicine" />
+
+            <com.example.api_test.SquareButton
                 android:id="@+id/btn_Urology"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
-                android:background="@drawable/icon_urology"
-                android:minHeight="0sp"
-                android:minWidth="0sp"
-                android:gravity="bottom|center"
-               />
-            <Button
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_urology" />
+
+            <com.example.api_test.SquareButton
                 android:id="@+id/btn_Obstetrics_Gynecology"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/border_layout"
+                android:layout_margin="3dp"
                 android:fontFamily="@font/hangeulnurib"
-                android:background="@drawable/icon_obstetrics"
-                android:minHeight="0sp"
-                android:minWidth="0sp"
-                android:gravity="bottom|center"
-                 />
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_obstetrics" />
 
 
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

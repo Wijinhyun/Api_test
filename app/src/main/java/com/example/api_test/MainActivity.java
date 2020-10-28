@@ -15,6 +15,7 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button Btn_region;
-    private Button Btn_Internal_Medicine, Btn_Dermatology, Btn_Ophthalmology, Btn_Cosmetic_Surgery, Btn_Orthopedics, Btn_Otolaryngology, Btn_Surgical, Btn_Urology, Btn_Obstetrics_Gynecology;
+    private ImageButton Btn_Internal_Medicine, Btn_Dermatology, Btn_Ophthalmology, Btn_Cosmetic_Surgery, Btn_Orthopedics, Btn_Otolaryngology, Btn_Surgical, Btn_Urology, Btn_Obstetrics_Gynecology;
 
     private String city_name;
     private String gu_name;
@@ -148,15 +149,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void init() {
         Btn_region = (Button) findViewById(R.id.btn_region);
-        Btn_Internal_Medicine = (Button) findViewById(R.id.btn_Internal_Medicine);
-        Btn_Dermatology = (Button) findViewById(R.id.btn_Dermatology);
-        Btn_Ophthalmology = (Button) findViewById(R.id.btn_Ophthalmology);
-        Btn_Cosmetic_Surgery = (Button) findViewById(R.id.btn_Cosmetic_Surgery);
-        Btn_Orthopedics = (Button) findViewById(R.id.btn_Orthopedics);
-        Btn_Otolaryngology = (Button) findViewById(R.id.btn_Otolaryngology);
-        Btn_Surgical = (Button) findViewById(R.id.btn_Surgical);
-        Btn_Urology = (Button) findViewById(R.id.btn_Urology);
-        Btn_Obstetrics_Gynecology = (Button) findViewById(R.id.btn_Obstetrics_Gynecology);
+        Btn_Internal_Medicine = (ImageButton) findViewById(R.id.btn_Internal_Medicine);
+        Btn_Dermatology = (ImageButton) findViewById(R.id.btn_Dermatology);
+        Btn_Ophthalmology = (ImageButton) findViewById(R.id.btn_Ophthalmology);
+        Btn_Cosmetic_Surgery = (ImageButton) findViewById(R.id.btn_Cosmetic_Surgery);
+        Btn_Orthopedics = (ImageButton) findViewById(R.id.btn_Orthopedics);
+        Btn_Otolaryngology = (ImageButton) findViewById(R.id.btn_Otolaryngology);
+        Btn_Surgical = (ImageButton) findViewById(R.id.btn_Surgical);
+        Btn_Urology = (ImageButton) findViewById(R.id.btn_Urology);
+        Btn_Obstetrics_Gynecology = (ImageButton) findViewById(R.id.btn_Obstetrics_Gynecology);
 
 
         Btn_region.setOnClickListener(this);

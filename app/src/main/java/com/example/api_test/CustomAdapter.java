@@ -2,6 +2,8 @@ package com.example.api_test;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +65,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
 
 
         //viewholder.estbDdtxt.setText(mList.get(position).getEstbDd());
+
         viewholder.yadmNmtxt.setText(mList.get(position).getYadmNm());
         if(mList.get(position).getMedical_list() != null) {
             viewholder.Tv_list.setText(mList.get(position).getMedical_list());
@@ -74,13 +77,17 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
             percent = String.format("%.1f", Double.parseDouble(mList.get(position).getSdrdgsCnt()) / Double.parseDouble(mList.get(position).getDrTotCnt()) * 100);
         }
         viewholder.Tv_percent.setText(percent + "%");
+        //GradientDrawable shape = new GradientDrawable();
+        //shape.setCornerRadius( 8 );
+        //View view = (TextView) findViewById( R.id.tv_percent );
         if(Double.parseDouble(percent) >= 66.6){
-            viewholder.Tv_percent.setBackgroundColor(Color.parseColor("#0A640A"));
+            viewholder.Tv_percent.setBackgroundResource(R.drawable.round_percent2);
         }else if(Double.parseDouble(percent) >= 33.3){
-            viewholder.Tv_percent.setBackgroundColor(Color.parseColor("#FFCC42"));
+            viewholder.Tv_percent.setBackgroundResource(R.drawable.round_percent3);
         }else{
-            viewholder.Tv_percent.setBackgroundColor(Color.parseColor("#BF3813"));
+            viewholder.Tv_percent.setBackgroundResource(R.drawable.round_percent);
         }
+
     }
 
     @Override

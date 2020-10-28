@@ -18,8 +18,9 @@
             android:layout_width="0dp"
             android:layout_height="30sp"
             android:layout_weight="1"
-            android:background="@drawable/location_toolbar"
+            android:background="@drawable/btn_top"
             android:fontFamily="@font/hangeulnurib"
+            android:layout_margin="10dp"
             android:text="지역 설정" />
         <Button
             android:id="@+id/btn_medical_subject"
@@ -27,7 +28,8 @@
             android:layout_height="30sp"
             android:layout_weight="1"
             android:fontFamily="@font/hangeulnurib"
-            android:background="@drawable/location_toolbar"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_top"
             android:text="" />
 
     </LinearLayout>
