@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_background2"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -21,7 +21,6 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="eu7sdvwbp9" />
 
-        <activity android:name=".Hospital_list" />
         <activity android:name=".Seoul_listview" />
         <activity android:name=".Region_listview" />
         <activity android:name=".MapActivity" />
