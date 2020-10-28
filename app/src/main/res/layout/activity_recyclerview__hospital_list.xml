@@ -11,24 +11,30 @@
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5sp"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/btn_region_in_list"
             android:layout_width="0dp"
-            android:layout_height="30sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="4dp"
             android:layout_weight="1"
             android:background="@drawable/btn_top"
             android:fontFamily="@font/hangeulnurib"
-            android:layout_margin="10dp"
             android:text="지역 설정" />
+
         <Button
             android:id="@+id/btn_medical_subject"
             android:layout_width="0dp"
-            android:layout_height="30sp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/hangeulnurib"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/btn_top"
             android:text="" />
 
