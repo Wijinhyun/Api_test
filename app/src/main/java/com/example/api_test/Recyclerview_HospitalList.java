@@ -38,6 +38,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private String temp_cnt;
     private String mykey = "%2BHeQuB3%2FCasGAbmRnedYca%2B6ESWu%2FcHnzFBtykDvwHZZLfz0ZTTJ2mANSme5%2Blr1DgBnQ4WJnmLXPwxsatF3Pw%3D%3D";
     private String MedicalsubCd;
+    private Boolean lock = false;
+    private String search;
 
     private FloatingActionButton Fb_tomap;
     private Button Btn_region_in_list, Btn_medical_subject;
@@ -53,6 +55,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         city_name = intent.getStringExtra("city_name");
         gu_name = intent.getStringExtra("gu_name");
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
+        search = intent.getStringExtra("search");
+
         if(MedicalsubCd.equals("01")){
             Btn_medical_subject.setText("내과");
         }else if(MedicalsubCd.equals("14")){
@@ -89,38 +93,42 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                             adapter = new CustomAdapter(getApplicationContext(), list);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
+
                         }
                     }
                 });
             }
         }).start();
 
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(final RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
-
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Pagenumber +=1;
-                            getXmlData();
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (list.isEmpty() == false || list.size() != 0) {
-                                        Log.d("list_check", list.size() + "");
-                                        adapter.notifyDataSetChanged();
-                                        Toast.makeText(Recyclerview_HospitalList.this, list.size() + "개", Toast.LENGTH_SHORT).show();
+                if(lock == false) {
+                    if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
+                        lock = true;
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Pagenumber += 1;
+                                getXmlData();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (list.isEmpty() == false || list.size() != 0) {
+                                            Log.d("list_check", list.size() + "");
+                                            adapter.notifyDataSetChanged();
+                                            Toast.makeText(Recyclerview_HospitalList.this, list.size() + "개", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
-                                }
-                            });
-                        }
-                    }).start();
+                                });
+                            }
+                        }).start();
+                    }
+                    lock = false;
                 }
-
             }
         });
 
@@ -709,6 +717,10 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         }
         if (sgguCd != null) {
             queryUrl += "&sgguCd=" + sgguCd;
+        }
+
+        if(search != null){
+            queryUrl += "&yadmNm=" + search;
         }
 
         Log.d("TAG", queryUrl);

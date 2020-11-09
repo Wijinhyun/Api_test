@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Recyclerview_HospitalList"></activity>
+        <activity android:name=".Search_btn" android:windowSoftInputMode="stateVisible|adjustResize"></activity>
+        <activity android:name=".Recyclerview_HospitalList" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"

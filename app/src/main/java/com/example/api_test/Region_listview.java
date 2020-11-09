@@ -17,6 +17,7 @@ public class Region_listview extends AppCompatActivity {
     private ListView Lv_city;
     private String Imfrom;
     private String MedicalsubCd;
+    private String search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class Region_listview extends AppCompatActivity {
         Intent intent = getIntent();
         Imfrom = intent.getStringExtra("Imfrom");
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
+        search = intent.getStringExtra("search");
 
         Lv_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -37,6 +39,7 @@ public class Region_listview extends AppCompatActivity {
                 intent.putExtra("city_name", (String) Lv_city.getAdapter().getItem(position)); /*송신*/
                 intent.putExtra("Imfrom", Imfrom); /*송신*/
                 intent.putExtra("MedicalsubCd", MedicalsubCd);
+                intent.putExtra("search", search);
 
                 startActivity(intent);
             }

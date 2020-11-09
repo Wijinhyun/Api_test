@@ -14,26 +14,46 @@
         android:layout_marginRight="13dp"
         android:layout_marginBottom="3dp"
         android:layout_marginTop="13dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_region"
+        app:layout_constraintBottom_toTopOf="@id/LL_main"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon_doctor" />
 
-    <Button
-        android:id="@+id/btn_region"
+
+    <LinearLayout
+        android:id="@+id/LL_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginLeft="13dp"
         android:layout_marginRight="13dp"
-        android:layout_marginBottom="3dp"
-        android:background="@drawable/btn_top"
-        android:text="지역"
-        android:fontFamily="@font/hangeulnurib"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent">
 
+        <Button
+            android:id="@+id/btn_region"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/border_layout"
+            android:text="지역"
+            android:fontFamily="@font/hangeulnurib"
 
+            />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="검색할 병원 명을 입력하세요"
+            android:background="@drawable/border_layout"
+            android:fontFamily="@font/hangeulnurib"
+            />
+
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"

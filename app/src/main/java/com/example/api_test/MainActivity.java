@@ -35,11 +35,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button Btn_region;
+    private Button Btn_region, Btn_search;
     private ImageButton Btn_Internal_Medicine, Btn_Dermatology, Btn_Ophthalmology, Btn_Cosmetic_Surgery, Btn_Orthopedics, Btn_Otolaryngology, Btn_Surgical, Btn_Urology, Btn_Obstetrics_Gynecology;
 
     private String city_name;
     private String gu_name;
+    private String search;
 
     private String MedicalsubCd;
 
@@ -54,7 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         city_name = intent.getStringExtra("city_name");
         gu_name = intent.getStringExtra("gu_name");
+        search = intent.getStringExtra("search");
 
+        if(search != null){
+            Btn_search.setText(search);
+        }
         if (city_name != null && gu_name != null) {
             Btn_region.setText(city_name + " - " + gu_name);
         }
@@ -66,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_region:
                 Intent intent = new Intent(MainActivity.this, Region_listview.class);
                 intent.putExtra("Imfrom", "mainactivity"); /*송신*/
+                intent.putExtra("search", search);
                 startActivity(intent);
                 break;
             case R.id.btn_Internal_Medicine:
@@ -74,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent01.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent01.putExtra("city_name", city_name);
                 intent01.putExtra("gu_name", gu_name);
+                intent01.putExtra("search", search);
                 startActivity(intent01);
                 break;
             case R.id.btn_Dermatology:
@@ -82,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent14.putExtra("city_name", city_name);
                 intent14.putExtra("gu_name", gu_name);
+                intent14.putExtra("search", search);
                 startActivity(intent14);
                 break;
             case R.id.btn_Ophthalmology:
@@ -90,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent12.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent12.putExtra("city_name", city_name);
                 intent12.putExtra("gu_name", gu_name);
+                intent12.putExtra("search", search);
                 startActivity(intent12);
                 break;
             case R.id.btn_Cosmetic_Surgery:
@@ -98,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent08.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent08.putExtra("city_name", city_name);
                 intent08.putExtra("gu_name", gu_name);
+                intent08.putExtra("search", search);
                 startActivity(intent08);
                 break;
             case R.id.btn_Orthopedics:
@@ -106,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent05.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent05.putExtra("city_name", city_name);
                 intent05.putExtra("gu_name", gu_name);
+                intent05.putExtra("search", search);
                 startActivity(intent05);
                 break;
             case R.id.btn_Otolaryngology:
@@ -114,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent49.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent49.putExtra("city_name", city_name);
                 intent49.putExtra("gu_name", gu_name);
+                intent49.putExtra("search", search);
                 startActivity(intent49);
                 break;
             case R.id.btn_Surgical:
@@ -122,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent04.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent04.putExtra("city_name", city_name);
                 intent04.putExtra("gu_name", gu_name);
+                intent04.putExtra("search", search);
                 startActivity(intent04);
                 break;
             case R.id.btn_Urology:
@@ -130,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent15.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent15.putExtra("city_name", city_name);
                 intent15.putExtra("gu_name", gu_name);
+                intent15.putExtra("search", search);
                 startActivity(intent15);
                 break;
             case R.id.btn_Obstetrics_Gynecology:
@@ -138,7 +152,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent10.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent10.putExtra("city_name", city_name);
                 intent10.putExtra("gu_name", gu_name);
+                intent10.putExtra("search", search);
                 startActivity(intent10);
+                break;
+            case R.id.btn_search:
+                Intent search = new Intent(MainActivity.this, Search_btn.class);
+                search.putExtra("city_name", city_name);
+                search.putExtra("gu_name", gu_name);
+                startActivity(search);
                 break;
             default:
                 break;
@@ -158,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Btn_Surgical = (ImageButton) findViewById(R.id.btn_Surgical);
         Btn_Urology = (ImageButton) findViewById(R.id.btn_Urology);
         Btn_Obstetrics_Gynecology = (ImageButton) findViewById(R.id.btn_Obstetrics_Gynecology);
-
+        Btn_search = (Button) findViewById(R.id.btn_search);
 
         Btn_region.setOnClickListener(this);
         Btn_Internal_Medicine.setOnClickListener(this);
@@ -170,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Btn_Surgical.setOnClickListener(this);
         Btn_Urology.setOnClickListener(this);
         Btn_Obstetrics_Gynecology.setOnClickListener(this);
-
+        Btn_search.setOnClickListener(this);
     }
 
 }

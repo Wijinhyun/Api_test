@@ -19,6 +19,7 @@ public class Seoul_listview extends AppCompatActivity {
     private String city_name;
     private String Imfrom;
     private String MedicalsubCd;
+    private String search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class Seoul_listview extends AppCompatActivity {
         city_name = intent.getStringExtra("city_name");
         Imfrom = intent.getStringExtra("Imfrom");
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
+        search = intent.getStringExtra("search");
 
         init();
 
@@ -40,6 +42,7 @@ public class Seoul_listview extends AppCompatActivity {
                     intent.putExtra("city_name", city_name);
                     intent.putExtra("gu_name", (String) Lv_gu.getAdapter().getItem(position)); /*송신*/
                     intent.putExtra("MedicalsubCd", MedicalsubCd);
+                    intent.putExtra("search", search);
 
                     startActivity(intent);
                 }
@@ -48,6 +51,7 @@ public class Seoul_listview extends AppCompatActivity {
 
                     intent.putExtra("city_name", city_name);
                     intent.putExtra("gu_name", (String) Lv_gu.getAdapter().getItem(position)); /*송신*/
+                    intent.putExtra("search", search);
 
                     startActivity(intent);
                 }
