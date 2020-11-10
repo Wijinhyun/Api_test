@@ -65,7 +65,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:text="검색할 병원 명을 입력하세요"
+            android:text="검색할 병원명을 입력하세요"
             android:background="@drawable/border_layout"
             android:fontFamily="@font/hangeulnurib"
             android:stateListAnimator="@null"

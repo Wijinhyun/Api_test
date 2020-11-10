@@ -17,6 +17,8 @@ public class Search_btn extends AppCompatActivity {
     private String search;
     private String city_name;
     private String gu_name;
+    private String Imfrom;
+    private String MedicalsubCd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,8 @@ public class Search_btn extends AppCompatActivity {
         Intent intent = getIntent();
         city_name = intent.getStringExtra("city_name");
         gu_name = intent.getStringExtra("gu_name");
+        Imfrom = intent.getStringExtra("Imfrom");
+        MedicalsubCd = intent.getStringExtra("MedicalsubCd");
 
         editText = (EditText) findViewById(R.id.et_search);
         editText.requestFocus();
@@ -42,14 +46,28 @@ public class Search_btn extends AppCompatActivity {
                         break;
                     default:
                         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        if(editText.getText().toString().length() != 0) {
-                            search = editText.getText().toString();
-                            intent.putExtra("search", search);
+                        if(Imfrom.equals("recyclerview")) {
+                            Intent intent1 = new Intent(getApplicationContext(), Recyclerview_HospitalList.class);
+                            intent1.putExtra("MedicalsubCd", MedicalsubCd);
+                            if (editText.getText().toString().length() != 0) {
+                                search = editText.getText().toString();
+                                intent1.putExtra("search", search);
+                            }
+                            intent1.putExtra("city_name", city_name);
+                            intent1.putExtra("gu_name", gu_name);
+                            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent1);
+                        }else {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            if (editText.getText().toString().length() != 0) {
+                                search = editText.getText().toString();
+                                intent.putExtra("search", search);
+                            }
+                            intent.putExtra("city_name", city_name);
+                            intent.putExtra("gu_name", gu_name);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
                         }
-                        intent.putExtra("city_name", city_name);
-                        intent.putExtra("gu_name", gu_name);
-                        startActivity(intent);
                         return false;
                 }
                 return true;

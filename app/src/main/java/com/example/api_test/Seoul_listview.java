@@ -43,7 +43,7 @@ public class Seoul_listview extends AppCompatActivity {
                     intent.putExtra("gu_name", (String) Lv_gu.getAdapter().getItem(position)); /*송신*/
                     intent.putExtra("MedicalsubCd", MedicalsubCd);
                     intent.putExtra("search", search);
-
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
                 else{
@@ -52,7 +52,7 @@ public class Seoul_listview extends AppCompatActivity {
                     intent.putExtra("city_name", city_name);
                     intent.putExtra("gu_name", (String) Lv_gu.getAdapter().getItem(position)); /*송신*/
                     intent.putExtra("search", search);
-
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
             }

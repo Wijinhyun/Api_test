@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private String MedicalsubCd;
     private TextFloatingActionButton Fb_qna;
-
+    private BackPressCloseHandler backPressCloseHandler;
 
 
     @Override
@@ -164,11 +164,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 qna.putExtra("gu_name", gu_name);
                 qna.putExtra("search", search);*/
                 startActivity(qna);
+                finish();
                 break;
             case R.id.btn_search:
                 Intent search = new Intent(MainActivity.this, Search_btn.class);
                 search.putExtra("city_name", city_name);
                 search.putExtra("gu_name", gu_name);
+                search.putExtra("Imfrom", "mainactivity");
                 startActivity(search);
                 break;
             default:
@@ -205,7 +207,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Btn_Obstetrics_Gynecology.setOnClickListener(this);
         Btn_search.setOnClickListener(this);
         Fb_qna.setOnClickListener(this);
-    }
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
+    }
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
+    }
 }
 

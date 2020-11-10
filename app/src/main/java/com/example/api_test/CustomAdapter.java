@@ -25,19 +25,19 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
     private ArrayList<HospitalItem> mList;
     private LayoutInflater mInflate;
     private Context context;
-
+    private String subject;
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         private TextView addrtxt,clCdNmtxt,estbDdtxt,gdrCnttxt,hospUrltxt,intnCnttxt,postNotxt,resdntCnttxt,sdrCnttxt,telnotxt,yadmNmtxt,ykihotxt, Tv_list, Code_list;
-        private TextView Tv_percent, Tv_sdrdgsCnt, Tv_drTotCnt, Tv_adress;
+        private TextView Tv_percent, Tv_sdrdgsCnt, Tv_drTotCnt, Tv_adress, Tv_sbj;
 
         public CustomViewHolder(View view) {
             super(view);
-
+            this.Tv_sbj = view.findViewById(R.id.tv_sbj);
             //this.estbDdtxt = (TextView) view.findViewById(R.id.estbDd);
             this.yadmNmtxt = (TextView) view.findViewById(R.id.yadmNm);
-            this.Tv_list = (TextView) view.findViewById(R.id.tv_list);
+            //this.Tv_list = (TextView) view.findViewById(R.id.tv_list);
             this.Tv_percent = (TextView) view.findViewById(R.id.tv_percent);
             this.Tv_sdrdgsCnt = (TextView) view.findViewById(R.id.tv_sdrdgsCnt);
             this.Tv_drTotCnt = (TextView) view.findViewById(R.id.tv_drTotCnt);
@@ -46,10 +46,11 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
     }
 
 
-    public CustomAdapter(Context context, ArrayList<HospitalItem> items) {
+    public CustomAdapter(Context context, ArrayList<HospitalItem> items, String subject) {
         this.mList = items;
         this.mInflate = LayoutInflater.from(context);
         this.context = context;
+        this.subject = subject;
     }
 
 
@@ -69,10 +70,11 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
         //viewholder.estbDdtxt.setText(mList.get(position).getEstbDd());
 
         viewholder.yadmNmtxt.setText(mList.get(position).getYadmNm());
-        if(mList.get(position).getMedical_list() != null) {
+       /* if(mList.get(position).getMedical_list() != null) {
             viewholder.Tv_list.setText(mList.get(position).getMedical_list());
-        }
+        }*/
         String percent = "0.0";
+        viewholder.Tv_sbj.setText(subject + " 전문의 : ");
         viewholder.Tv_sdrdgsCnt.setText(mList.get(position).getSdrdgsCnt());
         viewholder.Tv_drTotCnt.setText(mList.get(position).getDrTotCnt());
         viewholder.Tv_adress.setText(mList.get(position).getAddr());

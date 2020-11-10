@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,10 +41,12 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private String MedicalsubCd;
     private Boolean lock = false;
     private String search;
+    private int hospital_Cnt = 0;
+    private String subject;
 
     private FloatingActionButton Fb_tomap;
-    private Button Btn_region_in_list, Btn_medical_subject;
-
+    private Button Btn_region_in_list, Btn_medical_subject, Btn_back, Btn_search;
+    private TextView Tv_hospitalCnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,27 +62,38 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
         if(MedicalsubCd.equals("01")){
             Btn_medical_subject.setText("내과");
+            subject = "내과";
         }else if(MedicalsubCd.equals("14")){
             Btn_medical_subject.setText("피부과");
+            subject = "피부과";
         }else if(MedicalsubCd.equals("12")){
             Btn_medical_subject.setText("안과");
+            subject = "안과";
         }else if(MedicalsubCd.equals("08")){
             Btn_medical_subject.setText("성형외과");
+            subject = "성형외과";
         }else if(MedicalsubCd.equals("05")) {
             Btn_medical_subject.setText("정형외과");
+            subject = "정형외과";
         }else if(MedicalsubCd.equals("13")){
             Btn_medical_subject.setText("이비인후과");
+            subject = "이비인후과";
         }else if(MedicalsubCd.equals("04")){
             Btn_medical_subject.setText("외과");
+            subject = "외과";
         }else if(MedicalsubCd.equals("15")){
             Btn_medical_subject.setText("비뇨기의학과");
+            subject = "비뇨기의학과";
         }else if(MedicalsubCd.equals("10")){
             Btn_medical_subject.setText("산부인과");
+            subject = "산부인과";
         }
         if (city_name != null && gu_name != null) {
             Btn_region_in_list.setText(city_name + " - " + gu_name);
         }
-
+        if(search != null){
+            Btn_search.setText(search);
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -90,10 +104,10 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                     public void run() {
                         if (list.isEmpty() == false || list.size() != 0) {
                             Log.d("list_check", list.size() + "");
-                            adapter = new CustomAdapter(getApplicationContext(), list);
+                            adapter = new CustomAdapter(getApplicationContext(), list, subject);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
-
+                            Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
                         }
                     }
                 });
@@ -154,6 +168,13 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         manager = new LinearLayoutManager(Recyclerview_HospitalList.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
 
+        Btn_back = findViewById(R.id.btn_back);
+        Btn_back.setOnClickListener(this);
+
+        Btn_search = findViewById(R.id.btn_search);
+        Btn_search.setOnClickListener(this);
+
+        Tv_hospitalCnt = findViewById(R.id.tv_hospitalCnt);
         Fb_tomap = findViewById(R.id.fb_tomap);
         Btn_region_in_list = findViewById(R.id.btn_region_in_list);
         Btn_medical_subject = findViewById(R.id.btn_medical_subject);
@@ -170,13 +191,34 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent1.putExtra("MedicalsubCd", MedicalsubCd);
                 intent1.putExtra("city_name", city_name);
                 intent1.putExtra("gu_name", gu_name);
+                intent1.putExtra("search", search);
                 startActivity(intent1);
+                finish();
                 break;
             case R.id.btn_region_in_list:
                 Intent intent = new Intent(getApplicationContext(), Region_listview.class);
                 intent.putExtra("Imfrom", "recyclerview");
                 intent.putExtra("MedicalsubCd", MedicalsubCd);
+                intent.putExtra("search",search);
                 startActivity(intent);
+                break;
+            case R.id.btn_back:
+                onBackPressed();
+                break;
+            case R.id.btn_medical_subject:
+                Intent intent2 = new Intent(getApplicationContext(), Medical_subject.class);
+                intent2.putExtra("city_name", city_name);
+                intent2.putExtra("gu_name", gu_name);
+                intent2.putExtra("search",search);
+                startActivity(intent2);
+                break;
+            case R.id.btn_search:
+                Intent intent3 = new Intent(getApplicationContext(), Search_btn.class);
+                intent3.putExtra("Imfrom", "recyclerview");
+                intent3.putExtra("MedicalsubCd", MedicalsubCd);
+                intent3.putExtra("city_name", city_name);
+                intent3.putExtra("gu_name", gu_name);
+                startActivity(intent3);
                 break;
             default:
 
@@ -806,6 +848,10 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                             hospitalCode=xpp.getText();
                             Log.d("Tag", hospitalCode);
                             getXmlData2();
+                        }
+                        else if (tag.equals("totalCount")) {
+                            xpp.next();
+                            hospital_Cnt = Integer.parseInt(xpp.getText());
                         }
                         break;
 

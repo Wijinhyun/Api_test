@@ -51,6 +51,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private String hospitalCode;
     private String temp, temp2;
     private String temp_cnt;
+    private String search;
 
     ArrayList<HospitalItem> list = null;
     HospitalItem item = null;
@@ -68,6 +69,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         city_name = intent.getStringExtra("city_name");
         gu_name = intent.getStringExtra("gu_name");
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
+        search = intent.getStringExtra("search");
 
         Fb_tolist = findViewById(R.id.fb_tolist);
         Fb_tolist.setOnClickListener(new Button.OnClickListener() {
@@ -77,7 +79,9 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 intent.putExtra("MedicalsubCd", MedicalsubCd);
                 intent.putExtra("city_name", city_name);
                 intent.putExtra("gu_name", gu_name);
+                intent.putExtra("search", search);
                 startActivity(intent);
+                finish();
             }
         });
 
