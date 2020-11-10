@@ -192,8 +192,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent1.putExtra("city_name", city_name);
                 intent1.putExtra("gu_name", gu_name);
                 intent1.putExtra("search", search);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent1);
-                finish();
                 break;
             case R.id.btn_region_in_list:
                 Intent intent = new Intent(getApplicationContext(), Region_listview.class);
