@@ -1,6 +1,7 @@
 package com.example.api_test;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -29,7 +30,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         private TextView addrtxt,clCdNmtxt,estbDdtxt,gdrCnttxt,hospUrltxt,intnCnttxt,postNotxt,resdntCnttxt,sdrCnttxt,telnotxt,yadmNmtxt,ykihotxt, Tv_list, Code_list;
-        private TextView Tv_percent, Tv_sdrdgsCnt, Tv_drTotCnt;
+        private TextView Tv_percent, Tv_sdrdgsCnt, Tv_drTotCnt, Tv_adress;
 
         public CustomViewHolder(View view) {
             super(view);
@@ -40,6 +41,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
             this.Tv_percent = (TextView) view.findViewById(R.id.tv_percent);
             this.Tv_sdrdgsCnt = (TextView) view.findViewById(R.id.tv_sdrdgsCnt);
             this.Tv_drTotCnt = (TextView) view.findViewById(R.id.tv_drTotCnt);
+            this.Tv_adress = view.findViewById(R.id.tv_adress);
         }
     }
 
@@ -73,6 +75,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
         String percent = "0.0";
         viewholder.Tv_sdrdgsCnt.setText(mList.get(position).getSdrdgsCnt());
         viewholder.Tv_drTotCnt.setText(mList.get(position).getDrTotCnt());
+        viewholder.Tv_adress.setText(mList.get(position).getAddr());
         if(mList.get(position).getSdrdgsCnt() != null && !mList.get(position).getDrTotCnt().equals("0")) {
             percent = String.format("%.1f", Double.parseDouble(mList.get(position).getSdrdgsCnt()) / Double.parseDouble(mList.get(position).getDrTotCnt()) * 100);
         }
@@ -87,6 +90,8 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
         }else{
             viewholder.Tv_percent.setBackgroundResource(R.drawable.round_percent);
         }
+
+
 
     }
 

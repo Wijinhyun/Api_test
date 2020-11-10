@@ -132,6 +132,21 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             }
         });
 
+        recyclerView.addOnItemTouchListener(new RecyclerViewOnItemClickListener(getApplicationContext(), recyclerView,
+                new RecyclerViewOnItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        Intent recycler_item = new Intent(getApplicationContext(), Hospital_Detail.class);
+                        recycler_item.putExtra("array", list.get(position));
+                        startActivity(recycler_item);
+                    }
+
+                    @Override
+                    public void onItemLongClick(View v, int position) {
+
+                    }
+                }));
+
     }
 
     private void init() {
