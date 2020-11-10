@@ -164,7 +164,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 qna.putExtra("gu_name", gu_name);
                 qna.putExtra("search", search);*/
                 startActivity(qna);
-                finish();
                 break;
             case R.id.btn_search:
                 Intent search = new Intent(MainActivity.this, Search_btn.class);
