@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Hospital_Detail"></activity>
+        <activity android:name=".QnA_page"></activity>
+        <activity android:name=".Hospital_Detail" />
         <activity
             android:name=".Search_btn"
             android:windowSoftInputMode="stateVisible|adjustResize" />

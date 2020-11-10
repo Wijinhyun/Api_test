@@ -19,6 +19,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon_doctor" />
 
+    <com.github.edsergeev.TextFloatingActionButton
+        android:id="@+id/fb_qna"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="\?"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/hangeulnurib"
+        android:backgroundTint="#F87D4B"
+        app:text_y_offset="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#ffffff"
+        app:borderWidth="0dp"
+        />
 
     <LinearLayout
         android:id="@+id/LL_main"
@@ -39,7 +56,7 @@
             android:background="@drawable/border_layout"
             android:text="지역"
             android:fontFamily="@font/hangeulnurib"
-
+            android:stateListAnimator="@null"
             />
 
         <Button
@@ -51,6 +68,7 @@
             android:text="검색할 병원 명을 입력하세요"
             android:background="@drawable/border_layout"
             android:fontFamily="@font/hangeulnurib"
+            android:stateListAnimator="@null"
             />
 
     </LinearLayout>

@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.api_test.R;
 import com.example.api_test.Region_listview;
+import com.github.edsergeev.TextFloatingActionButton;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String search;
 
     private String MedicalsubCd;
+    private TextFloatingActionButton Fb_qna;
+
 
 
     @Override
@@ -155,6 +158,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent10.putExtra("search", search);
                 startActivity(intent10);
                 break;
+            case R.id.fb_qna:
+                Intent qna = new Intent(MainActivity.this, QnA_page.class);
+                /*qna.putExtra("city_name", city_name);
+                qna.putExtra("gu_name", gu_name);
+                qna.putExtra("search", search);*/
+                startActivity(qna);
+                break;
             case R.id.btn_search:
                 Intent search = new Intent(MainActivity.this, Search_btn.class);
                 search.putExtra("city_name", city_name);
@@ -180,6 +190,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Btn_Urology = (ImageButton) findViewById(R.id.btn_Urology);
         Btn_Obstetrics_Gynecology = (ImageButton) findViewById(R.id.btn_Obstetrics_Gynecology);
         Btn_search = (Button) findViewById(R.id.btn_search);
+        Fb_qna = findViewById(R.id.fb_qna);
+
 
         Btn_region.setOnClickListener(this);
         Btn_Internal_Medicine.setOnClickListener(this);
@@ -192,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Btn_Urology.setOnClickListener(this);
         Btn_Obstetrics_Gynecology.setOnClickListener(this);
         Btn_search.setOnClickListener(this);
+        Fb_qna.setOnClickListener(this);
     }
 
 }
