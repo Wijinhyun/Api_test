@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,6 +53,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private String temp, temp2;
     private String temp_cnt;
     private String search;
+    private String subject;
 
     ArrayList<HospitalItem> list = null;
     HospitalItem item = null;
@@ -59,6 +61,10 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private String mykey = "%2BHeQuB3%2FCasGAbmRnedYca%2B6ESWu%2FcHnzFBtykDvwHZZLfz0ZTTJ2mANSme5%2Blr1DgBnQ4WJnmLXPwxsatF3Pw%3D%3D";
     private double Xpos;
     private double Ypos;
+    private double init_xpos = 128.611553;
+    private double init_ypos = 35.887515;
+    private double new_xpos;
+    private double new_ypos;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +76,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         gu_name = intent.getStringExtra("gu_name");
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
         search = intent.getStringExtra("search");
+        subject = intent.getStringExtra("subject");
 
         Fb_tolist = findViewById(R.id.fb_tolist);
         Fb_tolist.setOnClickListener(new Button.OnClickListener() {
@@ -103,15 +110,53 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         naverMap.setOnMapClickListener(this);
 
         infoWindow = new InfoWindow();
-        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
+
+        infoWindow.setAdapter(new InfoWindow.DefaultViewAdapter(this) {
             @NonNull
             @Override
-            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+            protected View getContentView(@NonNull InfoWindow infoWindow) {
+
                 Marker marker = infoWindow.getMarker();
-                String store = (String) marker.getTag();
-                return store;
+                HospitalItem hospitalItem = (HospitalItem) marker.getTag();
+                View view = View.inflate(MapActivity.this,R.layout.view_info_window,null);
+
+                // distance 계산
+                new_xpos = Double.parseDouble(hospitalItem.getXpos());
+                new_ypos = Double.parseDouble(hospitalItem.getYpos());
+
+                int distance = calculateDistanceInKilometer(init_ypos,init_xpos,new_ypos,new_xpos);
+
+                // percent 계산
+                String percent = "0.0";
+                percent = String.format("%.1f", Double.parseDouble(hospitalItem.getSdrdgsCnt()) / Double.parseDouble(hospitalItem.getDrTotCnt()) * 100);
+
+                ((TextView) view.findViewById(R.id.iw_name)).setText(hospitalItem.getYadmNm());
+                ((TextView) view.findViewById(R.id.iw_distance)).setText(distance + "m");
+                ((TextView) view.findViewById(R.id.iw_addr)).setText(hospitalItem.getAddr());
+                ((TextView) view.findViewById(R.id.iw_percent)).setText(percent + "%");
+                ((TextView) view.findViewById(R.id.iw_sdrdgsCnt)).setText(hospitalItem.getSdrdgsCnt() + "명");
+                ((TextView) view.findViewById(R.id.iw_drTotCnt)).setText(hospitalItem.getDrTotCnt());
+                ((TextView) view.findViewById(R.id.iw_sbj)).setText(subject + " 전문의 : ");
+
+                return view;
             }
         });
+
+
+//        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
+//            @NonNull
+//            @Override
+//            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+//                Marker marker = infoWindow.getMarker();
+//                String store = (String) marker.getTag();
+//                return store;
+//            }
+//        });
+
+        LatLng location = new LatLng(init_ypos, init_xpos);
+
+        CameraPosition cameraPosition = new CameraPosition(location, 14);
+        naverMap.setCameraPosition(cameraPosition);
 
         LatLng mapCenter = naverMap.getCameraPosition().target;
 
@@ -142,7 +187,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         if(list.isEmpty() == false || list.size() != 0) {
             for(int i=0;i<list.size();i++) {
                 Marker marker = new Marker();
-                marker.setTag(list.get(i).getYadmNm());
+//                marker.setTag(list.get(i).getYadmNm());
+                marker.setTag(list.get(i));
 //                marker.setPosition(new LatLng(Double.parseDouble(list.get(i).YPos), Double.parseDouble(list.get(i).XPos)));
                 marker.setPosition(new LatLng(Double.parseDouble(list.get(i).getYpos()), Double.parseDouble(list.get(i).getXpos())));
 
@@ -451,4 +497,21 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         }
 
     }
+
+    public final static double AVERAGE_RADIUS_OF_EARTH_M = 6371000;
+    public int calculateDistanceInKilometer(double userLat, double userLng,
+                                            double venueLat, double venueLng) {
+
+        double latDistance = Math.toRadians(userLat - venueLat);
+        double lngDistance = Math.toRadians(userLng - venueLng);
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(venueLat))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_M * c));
+    }
+
 }

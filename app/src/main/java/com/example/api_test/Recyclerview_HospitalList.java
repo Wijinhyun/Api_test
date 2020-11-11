@@ -200,6 +200,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent1.putExtra("city_name", city_name);
                 intent1.putExtra("gu_name", gu_name);
                 intent1.putExtra("search", search);
+                intent1.putExtra("subject", subject);
                 startActivity(intent1);
                 finish();
                 break;
