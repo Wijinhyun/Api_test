@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private int hospital_Cnt = 0;
     private String subject;
 
-    private FloatingActionButton Fb_tomap;
+    private FloatingActionButton Fb_tomap,Fb_totop;
     private Button Btn_region_in_list, Btn_medical_subject, Btn_back, Btn_search;
     private TextView Tv_hospitalCnt;
 
@@ -176,10 +177,17 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
         Tv_hospitalCnt = findViewById(R.id.tv_hospitalCnt);
         Fb_tomap = findViewById(R.id.fb_tomap);
+        Fb_totop = findViewById(R.id.fb_totop);
         Btn_region_in_list = findViewById(R.id.btn_region_in_list);
         Btn_medical_subject = findViewById(R.id.btn_medical_subject);
 
         Fb_tomap.setOnClickListener(this);
+        Fb_totop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerView.scrollToPosition(0);
+            }
+        });
         Btn_region_in_list.setOnClickListener(this);
         Btn_medical_subject.setOnClickListener(this);
     }

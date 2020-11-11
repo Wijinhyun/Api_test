@@ -5,41 +5,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Recyclerview_HospitalList">
+    tools:context=".Recyclerview_HospitalList"
+    android:layout_margin="10dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/tv_hospitalCnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0개 검색됨"
+            android:textColor="#000000"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/baseline_arrow_back_24"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <HorizontalScrollView
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_region_in_list"
-            android:layout_width="0dp"
+        android:layout_below="@+id/layout_title">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="13dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_top"
-            android:fontFamily="@font/hangeulnurib"
-            android:text="지역 설정" />
+            android:orientation="horizontal"
+            >
 
-        <Button
-            android:id="@+id/btn_medical_subject"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/hangeulnurib"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="13dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/btn_top"
-            android:textSize="15sp"
-            android:text="" />
+            <Button
+                android:id="@+id/btn_region_in_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/btn_top"
+                android:fontFamily="@font/hangeulnurib"
+                android:text="지역 설정"
+                android:stateListAnimator="@null"/>
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_medical_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hangeulnurib"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/btn_top"
+                android:textSize="15sp"
+                android:text=""
+                android:stateListAnimator="@null"/>
+
+
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hangeulnurib"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/btn_top"
+                android:textSize="15sp"
+                android:text="검색할 병원명을 입력하세요"
+                android:stateListAnimator="@null"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
@@ -80,8 +131,27 @@
             app:borderWidth="0dp"
             app:fabCustomSize="70dp"
             app:text_y_offset="6dp"
-            app:useCompatPadding="true"
-            tools:ignore="smallSp" />
+            tools:ignore="smallSp"
+            android:elevation="0dp"
+            app:elevation="0dp"/>
+
+        <com.github.edsergeev.TextFloatingActionButton
+            android:id="@+id/fb_totop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F87D4B"
+            android:fontFamily="@font/hangeulnurib"
+            android:foregroundGravity="bottom"
+            android:text="TOP"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:borderWidth="0dp"
+            app:fabCustomSize="70dp"
+            app:text_y_offset="6dp"
+            tools:ignore="smallSp"
+            android:elevation="0dp"
+            app:elevation="0dp"/>
     </LinearLayout>
 
 
