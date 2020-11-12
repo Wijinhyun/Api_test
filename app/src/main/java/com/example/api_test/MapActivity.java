@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,6 +67,9 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private double init_ypos = 35.887515;
     private double new_xpos;
     private double new_ypos;
+    private double mark_xpos;
+    private double mark_ypos;
+    private Button btn_call;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,6 +97,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
             }
         });
 
+
+
         MapFragment mapFragment = (MapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
@@ -111,6 +118,14 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
 
         infoWindow = new InfoWindow();
 
+        infoWindow.setOnClickListener(new InfoWindow.OnClickListener() {
+            @Override
+            public boolean onClick(@NonNull Overlay overlay) {
+                Toast.makeText(MapActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
         infoWindow.setAdapter(new InfoWindow.DefaultViewAdapter(this) {
             @NonNull
             @Override
@@ -119,6 +134,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 Marker marker = infoWindow.getMarker();
                 HospitalItem hospitalItem = (HospitalItem) marker.getTag();
                 View view = View.inflate(MapActivity.this,R.layout.view_info_window,null);
+
+
 
                 // distance 계산
                 new_xpos = Double.parseDouble(hospitalItem.getXpos());
@@ -130,6 +147,14 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 String percent = "0.0";
                 percent = String.format("%.1f", Double.parseDouble(hospitalItem.getSdrdgsCnt()) / Double.parseDouble(hospitalItem.getDrTotCnt()) * 100);
 
+                if(Double.parseDouble(percent) >= 66.6){
+                    ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.greencircle);
+                }else if(Double.parseDouble(percent) >= 33.3){
+                    ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.yellowcircle);
+                }else if(Double.parseDouble(percent) >= 0.1) {          // 전문의가 아예 없으면 지도에 띄우지 않음
+                    ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.redcircle);
+                }
+
                 ((TextView) view.findViewById(R.id.iw_name)).setText(hospitalItem.getYadmNm());
                 ((TextView) view.findViewById(R.id.iw_distance)).setText(distance + "m");
                 ((TextView) view.findViewById(R.id.iw_addr)).setText(hospitalItem.getAddr());
@@ -137,6 +162,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 ((TextView) view.findViewById(R.id.iw_sdrdgsCnt)).setText(hospitalItem.getSdrdgsCnt() + "명");
                 ((TextView) view.findViewById(R.id.iw_drTotCnt)).setText(hospitalItem.getDrTotCnt());
                 ((TextView) view.findViewById(R.id.iw_sbj)).setText(subject + " 전문의 : ");
+
+
 
                 return view;
             }
@@ -174,7 +201,23 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 infoWindow.close();
             }
             else{
+                HospitalItem hospitalItem = (HospitalItem) marker.getTag();
+                mark_xpos = Double.parseDouble(hospitalItem.getXpos());
+                mark_ypos = Double.parseDouble(hospitalItem.getYpos());
+
+                LatLng location = new LatLng(mark_ypos, mark_xpos);
+
+                CameraPosition cameraPosition = new CameraPosition(location, 14);
+                naverMap.setCameraPosition(cameraPosition);
+
                 infoWindow.open(marker);
+//                btn_call = findViewById(R.id.iw_call);// 통화로 넘어가는 클릭리스너
+//                btn_call.setOnClickListener(new Button.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(MapActivity.this, "통화로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
             return true;
         }
@@ -210,25 +253,25 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 Log.d("percent", percent + "");
 
                 if(Double.parseDouble(percent) >= 66.6){
-                    //marker.setIcon(OverlayImage.fromResource(R.drawable.green));
-                    marker.setIcon(MarkerIcons.GREEN);
-                    marker.setIconTintColor(Color.GREEN);
+                    marker.setIcon(OverlayImage.fromResource(R.drawable.greencross));
+                    marker.setWidth(140);
+                    marker.setHeight(80);
                     marker.setAnchor(new PointF(0.5f,1.0f));
                     marker.setMap(naverMap);
                     marker.setOnClickListener(this);
                     markerList.add(marker);
                 }else if(Double.parseDouble(percent) >= 33.3){
-                    //marker.setIcon(OverlayImage.fromResource(R.drawable.yellow));
-                    marker.setIcon(MarkerIcons.YELLOW);
-                    marker.setIconTintColor(Color.YELLOW);
+                    marker.setIcon(OverlayImage.fromResource(R.drawable.yellowcross));
+                    marker.setWidth(140);
+                    marker.setHeight(80);
                     marker.setAnchor(new PointF(0.5f,1.0f));
                     marker.setMap(naverMap);
                     marker.setOnClickListener(this);
                     markerList.add(marker);
                 }else if(Double.parseDouble(percent) >= 0.1) {          // 전문의가 아예 없으면 지도에 띄우지 않음
-                    //marker.setIcon(OverlayImage.fromResource(R.drawable.red));
-                    marker.setIcon(MarkerIcons.RED);
-                    marker.setIconTintColor(Color.RED);
+                    marker.setIcon(OverlayImage.fromResource(R.drawable.redcross));
+                    marker.setWidth(140);
+                    marker.setHeight(80);
                     marker.setAnchor(new PointF(0.5f, 1.0f));
                     marker.setMap(naverMap);
                     marker.setOnClickListener(this);
