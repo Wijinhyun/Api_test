@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,6 +55,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private String temp, temp2;
     private String temp_cnt;
     private String search;
+    private String subject;
 
     ArrayList<HospitalItem> list = null;
     HospitalItem item = null;
@@ -59,6 +63,13 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private String mykey = "%2BHeQuB3%2FCasGAbmRnedYca%2B6ESWu%2FcHnzFBtykDvwHZZLfz0ZTTJ2mANSme5%2Blr1DgBnQ4WJnmLXPwxsatF3Pw%3D%3D";
     private double Xpos;
     private double Ypos;
+    private double init_xpos = 128.611553;
+    private double init_ypos = 35.887515;
+    private double new_xpos;
+    private double new_ypos;
+    private double mark_xpos;
+    private double mark_ypos;
+    private Button btn_call;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +81,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         gu_name = intent.getStringExtra("gu_name");
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
         search = intent.getStringExtra("search");
+        subject = intent.getStringExtra("subject");
 
         Fb_tolist = findViewById(R.id.fb_tolist);
         Fb_tolist.setOnClickListener(new Button.OnClickListener() {
@@ -84,6 +96,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 startActivity(intent);
             }
         });
+
+
 
         MapFragment mapFragment = (MapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -103,15 +117,73 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         naverMap.setOnMapClickListener(this);
 
         infoWindow = new InfoWindow();
-        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
-            @NonNull
+
+        infoWindow.setOnClickListener(new InfoWindow.OnClickListener() {
             @Override
-            public CharSequence getText(@NonNull InfoWindow infoWindow) {
-                Marker marker = infoWindow.getMarker();
-                String store = (String) marker.getTag();
-                return store;
+            public boolean onClick(@NonNull Overlay overlay) {
+                Toast.makeText(MapActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
+
+        infoWindow.setAdapter(new InfoWindow.DefaultViewAdapter(this) {
+            @NonNull
+            @Override
+            protected View getContentView(@NonNull InfoWindow infoWindow) {
+
+                Marker marker = infoWindow.getMarker();
+                HospitalItem hospitalItem = (HospitalItem) marker.getTag();
+                View view = View.inflate(MapActivity.this,R.layout.view_info_window,null);
+
+
+
+                // distance 계산
+                new_xpos = Double.parseDouble(hospitalItem.getXpos());
+                new_ypos = Double.parseDouble(hospitalItem.getYpos());
+
+                int distance = calculateDistanceInKilometer(init_ypos,init_xpos,new_ypos,new_xpos);
+
+                // percent 계산
+                String percent = "0.0";
+                percent = String.format("%.1f", Double.parseDouble(hospitalItem.getSdrdgsCnt()) / Double.parseDouble(hospitalItem.getDrTotCnt()) * 100);
+
+                if(Double.parseDouble(percent) >= 66.6){
+                    ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.greencircle);
+                }else if(Double.parseDouble(percent) >= 33.3){
+                    ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.yellowcircle);
+                }else if(Double.parseDouble(percent) >= 0.1) {          // 전문의가 아예 없으면 지도에 띄우지 않음
+                    ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.redcircle);
+                }
+
+                ((TextView) view.findViewById(R.id.iw_name)).setText(hospitalItem.getYadmNm());
+                ((TextView) view.findViewById(R.id.iw_distance)).setText(distance + "m");
+                ((TextView) view.findViewById(R.id.iw_addr)).setText(hospitalItem.getAddr());
+                ((TextView) view.findViewById(R.id.iw_percent)).setText(percent + "%");
+                ((TextView) view.findViewById(R.id.iw_sdrdgsCnt)).setText(hospitalItem.getSdrdgsCnt() + "명");
+                ((TextView) view.findViewById(R.id.iw_drTotCnt)).setText(hospitalItem.getDrTotCnt());
+                ((TextView) view.findViewById(R.id.iw_sbj)).setText(subject + " 전문의 : ");
+
+
+
+                return view;
+            }
+        });
+
+
+//        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
+//            @NonNull
+//            @Override
+//            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+//                Marker marker = infoWindow.getMarker();
+//                String store = (String) marker.getTag();
+//                return store;
+//            }
+//        });
+
+        LatLng location = new LatLng(init_ypos, init_xpos);
+
+        CameraPosition cameraPosition = new CameraPosition(location, 14);
+        naverMap.setCameraPosition(cameraPosition);
 
         LatLng mapCenter = naverMap.getCameraPosition().target;
 
@@ -129,7 +201,23 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 infoWindow.close();
             }
             else{
+                HospitalItem hospitalItem = (HospitalItem) marker.getTag();
+                mark_xpos = Double.parseDouble(hospitalItem.getXpos());
+                mark_ypos = Double.parseDouble(hospitalItem.getYpos());
+
+                LatLng location = new LatLng(mark_ypos, mark_xpos);
+
+                CameraPosition cameraPosition = new CameraPosition(location, 14);
+                naverMap.setCameraPosition(cameraPosition);
+
                 infoWindow.open(marker);
+//                btn_call = findViewById(R.id.iw_call);// 통화로 넘어가는 클릭리스너
+//                btn_call.setOnClickListener(new Button.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(MapActivity.this, "통화로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
             return true;
         }
@@ -142,7 +230,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         if(list.isEmpty() == false || list.size() != 0) {
             for(int i=0;i<list.size();i++) {
                 Marker marker = new Marker();
-                marker.setTag(list.get(i).getYadmNm());
+//                marker.setTag(list.get(i).getYadmNm());
+                marker.setTag(list.get(i));
 //                marker.setPosition(new LatLng(Double.parseDouble(list.get(i).YPos), Double.parseDouble(list.get(i).XPos)));
                 marker.setPosition(new LatLng(Double.parseDouble(list.get(i).getYpos()), Double.parseDouble(list.get(i).getXpos())));
 
@@ -164,25 +253,25 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 Log.d("percent", percent + "");
 
                 if(Double.parseDouble(percent) >= 66.6){
-                    //marker.setIcon(OverlayImage.fromResource(R.drawable.green));
-                    marker.setIcon(MarkerIcons.GREEN);
-                    marker.setIconTintColor(Color.GREEN);
+                    marker.setIcon(OverlayImage.fromResource(R.drawable.greencross));
+                    marker.setWidth(140);
+                    marker.setHeight(80);
                     marker.setAnchor(new PointF(0.5f,1.0f));
                     marker.setMap(naverMap);
                     marker.setOnClickListener(this);
                     markerList.add(marker);
                 }else if(Double.parseDouble(percent) >= 33.3){
-                    //marker.setIcon(OverlayImage.fromResource(R.drawable.yellow));
-                    marker.setIcon(MarkerIcons.YELLOW);
-                    marker.setIconTintColor(Color.YELLOW);
+                    marker.setIcon(OverlayImage.fromResource(R.drawable.yellowcross));
+                    marker.setWidth(140);
+                    marker.setHeight(80);
                     marker.setAnchor(new PointF(0.5f,1.0f));
                     marker.setMap(naverMap);
                     marker.setOnClickListener(this);
                     markerList.add(marker);
                 }else if(Double.parseDouble(percent) >= 0.1) {          // 전문의가 아예 없으면 지도에 띄우지 않음
-                    //marker.setIcon(OverlayImage.fromResource(R.drawable.red));
-                    marker.setIcon(MarkerIcons.RED);
-                    marker.setIconTintColor(Color.RED);
+                    marker.setIcon(OverlayImage.fromResource(R.drawable.redcross));
+                    marker.setWidth(140);
+                    marker.setHeight(80);
                     marker.setAnchor(new PointF(0.5f, 1.0f));
                     marker.setMap(naverMap);
                     marker.setOnClickListener(this);
@@ -451,4 +540,21 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         }
 
     }
+
+    public final static double AVERAGE_RADIUS_OF_EARTH_M = 6371000;
+    public int calculateDistanceInKilometer(double userLat, double userLng,
+                                            double venueLat, double venueLng) {
+
+        double latDistance = Math.toRadians(userLat - venueLat);
+        double lngDistance = Math.toRadians(userLng - venueLng);
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(venueLat))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_M * c));
+    }
+
 }
