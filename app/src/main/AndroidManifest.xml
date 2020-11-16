@@ -29,13 +29,16 @@
 
         <activity android:name=".Seoul_listview" />
         <activity android:name=".Region_listview" />
-        <activity android:name=".MapActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".StartActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MapActivity" />
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 
