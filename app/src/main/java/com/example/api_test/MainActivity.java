@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         search = intent.getStringExtra("search");
 
         if(search != null){
-            Btn_search.setText(search);
+            Btn_search.setText("검색어 : " + search);
         }
         if (city_name != null && gu_name != null) {
             Btn_region.setText(city_name + " - " + gu_name);

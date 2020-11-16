@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         >
 
+
         <TextView
             android:id="@+id/tv_hospitalCnt"
             android:layout_width="wrap_content"
@@ -91,6 +92,7 @@
         </LinearLayout>
     </HorizontalScrollView>
 
+
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
@@ -108,6 +110,33 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <com.github.edsergeev.TextFloatingActionButton
+            android:id="@+id/fb_totop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F87D4B"
+            android:elevation="0dp"
+            android:fontFamily="@font/hangeulnurib"
+            android:foregroundGravity="center"
+            android:text="^"
+            android:textColor="#ffffff"
+            android:textSize="31sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:borderWidth="0dp"
+            app:elevation="0dp"
+            app:fabCustomSize="45dp"
+            app:text_y_offset="15dp"
+            tools:ignore="smallSp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -135,25 +164,24 @@
             android:elevation="0dp"
             app:elevation="0dp"/>
 
-        <com.github.edsergeev.TextFloatingActionButton
-            android:id="@+id/fb_totop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#F87D4B"
-            android:fontFamily="@font/hangeulnurib"
-            android:foregroundGravity="bottom"
-            android:text="TOP"
-            android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:borderWidth="0dp"
-            app:fabCustomSize="70dp"
-            app:text_y_offset="6dp"
-            tools:ignore="smallSp"
-            android:elevation="0dp"
-            app:elevation="0dp"/>
+
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/base_progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:clickable="true"
+        android:visibility="gone">
 
+
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/circle_progress"
+            android:indeterminateDuration="1000"/>
+    </LinearLayout>
 
 </RelativeLayout>

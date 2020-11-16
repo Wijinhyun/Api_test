@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ScrollView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +45,10 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private int hospital_Cnt = 0;
     private String subject;
 
-    private FloatingActionButton Fb_tomap,Fb_totop;
+    private FloatingActionButton Fb_tomap, Fb_totop;
     private Button Btn_region_in_list, Btn_medical_subject, Btn_back, Btn_search;
     private TextView Tv_hospitalCnt;
+    private LinearLayout base_progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +94,9 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             Btn_region_in_list.setText(city_name + " - " + gu_name);
         }
         if(search != null){
-            Btn_search.setText(search);
+            Btn_search.setText("검색어 : " + search);
         }
+        base_progressBar.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -110,11 +112,29 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                             adapter.notifyDataSetChanged();
                             Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
                         }
+                        base_progressBar.setVisibility(View.GONE);
                     }
                 });
             }
         }).start();
 
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int firstVisibleItem = manager.findFirstVisibleItemPosition();
+
+                if (firstVisibleItem > 1) {
+                    //Show FAB
+                    Fb_totop.setVisibility(View.VISIBLE);
+                }
+                else{
+                    //Hide FAB
+                    Fb_totop.setVisibility(View.GONE);
+                }
+            }
+        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -124,6 +144,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 if(lock == false) {
                     if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
                         lock = true;
+                        base_progressBar.setVisibility(View.VISIBLE);
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -137,6 +158,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                                             adapter.notifyDataSetChanged();
                                             Toast.makeText(Recyclerview_HospitalList.this, list.size() + "개", Toast.LENGTH_SHORT).show();
                                         }
+                                        base_progressBar.setVisibility(View.GONE);
                                     }
                                 });
                             }
@@ -168,6 +190,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         manager = new LinearLayoutManager(Recyclerview_HospitalList.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
+        base_progressBar = findViewById(R.id.base_progressBar);
 
         Btn_back = findViewById(R.id.btn_back);
         Btn_back.setOnClickListener(this);
@@ -185,7 +208,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         Fb_totop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recyclerView.scrollToPosition(0);
+                recyclerView.smoothScrollToPosition(0);
             }
         });
         Btn_region_in_list.setOnClickListener(this);
@@ -200,7 +223,6 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent1.putExtra("city_name", city_name);
                 intent1.putExtra("gu_name", gu_name);
                 intent1.putExtra("search", search);
-                intent1.putExtra("subject", subject);
                 startActivity(intent1);
                 finish();
                 break;
