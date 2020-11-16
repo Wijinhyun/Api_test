@@ -118,6 +118,23 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             }
         }).start();
 
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int firstVisibleItem = manager.findFirstVisibleItemPosition();
+
+                if (firstVisibleItem > 1) {
+                    //Show FAB
+                    Fb_totop.setVisibility(View.VISIBLE);
+                }
+                else{
+                    //Hide FAB
+                    Fb_totop.setVisibility(View.GONE);
+                }
+            }
+        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -191,7 +208,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         Fb_totop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recyclerView.scrollToPosition(0);
+                recyclerView.smoothScrollToPosition(0);
             }
         });
         Btn_region_in_list.setOnClickListener(this);
