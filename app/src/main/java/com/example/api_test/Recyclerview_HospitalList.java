@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private FloatingActionButton Fb_tomap;
     private Button Btn_region_in_list, Btn_medical_subject, Btn_back, Btn_search;
     private TextView Tv_hospitalCnt;
+    private LinearLayout base_progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         if(search != null){
             Btn_search.setText(search);
         }
+        base_progressBar.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -108,6 +111,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                             Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
+                            base_progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -123,6 +127,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 if(lock == false) {
                     if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
                         lock = true;
+                        base_progressBar.setVisibility(View.VISIBLE);
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -134,6 +139,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                                         if (list.isEmpty() == false || list.size() != 0) {
                                             Log.d("list_check", list.size() + "");
                                             adapter.notifyDataSetChanged();
+                                            base_progressBar.setVisibility(View.GONE);
                                             Toast.makeText(Recyclerview_HospitalList.this, list.size() + "개", Toast.LENGTH_SHORT).show();
                                         }
                                     }
@@ -167,6 +173,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         manager = new LinearLayoutManager(Recyclerview_HospitalList.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
+        base_progressBar = findViewById(R.id.base_progressBar);
 
         Btn_back = findViewById(R.id.btn_back);
         Btn_back.setOnClickListener(this);
