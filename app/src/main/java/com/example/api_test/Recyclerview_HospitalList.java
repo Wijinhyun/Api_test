@@ -45,7 +45,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private int hospital_Cnt = 0;
     private String subject;
 
-    private FloatingActionButton Fb_tomap;
+    private FloatingActionButton Fb_tomap, Fb_totop;
     private Button Btn_region_in_list, Btn_medical_subject, Btn_back, Btn_search;
     private TextView Tv_hospitalCnt;
     private LinearLayout base_progressBar;
@@ -94,7 +94,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             Btn_region_in_list.setText(city_name + " - " + gu_name);
         }
         if(search != null){
-            Btn_search.setText(search);
+            Btn_search.setText("검색어 : " + search);
         }
         base_progressBar.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
@@ -111,8 +111,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                             Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
-                            base_progressBar.setVisibility(View.GONE);
                         }
+                        base_progressBar.setVisibility(View.GONE);
                     }
                 });
             }
@@ -139,9 +139,9 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                                         if (list.isEmpty() == false || list.size() != 0) {
                                             Log.d("list_check", list.size() + "");
                                             adapter.notifyDataSetChanged();
-                                            base_progressBar.setVisibility(View.GONE);
                                             Toast.makeText(Recyclerview_HospitalList.this, list.size() + "개", Toast.LENGTH_SHORT).show();
                                         }
+                                        base_progressBar.setVisibility(View.GONE);
                                     }
                                 });
                             }
@@ -183,10 +183,17 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
         Tv_hospitalCnt = findViewById(R.id.tv_hospitalCnt);
         Fb_tomap = findViewById(R.id.fb_tomap);
+        Fb_totop = findViewById(R.id.fb_totop);
         Btn_region_in_list = findViewById(R.id.btn_region_in_list);
         Btn_medical_subject = findViewById(R.id.btn_medical_subject);
 
         Fb_tomap.setOnClickListener(this);
+        Fb_totop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerView.scrollToPosition(0);
+            }
+        });
         Btn_region_in_list.setOnClickListener(this);
         Btn_medical_subject.setOnClickListener(this);
     }
