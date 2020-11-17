@@ -21,5 +21,10 @@
         android:id="@+id/tv_tel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/list_call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="전화걸기"/>
 
 </LinearLayout>
