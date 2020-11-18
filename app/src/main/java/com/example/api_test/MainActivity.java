@@ -59,25 +59,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private double latitude;
     private double longitude;
 
+    GPSTracker gps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // Create class object
+        gps = new GPSTracker(MainActivity.this);
 
-        if ( Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-            ActivityCompat.requestPermissions( MainActivity.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
-                    0 );
-            latitude = 35.887515;       // 위치정보 못얻었으면 초기 위치로 IT2호관 부여
-            longitude = 128.611553;
+        // Check if GPS enabled
+        if(gps.canGetLocation()) {
+
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+
+            // \n is for new line
+            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+        } else {
+            // Can't get location.
+            // GPS or network is not enabled.
+            // Ask user to enable GPS/network in settings.
+            gps.showSettingsAlert();
         }
-        else{
-            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            longitude = location.getLongitude();
-            latitude = location.getLatitude();
-        }
+        Log.d("location_check", latitude + "");
+        Log.d("location_check", longitude + "");
+
+//        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//
+//        if ( Build.VERSION.SDK_INT >= 23 &&
+//                ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+//            ActivityCompat.requestPermissions( MainActivity.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
+//                    0 );
+//            latitude = 35.887515;       // 위치정보 못얻었으면 초기 위치로 IT2호관 부여
+//            longitude = 128.611553;
+//        }
+//        else{
+//            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//
+////            if(location!= null){
+////                latitude = location.getLatitude();
+////                longitude = location.getLongitude();
+////            }
+////            else{
+////                latitude = 35.887515;       // 위치정보 못얻었으면 초기 위치로 IT2호관 부여
+////                longitude = 128.611553;
+////            }
+//            provider = location.getProvider();
+//            longitude = location.getLongitude();
+//            latitude = location.getLatitude();
+//        }
 
         init();
 
@@ -256,5 +288,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         backPressCloseHandler.onBackPressed();
     }
+
 }
 
