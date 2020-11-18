@@ -74,11 +74,30 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private double mark_xpos;
     private double mark_ypos;
     private Button btn_call;
+    GPSTracker gps;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.maplayout);
+
+        // Create class object
+        gps = new GPSTracker(MapActivity.this);
+
+        // Check if GPS enabled
+        if(gps.canGetLocation()) {
+
+            init_ypos = gps.getLatitude();
+            init_xpos = gps.getLongitude();
+
+            // \n is for new line
+            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+        } else {
+            // Can't get location.
+            // GPS or network is not enabled.
+            // Ask user to enable GPS/network in settings.
+            gps.showSettingsAlert();
+        }
 
         Intent intent = getIntent();
         city_name = intent.getStringExtra("city_name");
@@ -86,8 +105,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
         search = intent.getStringExtra("search");
         subject = intent.getStringExtra("subject");
-        init_xpos = intent.getDoubleExtra("longitude",128.611553);
-        init_ypos = intent.getDoubleExtra("latitude",35.887515);
+//        init_xpos = intent.getDoubleExtra("longitude",128.611553);
+//        init_ypos = intent.getDoubleExtra("latitude",35.887515);
 
         Fb_tolist = findViewById(R.id.fb_tolist);
         Fb_tolist.setOnClickListener(new Button.OnClickListener() {

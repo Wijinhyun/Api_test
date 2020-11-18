@@ -65,6 +65,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private Button Btn_region_in_list, Btn_medical_subject, Btn_back, Btn_search;
     private TextView Tv_hospitalCnt;
     private LinearLayout base_progressBar;
+    GPSTracker gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,20 +79,38 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
         search = intent.getStringExtra("search");
 
-        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // Create class object
+        gps = new GPSTracker(Recyclerview_HospitalList.this);
 
-        if ( Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
-                    0 );
-            latitude = 35.887515;       // 위치정보 못얻었으면 초기 위치로 IT2호관 부여
-            longitude = 128.611553;
+        // Check if GPS enabled
+        if(gps.canGetLocation()) {
+
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+
+            // \n is for new line
+            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+        } else {
+            // Can't get location.
+            // GPS or network is not enabled.
+            // Ask user to enable GPS/network in settings.
+            gps.showSettingsAlert();
         }
-        else{
-            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            longitude = location.getLongitude();
-            latitude = location.getLatitude();
-        }
+
+//        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//
+//        if ( Build.VERSION.SDK_INT >= 23 &&
+//                ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+//            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
+//                    0 );
+//            latitude = 35.887515;       // 위치정보 못얻었으면 초기 위치로 IT2호관 부여
+//            longitude = 128.611553;
+//        }
+//        else{
+//            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//            longitude = location.getLongitude();
+//            latitude = location.getLatitude();
+//        }
         Log.d("Wi", latitude +" " + longitude);
 
         if(MedicalsubCd.equals("01")){
