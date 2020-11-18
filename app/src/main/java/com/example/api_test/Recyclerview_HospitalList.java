@@ -1,10 +1,17 @@
 package com.example.api_test;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,10 +49,17 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private String MedicalsubCd;
     private Boolean lock = false;
     private String search;
-    private double latitude;
-    private double longitude;
     private int hospital_Cnt = 0;
     private String subject;
+
+    private double Xpos;
+    private double Ypos;
+
+    private Location location;
+    private String provider;
+    private double latitude;
+    private double longitude;
+
 
     private FloatingActionButton Fb_tomap, Fb_totop;
     private Button Btn_region_in_list, Btn_medical_subject, Btn_back, Btn_search;
@@ -63,8 +77,22 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         gu_name = intent.getStringExtra("gu_name");
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
         search = intent.getStringExtra("search");
-        latitude = intent.getDoubleExtra("latitude",35.887515);       // 리스트에서 사용할 위치 값
-        longitude = intent.getDoubleExtra("longitude",128.611553);
+
+        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if ( Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
+                    0 );
+            latitude = 35.887515;       // 위치정보 못얻었으면 초기 위치로 IT2호관 부여
+            longitude = 128.611553;
+        }
+        else{
+            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+        }
+        Log.d("Wi", latitude +" " + longitude);
 
         if(MedicalsubCd.equals("01")){
             Btn_medical_subject.setText("내과");
@@ -228,8 +256,6 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent1.putExtra("gu_name", gu_name);
                 intent1.putExtra("search", search);
                 intent1.putExtra("subject", subject);
-                intent1.putExtra("longitude", longitude);
-                intent1.putExtra("latitude", latitude);
                 startActivity(intent1);
                 finish();
                 break;
@@ -876,7 +902,14 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                         } else if (tag.equals("telno")) {
                             xpp.next();
                             item.setTelno(xpp.getText());
-                        } else if (tag.equals("yadmNm")) {
+                        } else if (tag.equals("XPos")) {
+                            xpp.next();
+                            item.setXpos(xpp.getText());
+                        } else if (tag.equals("YPos")) {
+                            xpp.next();
+                            item.setYpos(xpp.getText());
+                            item.setDistance(calculateDistanceInKilometer(latitude,longitude,Double.parseDouble(item.getYpos()),Double.parseDouble(item.getXpos())));
+                        }else if (tag.equals("yadmNm")) {
                             xpp.next();
                             item.setYadmNm(xpp.getText());
                         }
@@ -901,8 +934,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                         tag = xpp.getName(); //테그 이름 얻어오기
 
                         if (tag.equals("item") && item != null) {
-                            Log.d("adapter_address_check", item.getAddr());
-                            //Trial1
+
+
                             list.add(item);
                             //getXmlData2();
                         }
@@ -982,5 +1015,21 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             e.printStackTrace();
         }
 
+    }
+
+    public final static double AVERAGE_RADIUS_OF_EARTH_M = 6371000;
+    public int calculateDistanceInKilometer(double userLat, double userLng,
+                                            double venueLat, double venueLng) {
+
+        double latDistance = Math.toRadians(userLat - venueLat);
+        double lngDistance = Math.toRadians(userLng - venueLng);
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(venueLat))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_M * c));
     }
 }

@@ -57,6 +57,16 @@
                 android:layout_marginBottom="4dp">
 
                 <TextView
+                    android:id="@+id/tv_distance"
+                    android:fontFamily="@font/hangeulnurir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:maxLines="1"
+                    android:textColor="#000000"
+                    />
+
+                <TextView
                     android:id="@+id/tv_adress"
                     android:fontFamily="@font/hangeulnurir"
                     android:layout_width="wrap_content"
