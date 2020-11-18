@@ -126,16 +126,16 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
             }
         });
 
-        infoWindow.setAdapter(new InfoWindow.DefaultViewAdapter(this) {
+        infoWindow.setAdapter(new InfoWindow.ViewAdapter() {
+
             @NonNull
             @Override
-            protected View getContentView(@NonNull InfoWindow infoWindow) {
-
+            public View getView(@NonNull InfoWindow infoWindow) {
                 Marker marker = infoWindow.getMarker();
                 HospitalItem hospitalItem = (HospitalItem) marker.getTag();
                 View view = View.inflate(MapActivity.this,R.layout.view_info_window,null);
 
-
+                //view.setBackgroundColor(Color.parseColor("#F66911"));
 
                 // distance 계산
                 new_xpos = Double.parseDouble(hospitalItem.getXpos());
@@ -149,10 +149,13 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
 
                 if(Double.parseDouble(percent) >= 66.6){
                     ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.greencircle);
+                    ((TextView) view.findViewById(R.id.iw_percent)).setTextColor(Color.parseColor("#0A640A"));
                 }else if(Double.parseDouble(percent) >= 33.3){
                     ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.yellowcircle);
+                    ((TextView) view.findViewById(R.id.iw_percent)).setTextColor(Color.parseColor("#FFCC42"));
                 }else if(Double.parseDouble(percent) >= 0.1) {          // 전문의가 아예 없으면 지도에 띄우지 않음
                     ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.redcircle);
+                    ((TextView) view.findViewById(R.id.iw_percent)).setTextColor(Color.parseColor("#C03713"));
                 }
 
                 ((TextView) view.findViewById(R.id.iw_name)).setText(hospitalItem.getYadmNm());
@@ -167,6 +170,48 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
 
                 return view;
             }
+
+//            @NonNull
+//            @Override
+//            protected View getContentView(@NonNull InfoWindow infoWindow) {
+//
+//                Marker marker = infoWindow.getMarker();
+//                HospitalItem hospitalItem = (HospitalItem) marker.getTag();
+//                View view = View.inflate(MapActivity.this,R.layout.view_info_window,null);
+//
+//                view.setBackgroundColor(Color.parseColor("#F66911"));
+//
+//                // distance 계산
+//                new_xpos = Double.parseDouble(hospitalItem.getXpos());
+//                new_ypos = Double.parseDouble(hospitalItem.getYpos());
+//
+//                int distance = calculateDistanceInKilometer(init_ypos,init_xpos,new_ypos,new_xpos);
+//
+//                // percent 계산
+//                String percent = "0.0";
+//                percent = String.format("%.1f", Double.parseDouble(hospitalItem.getSdrdgsCnt()) / Double.parseDouble(hospitalItem.getDrTotCnt()) * 100);
+//
+//                if(Double.parseDouble(percent) >= 66.6){
+//                    ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.greencircle);
+//                }else if(Double.parseDouble(percent) >= 33.3){
+//                    ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.yellowcircle);
+//                }else if(Double.parseDouble(percent) >= 0.1) {          // 전문의가 아예 없으면 지도에 띄우지 않음
+//                    ((ImageView) view.findViewById(R.id.iw_circle)).setImageResource(R.drawable.redcircle);
+//                }
+//
+//                ((TextView) view.findViewById(R.id.iw_name)).setText(hospitalItem.getYadmNm());
+//                ((TextView) view.findViewById(R.id.iw_distance)).setText(distance + "m");
+//                ((TextView) view.findViewById(R.id.iw_addr)).setText(hospitalItem.getAddr());
+//                ((TextView) view.findViewById(R.id.iw_percent)).setText(percent + "%");
+//                ((TextView) view.findViewById(R.id.iw_sdrdgsCnt)).setText(hospitalItem.getSdrdgsCnt() + "명");
+//                ((TextView) view.findViewById(R.id.iw_drTotCnt)).setText(hospitalItem.getDrTotCnt());
+//                ((TextView) view.findViewById(R.id.iw_sbj)).setText(subject + " 전문의 : ");
+//
+//
+//
+//                return view;
+//            }
+
         });
 
 
