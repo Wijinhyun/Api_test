@@ -269,7 +269,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
         String sidoCd = null;
         String sgguCd = null;
-        String queryUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=10" + "&pageNo="+Pagenumber+"&dgsbjtCd="+MedicalsubCd;
+        String queryUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?" + "ServiceKey=" + mykey + "&clCd=31" + "&numOfRows=20" + "&pageNo="+Pagenumber+"&dgsbjtCd="+MedicalsubCd;
         if (city_name != null) {
             if (city_name.equals("서울")) {
                 sidoCd = "110000";
