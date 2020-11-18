@@ -63,8 +63,12 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private String mykey = "%2BHeQuB3%2FCasGAbmRnedYca%2B6ESWu%2FcHnzFBtykDvwHZZLfz0ZTTJ2mANSme5%2Blr1DgBnQ4WJnmLXPwxsatF3Pw%3D%3D";
     private double Xpos;
     private double Ypos;
-    private double init_xpos = 128.611553;
-    private double init_ypos = 35.887515;
+//    private double init_xpos = 128.611553;
+//    private double init_ypos = 35.887515;     // latitude
+
+    private double init_xpos;
+    private double init_ypos;
+
     private double new_xpos;
     private double new_ypos;
     private double mark_xpos;
@@ -82,6 +86,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
         search = intent.getStringExtra("search");
         subject = intent.getStringExtra("subject");
+        init_xpos = intent.getDoubleExtra("longitude",128.611553);
+        init_ypos = intent.getDoubleExtra("latitude",35.887515);
 
         Fb_tolist = findViewById(R.id.fb_tolist);
         Fb_tolist.setOnClickListener(new Button.OnClickListener() {
@@ -272,6 +278,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private void updateMapMarkers() {
         resetMarkerList();
         Log.d("list_check", list.size() + "");
+        Log.d("location_check", init_xpos + "");
+        Log.d("location_check", init_ypos + "");
         if(list.isEmpty() == false || list.size() != 0) {
             for(int i=0;i<list.size();i++) {
                 Marker marker = new Marker();

@@ -2,13 +2,20 @@ package com.example.api_test;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Movie;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -47,10 +54,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextFloatingActionButton Fb_qna;
     private BackPressCloseHandler backPressCloseHandler;
 
+    private Location location;
+    private String provider;
+    private double latitude;
+    private double longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if ( Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+            ActivityCompat.requestPermissions( MainActivity.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
+                    0 );
+            latitude = 35.887515;       // 위치정보 못얻었으면 초기 위치로 IT2호관 부여
+            longitude = 128.611553;
+        }
+        else{
+            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+        }
 
         init();
 
@@ -82,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent01.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent01.putExtra("city_name", city_name);
                 intent01.putExtra("gu_name", gu_name);
+                intent01.putExtra("longitude", longitude);
+                intent01.putExtra("latitude", latitude);
                 intent01.putExtra("search", search);
                 startActivity(intent01);
                 break;
@@ -91,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent14.putExtra("city_name", city_name);
                 intent14.putExtra("gu_name", gu_name);
+                intent14.putExtra("longitude", longitude);
+                intent14.putExtra("latitude", latitude);
                 intent14.putExtra("search", search);
                 startActivity(intent14);
                 break;
@@ -100,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent12.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent12.putExtra("city_name", city_name);
                 intent12.putExtra("gu_name", gu_name);
+                intent12.putExtra("longitude", longitude);
+                intent12.putExtra("latitude", latitude);
                 intent12.putExtra("search", search);
                 startActivity(intent12);
                 break;
@@ -109,6 +142,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent08.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent08.putExtra("city_name", city_name);
                 intent08.putExtra("gu_name", gu_name);
+                intent08.putExtra("longitude", longitude);
+                intent08.putExtra("latitude", latitude);
                 intent08.putExtra("search", search);
                 startActivity(intent08);
                 break;
@@ -118,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent05.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent05.putExtra("city_name", city_name);
                 intent05.putExtra("gu_name", gu_name);
+                intent05.putExtra("longitude", longitude);
+                intent05.putExtra("latitude", latitude);
                 intent05.putExtra("search", search);
                 startActivity(intent05);
                 break;
@@ -127,6 +164,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent49.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent49.putExtra("city_name", city_name);
                 intent49.putExtra("gu_name", gu_name);
+                intent49.putExtra("longitude", longitude);
+                intent49.putExtra("latitude", latitude);
                 intent49.putExtra("search", search);
                 startActivity(intent49);
                 break;
@@ -136,6 +175,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent04.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent04.putExtra("city_name", city_name);
                 intent04.putExtra("gu_name", gu_name);
+                intent04.putExtra("longitude", longitude);
+                intent04.putExtra("latitude", latitude);
                 intent04.putExtra("search", search);
                 startActivity(intent04);
                 break;
@@ -145,6 +186,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent15.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent15.putExtra("city_name", city_name);
                 intent15.putExtra("gu_name", gu_name);
+                intent15.putExtra("longitude", longitude);
+                intent15.putExtra("latitude", latitude);
                 intent15.putExtra("search", search);
                 startActivity(intent15);
                 break;
@@ -154,6 +197,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent10.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
                 intent10.putExtra("city_name", city_name);
                 intent10.putExtra("gu_name", gu_name);
+                intent10.putExtra("longitude", longitude);
+                intent10.putExtra("latitude", latitude);
                 intent10.putExtra("search", search);
                 startActivity(intent10);
                 break;

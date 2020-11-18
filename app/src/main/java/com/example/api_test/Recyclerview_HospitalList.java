@@ -42,6 +42,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private String MedicalsubCd;
     private Boolean lock = false;
     private String search;
+    private double latitude;
+    private double longitude;
     private int hospital_Cnt = 0;
     private String subject;
 
@@ -61,6 +63,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         gu_name = intent.getStringExtra("gu_name");
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
         search = intent.getStringExtra("search");
+        latitude = intent.getDoubleExtra("latitude",35.887515);       // 리스트에서 사용할 위치 값
+        longitude = intent.getDoubleExtra("longitude",128.611553);
 
         if(MedicalsubCd.equals("01")){
             Btn_medical_subject.setText("내과");
@@ -224,6 +228,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent1.putExtra("gu_name", gu_name);
                 intent1.putExtra("search", search);
                 intent1.putExtra("subject", subject);
+                intent1.putExtra("longitude", longitude);
+                intent1.putExtra("latitude", latitude);
                 startActivity(intent1);
                 finish();
                 break;
