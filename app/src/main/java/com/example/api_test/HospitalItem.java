@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 public class HospitalItem implements Serializable {
 
-    private String addr, clCdNm, estbDd, gdrCnt, hospUrl, intnCnt, postNo, resdntCnt, sdrCnt, telno, yadmNm, ykiho, XPos, YPos,distance, drTotCnt, medical_list;
+    private String addr, clCdNm, estbDd, gdrCnt, hospUrl, intnCnt, postNo, resdntCnt, sdrCnt, telno, yadmNm, ykiho, XPos, YPos, drTotCnt, medical_list;
     private ArrayList<String> dgsbjtCdNm = new ArrayList<String>(), dgsbjtPrSdrCnt = new ArrayList<String>(), dgsbjtCd = new ArrayList<String>();
     private String sdrdgsCnt;
+    private int distance;
 
-
-    public HospitalItem(String addr, String clCdNm, String estbDd, String gdrCnt, String hospUrl, String intnCnt, String postNo, String resdntCnt, String sdrCnt, String telno, String yadmNm, String ykiho, ArrayList<String> dgsbjtCdNm, ArrayList<String> dgsbjtPrSdrCnt, String medical_list, ArrayList<String> dgsbjtCd, String sdrdgsCnt) {
+    public HospitalItem(String addr, String clCdNm, String estbDd, String gdrCnt, String hospUrl, String intnCnt, String postNo, String resdntCnt, String sdrCnt, String telno, String yadmNm, String ykiho, ArrayList<String> dgsbjtCdNm, ArrayList<String> dgsbjtPrSdrCnt, String medical_list, ArrayList<String> dgsbjtCd, String sdrdgsCnt, int distance, String drTotCnt, String XPos, String YPos) {
         this.addr = addr; //주소
         this.clCdNm = clCdNm; //종별코드명
         this.estbDd = estbDd; //개설일자
@@ -168,11 +168,11 @@ public class HospitalItem implements Serializable {
         this.ykiho = ykiho;
     }
 
-    public String getDistance() {
+    public int getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(int distance) {
         this.distance = distance;
     }
 

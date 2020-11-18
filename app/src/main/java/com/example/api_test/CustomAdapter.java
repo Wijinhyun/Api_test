@@ -30,7 +30,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         private TextView addrtxt,clCdNmtxt,estbDdtxt,gdrCnttxt,hospUrltxt,intnCnttxt,postNotxt,resdntCnttxt,sdrCnttxt,telnotxt,yadmNmtxt,ykihotxt, Tv_list, Code_list;
-        private TextView Tv_percent, Tv_sdrdgsCnt, Tv_drTotCnt, Tv_adress, Tv_sbj;
+        private TextView Tv_percent, Tv_sdrdgsCnt, Tv_drTotCnt, Tv_adress, Tv_sbj, Tv_distance;
 
         public CustomViewHolder(View view) {
             super(view);
@@ -42,6 +42,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
             this.Tv_sdrdgsCnt = (TextView) view.findViewById(R.id.tv_sdrdgsCnt);
             this.Tv_drTotCnt = (TextView) view.findViewById(R.id.tv_drTotCnt);
             this.Tv_adress = view.findViewById(R.id.tv_adress);
+            this.Tv_distance = view.findViewById(R.id.tv_distance);
         }
     }
 
@@ -82,6 +83,14 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
             percent = String.format("%.1f", Double.parseDouble(mList.get(position).getSdrdgsCnt()) / Double.parseDouble(mList.get(position).getDrTotCnt()) * 100);
         }
         viewholder.Tv_percent.setText(percent + "%");
+        int temp = mList.get(position).getDistance();
+        String temp2;
+        if(temp >= 1000){
+            temp2 = String.format("%.1f", (double) temp / 1000);
+            viewholder.Tv_distance.setText(temp2 + "km | ");
+        }else {
+            viewholder.Tv_distance.setText(temp + "m | ");
+        }
         //GradientDrawable shape = new GradientDrawable();
         //shape.setCornerRadius( 8 );
         //View view = (TextView) findViewById( R.id.tv_percent );
