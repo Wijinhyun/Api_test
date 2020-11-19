@@ -2,6 +2,7 @@ package com.example.api_test;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,8 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -54,13 +57,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextFloatingActionButton Fb_qna;
     private BackPressCloseHandler backPressCloseHandler;
 
-
+    ConstraintLayout Const;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Const = findViewById(R.id.start_main);
+        Animation c = AnimationUtils.loadAnimation(MainActivity.this,R.anim.reverse_alphaex);
+        Const.startAnimation(c);
 
         init();
 

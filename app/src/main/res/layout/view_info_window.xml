@@ -6,7 +6,7 @@
     <ImageView
         android:layout_gravity="center"
         android:layout_width="200dp"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:src="@drawable/info_back"
         android:scaleType="centerCrop"/>
 <LinearLayout
@@ -87,7 +87,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="6dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/hangeulnurib"
                     android:textColor="#FFFFFF"
-                    android:textSize="20sp"
+                    android:textSize="30sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -111,12 +111,14 @@
                     android:id="@+id/iw_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:textColor="#FFFFFF" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/hangeulnurib"
+                    android:textStyle="bold"
                     android:text=" | "
                     android:textColor="#FFFFFF" />
 
@@ -124,6 +126,7 @@
                     android:id="@+id/iw_addr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
 
@@ -139,6 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/hangeulnurir"
+                    android:textStyle="bold"
                     android:text=""
                     android:textColor="#FFFFFF" />
 
@@ -147,12 +151,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/hangeulnurir"
+                    android:textStyle="bold"
                     android:textColor="#FFFFFF" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/hangeulnurir"
+                    android:textStyle="bold"
                     android:text="/ 전체 의사 : "
                     android:textColor="#FFFFFF" />
 
@@ -160,6 +166,7 @@
                     android:id="@+id/iw_drTotCnt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:fontFamily="@font/hangeulnurir"
                     android:textColor="#FFFFFF" />
             </LinearLayout>

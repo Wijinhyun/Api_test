@@ -6,8 +6,11 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
@@ -51,6 +55,7 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private String MedicalsubCd;
     private List<Marker> markerList = new ArrayList<>();
     private InfoWindow infoWindow;
+    private Button infobutton;
     private String hospitalCode;
     private String temp, temp2;
     private String temp_cnt;
@@ -76,10 +81,16 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
     private Button btn_call;
     GPSTracker gps;
 
+    RelativeLayout rela;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.maplayout);
+
+        rela = findViewById(R.id.start_map);
+        Animation c = AnimationUtils.loadAnimation(MapActivity.this,R.anim.reverse_alphaex);
+        rela.startAnimation(c);
 
         // Create class object
         gps = new GPSTracker(MapActivity.this);
@@ -134,6 +145,8 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
 
         locationSource = new FusedLocationSource(this,ACCESS_LOCATION_PERMISSION_REQUEST_CODE);
         naverMap.setLocationSource(locationSource);
+        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+
         UiSettings uiSettings = naverMap.getUiSettings();
         uiSettings.setLocationButtonEnabled(true);
 
@@ -142,6 +155,15 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
         naverMap.setOnMapClickListener(this);
 
         infoWindow = new InfoWindow();
+
+        infobutton = (Button) findViewById(R.id.iw_call);
+
+        infobutton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MapActivity.this, "iwcall 클릭", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         infoWindow.setOnClickListener(new InfoWindow.OnClickListener() {
             @Override
@@ -183,12 +205,19 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                     ((TextView) view.findViewById(R.id.iw_percent)).setTextColor(Color.parseColor("#C03713"));
                 }
 
-                ((TextView) view.findViewById(R.id.iw_name)).setText(hospitalItem.getYadmNm());
+                String temp2;
+                if(distance >= 1000){
+                    temp2 = String.format("%.1f", (double) distance / 1000);
+                ((TextView) view.findViewById(R.id.iw_distance)).setText(temp2 + "km");
+                }else {
                 ((TextView) view.findViewById(R.id.iw_distance)).setText(distance + "m");
+                }
+
+                ((TextView) view.findViewById(R.id.iw_name)).setText(hospitalItem.getYadmNm());
                 ((TextView) view.findViewById(R.id.iw_addr)).setText(hospitalItem.getAddr());
                 ((TextView) view.findViewById(R.id.iw_percent)).setText(percent + "%");
-                ((TextView) view.findViewById(R.id.iw_sdrdgsCnt)).setText(hospitalItem.getSdrdgsCnt() + "명");
-                ((TextView) view.findViewById(R.id.iw_drTotCnt)).setText(hospitalItem.getDrTotCnt());
+                ((TextView) view.findViewById(R.id.iw_sdrdgsCnt)).setText(hospitalItem.getSdrdgsCnt() + "명 ");
+                ((TextView) view.findViewById(R.id.iw_drTotCnt)).setText(hospitalItem.getDrTotCnt() + "명");
                 ((TextView) view.findViewById(R.id.iw_sbj)).setText(subject + " 전문의 : ");
 
 
@@ -305,6 +334,9 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
 //                marker.setTag(list.get(i).getYadmNm());
                 marker.setTag(list.get(i));
 //                marker.setPosition(new LatLng(Double.parseDouble(list.get(i).YPos), Double.parseDouble(list.get(i).XPos)));
+                if(list.get(i).getYpos() == null || list.get(i).getXpos() == null){
+                    continue;
+                }
                 marker.setPosition(new LatLng(Double.parseDouble(list.get(i).getYpos()), Double.parseDouble(list.get(i).getXpos())));
 
                 Log.d("list_getSdrdgs", list.get(i).getSdrCnt() + "");
