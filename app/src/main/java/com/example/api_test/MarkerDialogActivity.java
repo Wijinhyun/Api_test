@@ -3,10 +3,13 @@ package com.example.api_test;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -20,6 +23,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
+import java.util.List;
+
 public class MarkerDialogActivity extends Activity implements View.OnClickListener {
 
     private ImageView iv_circle;
@@ -28,6 +33,10 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
     private CardView cardView;
     private String tvpercent, tvhospitalname, tvdistance, tvaddr, tvsbj, tvpronum, tvtotalnum, tvtel, tvpark, tvurl;
     private String callnum;
+
+    private double init_xpos;
+    private double init_ypos;
+    private String d_ypos, d_xpos;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +72,10 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
         tvtel = intent.getStringExtra("tel");
         tvpark = intent.getStringExtra("park");
         tvurl = intent.getStringExtra("url");
+        d_ypos = intent.getStringExtra("d_ypos");
+        d_xpos = intent.getStringExtra("d_xpos");
+        init_ypos = intent.getDoubleExtra("init_ypos",0);
+        init_xpos = intent.getDoubleExtra("init_xpos",0);
 
         callnum = "tel: "+tvtel;
 
@@ -134,7 +147,24 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
                 //Toast.makeText(MarkerDialogActivity.this, "전화로 넘어가게 구현", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_route:
-                Toast.makeText(MarkerDialogActivity.this, "네이버 지도 길찾기로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+                String url =
+                "nmap://route/public?slat="+init_ypos+"&slng="+init_xpos+"&dlat="+d_ypos+"&dlng="+d_xpos+"&appname=com.example.api_test";
+
+                Log.d("init, d 값",init_ypos + "  " + init_xpos + "  " + d_ypos + "  " + d_xpos);
+
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+
+                List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                if (list == null || list.isEmpty()) {
+                    this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.nmap")));
+                } else {
+                    this.startActivity(intent);
+                }
+
+                //Toast.makeText(MarkerDialogActivity.this, "네이버 지도 길찾기로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+
             default:
                 break;
         }

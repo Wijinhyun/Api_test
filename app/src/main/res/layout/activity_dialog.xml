@@ -34,8 +34,8 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -43,9 +43,10 @@
                         android:id="@+id/hos_phar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:text="의원"
+                        android:textColor="#F66911"
                         android:textSize="14sp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
                         android:text="의원/약국"
-                        android:textSize="20sp"
+                        android:textSize="24sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/hos_phar" />
 
@@ -63,7 +64,7 @@
                         android:id="@+id/btn_call"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/call_icon"
+                        android:background="@drawable/tonghwa"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,7 +72,8 @@
                         android:id="@+id/btn_route"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/call_icon"
+                        android:background="@drawable/routteeee"
+                        android:textColor="#FFFFFF"
                         app:layout_constraintRight_toLeftOf="@id/btn_call"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,8 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -98,21 +99,20 @@
                         android:fontFamily="@font/hangeulnurib"
                         android:text=" | "
                         android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_addr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textSize="14sp" />
+
                 </LinearLayout>
 
 
                 <LinearLayout
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="40dp"
                     android:layout_marginBottom="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -136,9 +136,7 @@
                                 android:fontFamily="@font/hangeulnurir"
                                 android:gravity="center"
                                 android:text=""
-                                android:textColor="#000000"
-                                android:textSize="17sp"
-                                android:textStyle="bold" />
+                                android:textColor="#000000" />
 
                         </LinearLayout>
 
@@ -153,9 +151,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/hangeulnurir"
                                 android:gravity="center"
-                                android:textColor="#000000"
-                                android:textSize="17sp"
-                                android:textStyle="bold" />
+                                android:textColor="#000000" />
 
                         </LinearLayout>
 
@@ -192,9 +188,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/hangeulnurir"
                                 android:gravity="center"
-                                android:textColor="#000000"
-                                android:textSize="17sp"
-                                android:textStyle="bold" />
+                                android:textColor="#000000" />
 
                         </LinearLayout>
 
@@ -229,15 +223,26 @@
                                 android:id="@+id/tv_percent"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
-                                android:layout_weight="3"
                                 android:gravity="center"
-                                android:paddingRight="3dp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
                     </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/line"/>
+
 
                 </LinearLayout>
 

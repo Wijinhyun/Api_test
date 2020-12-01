@@ -22,7 +22,8 @@ import java.util.ArrayList;
 
 class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
-    private ArrayList<HospitalItem> mList;
+    //private ArrayList<HospitalItem> mList;
+    private ArrayList<HospitalItemForCsv> mList; //new ArrayList<>();
     private LayoutInflater mInflate;
     private Context context;
     private String subject;
@@ -34,20 +35,20 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
 
         public CustomViewHolder(View view) {
             super(view);
-            this.Tv_sbj = view.findViewById(R.id.tv_sbj);
+            this.Tv_sbj = view.findViewById(R.id.tv_sbj1);
             //this.estbDdtxt = (TextView) view.findViewById(R.id.estbDd);
-            this.yadmNmtxt = (TextView) view.findViewById(R.id.yadmNm);
+            this.yadmNmtxt = (TextView) view.findViewById(R.id.tv_hospitalname1);
             //this.Tv_list = (TextView) view.findViewById(R.id.tv_list);
-            this.Tv_percent = (TextView) view.findViewById(R.id.tv_percent);
-            this.Tv_sdrdgsCnt = (TextView) view.findViewById(R.id.tv_sdrdgsCnt);
-            this.Tv_drTotCnt = (TextView) view.findViewById(R.id.tv_drTotCnt);
-            this.Tv_adress = view.findViewById(R.id.tv_adress);
-            this.Tv_distance = view.findViewById(R.id.tv_distance);
+            this.Tv_percent = (TextView) view.findViewById(R.id.tv_percent1);
+            this.Tv_sdrdgsCnt = (TextView) view.findViewById(R.id.tv_pronum1);
+            this.Tv_drTotCnt = (TextView) view.findViewById(R.id.tv_totalnum1);
+            this.Tv_adress = view.findViewById(R.id.tv_addr1);
+            this.Tv_distance = view.findViewById(R.id.tv_distance1);
         }
     }
 
 
-    public CustomAdapter(Context context, ArrayList<HospitalItem> items, String subject) {
+    public CustomAdapter(Context context, ArrayList<HospitalItemForCsv> items, String subject) {
         this.mList = items;
         this.mInflate = LayoutInflater.from(context);
         this.context = context;
@@ -70,23 +71,24 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
 
         //viewholder.estbDdtxt.setText(mList.get(position).getEstbDd());
 
-        viewholder.yadmNmtxt.setText(mList.get(position).getYadmNm());
+        viewholder.yadmNmtxt.setText(mList.get(position).getHospitalname());
        /* if(mList.get(position).getMedical_list() != null) {
             viewholder.Tv_list.setText(mList.get(position).getMedical_list());
         }*/
         String percent = "0.0";
         viewholder.Tv_sbj.setText(subject + " 전문의 : ");
-        viewholder.Tv_sdrdgsCnt.setText(mList.get(position).getSdrdgsCnt());
-        viewholder.Tv_drTotCnt.setText(mList.get(position).getDrTotCnt());
+        viewholder.Tv_sdrdgsCnt.setText(mList.get(position).getPronum());
+        viewholder.Tv_drTotCnt.setText(mList.get(position).getTotalnum());
         viewholder.Tv_adress.setText(mList.get(position).getAddr());
-        if(mList.get(position).getSdrdgsCnt() != null && !mList.get(position).getDrTotCnt().equals("0")) {
-            percent = String.format("%.1f", Double.parseDouble(mList.get(position).getSdrdgsCnt()) / Double.parseDouble(mList.get(position).getDrTotCnt()) * 100);
+        if(mList.get(position).getPronum() != null && !mList.get(position).getTotalnum().equals("0")) {
+            percent = String.format("%.1f", Double.parseDouble(mList.get(position).getPronum()) / Double.parseDouble(mList.get(position).getTotalnum()) * 100);
         }
         viewholder.Tv_percent.setText(percent + "%");
-        int temp = mList.get(position).getDistance();
+
+        double temp = Double.parseDouble(mList.get(position).getDistance());
         String temp2;
         if(temp >= 1000){
-            temp2 = String.format("%.1f", (double) temp / 1000);
+            temp2 = String.format("%.1f", temp / 1000);
             viewholder.Tv_distance.setText(temp2 + "km | ");
         }else {
             viewholder.Tv_distance.setText(temp + "m | ");
@@ -94,13 +96,13 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
         //GradientDrawable shape = new GradientDrawable();
         //shape.setCornerRadius( 8 );
         //View view = (TextView) findViewById( R.id.tv_percent );
-        if(Double.parseDouble(percent) >= 66.6){
-            viewholder.Tv_percent.setBackgroundResource(R.drawable.round_percent2);
-        }else if(Double.parseDouble(percent) >= 33.3){
-            viewholder.Tv_percent.setBackgroundResource(R.drawable.round_percent3);
-        }else{
-            viewholder.Tv_percent.setBackgroundResource(R.drawable.round_percent);
-        }
+//        if(Double.parseDouble(percent) >= 66.6){
+//            viewholder.Tv_percent.setBackgroundResource(R.drawable.round_percent2);
+//        }else if(Double.parseDouble(percent) >= 33.3){
+//            viewholder.Tv_percent.setBackgroundResource(R.drawable.round_percent3);
+//        }else{
+//            viewholder.Tv_percent.setBackgroundResource(R.drawable.round_percent);
+//        }
 
 
 

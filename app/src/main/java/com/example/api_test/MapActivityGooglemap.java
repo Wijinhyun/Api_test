@@ -335,6 +335,10 @@ public class MapActivityGooglemap extends AppCompatActivity
             intent.putExtra("tel",item.getTel());
             intent.putExtra("park",item.getPark());
             intent.putExtra("url",item.getUrl());
+            intent.putExtra("init_ypos",init_ypos);
+            intent.putExtra("init_xpos",init_xpos);
+            intent.putExtra("d_ypos",item.getYpos());
+            intent.putExtra("d_xpos",item.getXpos());
             //startActivity(intent);
 
             mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {

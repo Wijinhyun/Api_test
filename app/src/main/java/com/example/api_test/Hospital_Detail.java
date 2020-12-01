@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class Hospital_Detail extends AppCompatActivity {
 
-    private HospitalItem hospitalItem;
+    private HospitalItemForCsv hospitalItem;
 
     private TextView Tv_title, Tv_adr, Tv_tel;
     private Button btn_listcall;
@@ -21,7 +21,7 @@ public class Hospital_Detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital__detail);
 
-        hospitalItem = (HospitalItem) getIntent().getSerializableExtra("array");
+        hospitalItem = (HospitalItemForCsv) getIntent().getSerializableExtra("array");
 
         init();
 
@@ -40,9 +40,9 @@ public class Hospital_Detail extends AppCompatActivity {
         Tv_adr = findViewById(R.id.tv_adr);
         btn_listcall=findViewById(R.id.list_call);
 
-        Tv_title.setText(hospitalItem.getYadmNm());
+        Tv_title.setText(hospitalItem.getHospitalname());
         Tv_adr.setText(hospitalItem.getAddr());
-        Tv_tel.setText(hospitalItem.getTelno());
-        callnum="tel: "+hospitalItem.getTelno();
+        Tv_tel.setText(hospitalItem.getTel());
+        callnum="tel: "+hospitalItem.getTel();
     }
 }

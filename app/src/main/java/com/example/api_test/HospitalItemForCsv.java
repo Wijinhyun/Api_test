@@ -1,6 +1,8 @@
 package com.example.api_test;
 
-public class HospitalItemForCsv {
+import java.io.Serializable;
+
+public class HospitalItemForCsv implements Serializable {
 
     private String ykiho, hospitalname, subject, pronum, totalnum, percent, xpos, ypos, sidocode,
             sidoname, sigungucode, sigunguname, addr, tel, url, park, distance;
