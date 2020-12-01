@@ -269,7 +269,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fb_tomap:
-                Intent intent1 = new Intent(getApplicationContext(), MapActivity.class);
+                Intent intent1 = new Intent(getApplicationContext(), MapActivityGooglemap.class);
                 intent1.putExtra("MedicalsubCd", MedicalsubCd);
                 intent1.putExtra("city_name", city_name);
                 intent1.putExtra("gu_name", gu_name);
