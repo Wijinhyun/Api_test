@@ -235,7 +235,29 @@ public class MapActivityGooglemap extends AppCompatActivity
 
     public void readDataFromCsv() throws IOException {
         // 진료과목 코드에 따라 어떤 csv파일 읽을지 여기서 스위치문 설정
-        InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.dataneakwa2));
+
+        InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.plastic));
+        if(MedicalsubCd.equals("01")){
+            is = new InputStreamReader(getResources().openRawResource(R.raw.inside));
+        }else if(MedicalsubCd.equals("14")){
+            is = new InputStreamReader(getResources().openRawResource(R.raw.pbu));
+        }else if(MedicalsubCd.equals("12")){
+            is = new InputStreamReader(getResources().openRawResource(R.raw.eye));
+        }else if(MedicalsubCd.equals("08")){
+            is = new InputStreamReader(getResources().openRawResource(R.raw.plastic));
+        }else if(MedicalsubCd.equals("05")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.jeonghyeong));
+        }else if(MedicalsubCd.equals("13")){
+            is = new InputStreamReader(getResources().openRawResource(R.raw.ebinhu));
+        }else if(MedicalsubCd.equals("04")){
+            is = new InputStreamReader(getResources().openRawResource(R.raw.outside));
+        }else if(MedicalsubCd.equals("15")){
+            is = new InputStreamReader(getResources().openRawResource(R.raw.benyo));
+        }else if(MedicalsubCd.equals("10")){
+            is = new InputStreamReader(getResources().openRawResource(R.raw.sanbu));
+        }
+
+        //InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.dataneakwa2));
 
         CSVReader reader = new CSVReader(is); // 1
         List<String[]> list = reader.readAll();
