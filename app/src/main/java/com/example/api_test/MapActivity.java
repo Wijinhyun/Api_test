@@ -128,8 +128,9 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
                 intent.putExtra("city_name", city_name);
                 intent.putExtra("gu_name", gu_name);
                 intent.putExtra("search", search);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
                 startActivity(intent);
+
             }
         });
 
@@ -156,14 +157,14 @@ public class MapActivity extends AppCompatActivity implements Overlay.OnClickLis
 
         infoWindow = new InfoWindow();
 
-//        infobutton = (Button) findViewById(R.id.iw_call);
-//
-//        infobutton.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(MapActivity.this, "iwcall 클릭", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        infobutton = (Button) findViewById(R.id.iw_call);
+
+        infobutton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MapActivity.this, "iwcall 클릭", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         infoWindow.setOnClickListener(new InfoWindow.OnClickListener() {
             @Override

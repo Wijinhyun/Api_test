@@ -102,7 +102,7 @@ public class MapActivityGooglemap extends AppCompatActivity
                 intent.putExtra("city_name", city_name);
                 intent.putExtra("gu_name", gu_name);
                 intent.putExtra("search", search);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                finish();
                 startActivity(intent);
             }
         });
