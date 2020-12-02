@@ -75,15 +75,30 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
        /* if(mList.get(position).getMedical_list() != null) {
             viewholder.Tv_list.setText(mList.get(position).getMedical_list());
         }*/
-        String percent = "0.0";
-        viewholder.Tv_sbj.setText(subject + " 전문의 : ");
-        viewholder.Tv_sdrdgsCnt.setText(mList.get(position).getPronum());
-        viewholder.Tv_drTotCnt.setText(mList.get(position).getTotalnum());
+        //String percent = "0.0";
+        viewholder.Tv_sbj.setText(subject + " 전문의");
+        viewholder.Tv_sdrdgsCnt.setText(mList.get(position).getPronum() + "명");
+        viewholder.Tv_drTotCnt.setText(mList.get(position).getTotalnum() + "명");
         viewholder.Tv_adress.setText(mList.get(position).getAddr());
-        if(mList.get(position).getPronum() != null && !mList.get(position).getTotalnum().equals("0")) {
-            percent = String.format("%.1f", Double.parseDouble(mList.get(position).getPronum()) / Double.parseDouble(mList.get(position).getTotalnum()) * 100);
-        }
+//        if(mList.get(position).getPronum() != null && !mList.get(position).getTotalnum().equals("0")) {
+//            percent = String.format("%.1f", Double.parseDouble(mList.get(position).getPronum()) / Double.parseDouble(mList.get(position).getTotalnum()) * 100);
+//        }
+        //viewholder.Tv_percent.setText(mList.get(position).getPercent() + "%");
+
+        String percent = "0.0";
+        percent = String.format("%.1f", Double.parseDouble(mList.get(position).getPercent()));
         viewholder.Tv_percent.setText(percent + "%");
+
+        if(Double.parseDouble(percent) >= 66.6){
+            //iv_circle.setImageResource(R.drawable.greencircle);
+            viewholder.Tv_percent.setTextColor(Color.parseColor("#0A640A"));
+        }else if(Double.parseDouble(percent) >= 33.3){
+            //iv_circle.setImageResource(R.drawable.yellowcircle);
+            viewholder.Tv_percent.setTextColor(Color.parseColor("#FFCC42"));
+        }else if(Double.parseDouble(percent) >= 0.1) {          // 전문의가 아예 없으면 지도에 띄우지 않음
+            //iv_circle.setImageResource(R.drawable.redcircle);
+            viewholder.Tv_percent.setTextColor(Color.parseColor("#C03713"));
+        }
 
         double temp = Double.parseDouble(mList.get(position).getDistance());
         String temp2;

@@ -247,9 +247,24 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 new RecyclerViewOnItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
-                        Intent recycler_item = new Intent(getApplicationContext(), Hospital_Detail.class);
-                        recycler_item.putExtra("array", arr.get(position));
-                        startActivity(recycler_item);
+//                        Intent recycler_item = new Intent(getApplicationContext(), Hospital_Detail.class);
+////                        recycler_item.putExtra("array", arr.get(position));
+                        final Intent intent = new Intent(getApplicationContext(),ListDialogActivity.class);
+                        intent.putExtra("percent",arr.get(position).getPercent());
+                        intent.putExtra("hospitalname",arr.get(position).getHospitalname());
+                        intent.putExtra("distance",arr.get(position).getDistance());
+                        intent.putExtra("addr",arr.get(position).getAddr());
+                        intent.putExtra("sbj",arr.get(position).getSubject());
+                        intent.putExtra("pronum",arr.get(position).getPronum());
+                        intent.putExtra("totalnum", arr.get(position).getTotalnum());
+                        intent.putExtra("tel",arr.get(position).getTel());
+                        intent.putExtra("park",arr.get(position).getPark());
+                        intent.putExtra("url",arr.get(position).getUrl());
+                        intent.putExtra("init_ypos",latitude);
+                        intent.putExtra("init_xpos",longitude);
+                        intent.putExtra("d_ypos",arr.get(position).getYpos());
+                        intent.putExtra("d_xpos",arr.get(position).getXpos());
+                        startActivity(intent);
                     }
 
                     @Override

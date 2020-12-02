@@ -23,13 +23,14 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
-public class MarkerDialogActivity extends Activity implements View.OnClickListener {
-
-    private ImageView iv_circle;
+public class ListDialogActivity extends Activity implements View.OnClickListener {
+    private ImageView iv_static;
     private TextView tv_percent, tv_hospitalname, tv_distance, tv_addr, tv_sbj, tv_pronum, tv_totalnum;
     private Button btn_call, btn_route;
     private CardView cardView;
@@ -48,9 +49,9 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        getWindow().setGravity(Gravity.BOTTOM);
+        getWindow().setGravity(Gravity.CENTER);
 
-        setContentView(R.layout.activity_dialog);
+        setContentView(R.layout.activity_dialog_list);
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         int width = (int) (display.getWidth() * 1.0); //Display 사이즈의 70%
         //int height = (int) (display.getHeight() * 0.2);  //Display 사이즈의 90%
@@ -80,6 +81,8 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
         init_xpos = intent.getDoubleExtra("init_xpos",0);
 
         callnum = "tel: "+tvtel;
+
+        Picasso.get().load("https://naveropenapi.apigw.ntruss.com/map-static/v2/raster-cors?w=300&h=300&center=127.1054221,37.3591614&level=16&X-NCP-APIGW-API-KEY-ID=u1aee7mhqb").into(iv_static);
 
         tv_hospitalname.setText(tvhospitalname);
         tv_totalnum.setText(tvtotalnum + "명");
@@ -116,22 +119,22 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(MarkerDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ListDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
     private void setContent(){
-        cardView = (CardView) findViewById(R.id.view_card);
-        //iv_circle = (ImageView) findViewById(R.id.iv_circle);
-        tv_percent = (TextView) findViewById(R.id.tv_percent);
-        tv_hospitalname = (TextView) findViewById(R.id.tv_hospitalname);
-        tv_distance = (TextView) findViewById(R.id.tv_distance);
-        tv_addr = (TextView) findViewById(R.id.tv_addr);
-        tv_sbj = (TextView) findViewById(R.id.tv_sbj);
-        tv_pronum = (TextView) findViewById(R.id.tv_pronum);
-        tv_totalnum = (TextView) findViewById(R.id.tv_totalnum);
-        btn_call = (Button) findViewById(R.id.btn_call);
-        btn_route = (Button) findViewById(R.id.btn_route);
+        cardView = (CardView) findViewById(R.id.view_cardforlist);
+        iv_static = (ImageView) findViewById(R.id.iv_static);
+        tv_percent = (TextView) findViewById(R.id.tv_percentforlist);
+        tv_hospitalname = (TextView) findViewById(R.id.tv_hospitalnameforlist);
+        tv_distance = (TextView) findViewById(R.id.tv_distanceforlist);
+        tv_addr = (TextView) findViewById(R.id.tv_addrforlist);
+        tv_sbj = (TextView) findViewById(R.id.tv_sbjforlist);
+        tv_pronum = (TextView) findViewById(R.id.tv_pronumforlist);
+        tv_totalnum = (TextView) findViewById(R.id.tv_totalnumforlist);
+        btn_call = (Button) findViewById(R.id.btn_callforlist);
+        btn_route = (Button) findViewById(R.id.btn_routeforlist);
 
         cardView.setOnClickListener(this);
         btn_call.setOnClickListener(this);
@@ -141,14 +144,14 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.view_card:
-                Toast.makeText(MarkerDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+            case R.id.view_cardforlist:
+                Toast.makeText(ListDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.btn_call:
+            case R.id.btn_callforlist:
                 startActivity(new Intent("android.intent.action.DIAL", Uri.parse(callnum)));
                 //Toast.makeText(MarkerDialogActivity.this, "전화로 넘어가게 구현", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.btn_route:
+            case R.id.btn_routeforlist:
 
                 String sname = null;
                 try {
@@ -166,7 +169,7 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
                 //String url = "http://stackoverflow.com/search?q=" + query;
 
                 String url =
-                "nmap://route/public?slat="+init_ypos+"&slng="+init_xpos+"&sname="+sname+"&dlat="+d_ypos+"&dlng="+d_xpos+"&dname="+dname+"&appname=com.example.api_test";
+                        "nmap://route/public?slat="+init_ypos+"&slng="+init_xpos+"&sname="+sname+"&dlat="+d_ypos+"&dlng="+d_xpos+"&dname="+dname+"&appname=com.example.api_test";
                 //"nmap://route/public?slat=37.4640070&slng=126.9522394&sname=&dlat=37.5209436&dlng=127.1230074&dname=&appname=com.example.api_test";
                 Log.d("init, d 값",init_ypos + "  " + init_xpos + "  " + d_ypos + "  " + d_xpos);
                 Log.d("init, d 값",sname + "  " + dname);

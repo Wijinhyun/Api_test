@@ -108,6 +108,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -116,7 +117,8 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/hangeulnurir"
                                 android:gravity="center"
-                                android:text=""
+                                android:textSize="15sp"
+                                android:text="전문의"
                                 android:textColor="#000000" />
 
                         </LinearLayout>
@@ -131,6 +133,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/hangeulnurir"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
                                 android:gravity="center"
                                 android:textColor="#000000" />
 
@@ -147,12 +151,15 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:fontFamily="@font/hangeulnurir"
                                 android:gravity="center"
+                                android:textSize="15sp"
                                 android:text="전체의사"
                                 android:textColor="#000000" />
 
@@ -168,10 +175,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/hangeulnurir"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
                                 android:gravity="center"
                                 android:textColor="#000000" />
 
                         </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+
 
                     </LinearLayout>
 
@@ -184,12 +202,15 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:fontFamily="@font/hangeulnurir"
                                 android:gravity="center"
+                                android:textSize="15sp"
                                 android:text="비율"
                                 android:textColor="#000000" />
 
@@ -204,7 +225,10 @@
                                 android:id="@+id/tv_percent1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/hangeulnurir"
                                 android:gravity="center"
+                                android:text="30%"
+                                android:textSize="20sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>

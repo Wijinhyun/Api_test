@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/view_card"
+            android:id="@+id/view_cardforlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -32,6 +32,11 @@
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:id="@+id/iv_static"/>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_marginTop="15dp"
@@ -40,7 +45,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/hos_phar"
+                        android:id="@+id/hos_pharforlist"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="의원"
@@ -51,17 +56,17 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tv_hospitalname"
+                        android:id="@+id/tv_hospitalnameforlist"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
                         android:text="의원/약국"
                         android:textSize="24sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/hos_phar" />
+                        app:layout_constraintTop_toBottomOf="@+id/hos_pharforlist" />
 
                     <Button
-                        android:id="@+id/btn_call"
+                        android:id="@+id/btn_callforlist"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@drawable/tonghwa"
@@ -69,13 +74,13 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
-                        android:id="@+id/btn_route"
+                        android:id="@+id/btn_routeforlist"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginRight="5dp"
                         android:background="@drawable/routteeee"
                         android:textColor="#FFFFFF"
-                        app:layout_constraintRight_toLeftOf="@id/btn_call"
+                        app:layout_constraintRight_toLeftOf="@id/btn_callforlist"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -88,7 +93,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_distance"
+                        android:id="@+id/tv_distanceforlist"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
@@ -103,7 +108,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_addr"
+                        android:id="@+id/tv_addrforlist"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
@@ -132,7 +137,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/tv_sbj"
+                                android:id="@+id/tv_sbjforlist"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/hangeulnurir"
@@ -149,7 +154,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/tv_pronum"
+                                android:id="@+id/tv_pronumforlist"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/hangeulnurir"
@@ -191,7 +196,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/tv_totalnum"
+                                android:id="@+id/tv_totalnumforlist"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/hangeulnurir"
@@ -242,7 +247,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/tv_percent"
+                                android:id="@+id/tv_percentforlist"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
