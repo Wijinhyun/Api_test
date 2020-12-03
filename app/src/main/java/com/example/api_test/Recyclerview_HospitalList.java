@@ -58,6 +58,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private Boolean lock = false;
     private String search;
     private int hospital_Cnt = 0;
+    //private int Tv_cnt = 0;
     private String subject;
 
     private double Xpos;
@@ -71,7 +72,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
     private FloatingActionButton Fb_tomap, Fb_totop;
     private Button Btn_region_in_list, Btn_medical_subject, Btn_back, Btn_search;
-    private TextView Tv_hospitalCnt;
+    private TextView Tv_hospitalCnt, Tv_cnt;
     private LinearLayout base_progressBar;
     GPSTracker gps;
 
@@ -185,6 +186,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                             adapter = new CustomAdapter(getApplicationContext(), arr, subject);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
+                            Tv_cnt.setText(arr.size()+ "개 검색됨");
                             //Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
                         }
                         base_progressBar.setVisibility(View.GONE);
@@ -288,7 +290,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         Btn_search = findViewById(R.id.btn_search);
         Btn_search.setOnClickListener(this);
 
-        Tv_hospitalCnt = findViewById(R.id.tv_hospitalCnt);
+        //Tv_hospitalCnt = findViewById(R.id.tv_hospitalCnt);
+        Tv_cnt = findViewById(R.id.tv_cnt);
         Fb_tomap = findViewById(R.id.fb_tomap);
         Fb_totop = findViewById(R.id.fb_totop);
         Btn_region_in_list = findViewById(R.id.btn_region_in_list);
