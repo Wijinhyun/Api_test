@@ -17,14 +17,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="자주 묻는 질문"
+            android:text="FAQ"
             android:textColor="#000000"
-            android:textSize="28sp"
+            android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_back"
@@ -50,9 +50,10 @@
                 android:id="@+id/question1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
                 android:text="전문의는 무엇인가요?"
-                android:textColor="#000000"
-                android:textSize="25sp"
+                android:textColor="#433E3E"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
@@ -61,52 +62,62 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:gravity="center"
-                android:drawableRight="@drawable/baseline_control_point_24"
+                android:drawableRight="@drawable/faq_up"
+                android:paddingLeft="10dp"
                 android:paddingRight="10dp"/>
 
             <TextView
                 android:id="@+id/answer1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:text="의사 면허를 취득한 후 인턴 1년, 레지던트 4년(내과·외과·가정의학과는 3년, 예방의학과는 해당 항목 참조)을 수련받은 사람으로서 보건복지부장관이 실시하는 전문의 자격시험에 합격한 사람입니다."
-                android:textColor="#000000"
+                android:textColor="#433E3E"
                 android:layout_marginTop="5dp"
-                android:textSize="18sp"/>
+                android:layout_marginBottom="5dp"
+                android:textSize="15sp"/>
 
             <Button
                 android:id="@+id/question2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="전문의에게 진료받아야 하나요?"
-                android:textColor="#000000"
-                android:textSize="25sp"
-                android:textStyle="bold"
                 android:background="@drawable/border_layout"
+                android:drawableRight="@drawable/faq_up"
                 android:fontFamily="@font/hangeulnurib"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:gravity="center"
-                android:drawableRight="@drawable/baseline_control_point_24"
-                android:paddingRight="10dp"/>
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:text="전문의에게 진료받아야 하나요?"
+                android:textColor="#433E3E"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/answer2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:text="의료행위를 할 수 있느냐 여부에 있어서 일반의와 전문의의 차이점은 없습니다. 의사가 행할 수 있는 의료행위는 의료법에서 지정하고 있고 이를 할 수 있느냐 없느냐는 국가고시로 획득하는 의사면허증 유무의 문제입니다. "
-                android:textColor="#000000"
+                android:textColor="#433E3E"
                 android:layout_marginTop="5dp"
-                android:textSize="18sp"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="15sp"/>
 
             <Button
                 android:id="@+id/question3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
                 android:text="자료의 출처는 어디인가요?"
-                android:textColor="#000000"
-                android:textSize="25sp"
+                android:textColor="#433E3E"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
@@ -115,7 +126,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:gravity="center"
-                android:drawableRight="@drawable/baseline_control_point_24"
+                android:drawableRight="@drawable/faq_up"
                 android:paddingRight="10dp"/>
 
             <TextView
@@ -123,17 +134,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:text="대한민국 공공기관 중 하나인 건강보험심사평가원에서 제공하는 정보입니다."
-                android:textColor="#000000"
+                android:textColor="#433E3E"
                 android:layout_marginTop="5dp"
-                android:textSize="18sp"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="15sp"/>
 
             <Button
                 android:id="@+id/question4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
                 android:text="제가 찾는 병원이 안나와요"
-                android:textColor="#000000"
-                android:textSize="25sp"
+                android:textColor="#433E3E"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
@@ -142,7 +157,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:gravity="center"
-                android:drawableRight="@drawable/baseline_control_point_24"
+                android:drawableRight="@drawable/faq_up"
                 android:paddingRight="10dp"/>
 
             <TextView
@@ -150,17 +165,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:text="저희 프로닥터에서는 병상수가 30개 미만인 의원급만 소개해드리고 있습니다. 저희 앱의 취지에 맞게 사용자분들이 동네병원을 찾을 때 유용한 정보를 얻을 수 있도록 노력하겠습니다."
-                android:textColor="#000000"
+                android:textColor="#433E3E"
                 android:layout_marginTop="5dp"
-                android:textSize="18sp"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="15sp"/>
 
             <Button
                 android:id="@+id/question5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
                 android:text="다른 사람들의 후기를 보고싶어요"
-                android:textColor="#000000"
-                android:textSize="25sp"
+                android:textColor="#433E3E"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
@@ -169,7 +188,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:gravity="center"
-                android:drawableRight="@drawable/baseline_control_point_24"
+                android:drawableRight="@drawable/faq_up"
                 android:paddingRight="10dp"/>
 
             <TextView
@@ -177,17 +196,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:text="의료법 제56조 제1항에 위배되는 사항입니다. 의료인이 아닌 사용자분들은 법적으로 개인적으로 후기를 남기는 등 의료광고를 할 수 없습니다."
-                android:textColor="#000000"
+                android:textColor="#433E3E"
                 android:layout_marginTop="5dp"
-                android:textSize="18sp"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="15sp"/>
 
             <Button
                 android:id="@+id/question6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
                 android:text="전문의가 있는 병원만 보고싶어요"
-                android:textColor="#000000"
-                android:textSize="25sp"
+                android:textColor="#433E3E"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="@drawable/border_layout"
                 android:fontFamily="@font/hangeulnurib"
@@ -196,7 +219,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:gravity="center"
-                android:drawableRight="@drawable/baseline_control_point_24"
+                android:drawableRight="@drawable/faq_up"
                 android:paddingRight="10dp"/>
 
             <TextView
@@ -204,9 +227,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:text="검색어에 해당 진료과목을 검색하시면 됩니다. 왜냐하면, 진료과목의 전문의가 보유한 병원만 \'피부과'\와 같은 전문과목을 표기할 수 있습니다."
-                android:textColor="#000000"
+                android:textColor="#433E3E"
                 android:layout_marginTop="5dp"
-                android:textSize="18sp"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="15sp"/>
 
         </LinearLayout>
 

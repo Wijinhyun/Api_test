@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,8 @@ public class QnA_page extends AppCompatActivity {
 
     private TextView Answer1, Answer2, Answer3, Answer4, Answer5, Answer6;
 
+    private Drawable faq_updown;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,8 @@ public class QnA_page extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        //faq_updown = findViewById(R.drawable.faq_up);
         Answer1 = findViewById(R.id.answer1);
         Question1 = findViewById(R.id.question1);
 
