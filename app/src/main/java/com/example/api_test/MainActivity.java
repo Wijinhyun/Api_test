@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Animation c = AnimationUtils.loadAnimation(MainActivity.this,R.anim.reverse_alphaex);
         Const.startAnimation(c);
 
+
+        getpermisson();
+
         init();
 
         Intent intent = getIntent();
@@ -82,6 +86,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Btn_region.setText(city_name + " - " + gu_name);
         }
     }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        if(requestCode == 0) {
+//
+//            if (grantResults[0] == 0) {
+//
+//                Log.d("전화 권한 있는 상태", "");
+//
+//            } else {
+//                //finish();
+//
+//                Log.d("전화 권한 없는 상태", "");
+//
+//            }
+//        }
+//        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//    }
 
     @Override
     public void onClick(View view) {
@@ -226,6 +248,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void onBackPressed() {
         backPressCloseHandler.onBackPressed();
+    }
+    private void getpermisson() {
+
+        // 메니패스트에 권한이 있는지 확인
+        int permiCheck_loca = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        //앱권한이 없으면 권한 요청
+        if(permiCheck_loca == PackageManager.PERMISSION_DENIED){
+            Log.d("전화 권한 없는 상태", "");
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
+        //권한 있다면
+        else{
+            Log.d("전화 권한 있는 상태", "");
+        }
     }
 }
 

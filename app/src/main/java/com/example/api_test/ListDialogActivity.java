@@ -82,7 +82,17 @@ public class ListDialogActivity extends Activity implements View.OnClickListener
 
         callnum = "tel: "+tvtel;
 
-        Picasso.get().load("https://naveropenapi.apigw.ntruss.com/map-static/v2/raster-cors?w=300&h=300&center=127.1054221,37.3591614&level=16&X-NCP-APIGW-API-KEY-ID=u1aee7mhqb").into(iv_static);
+        String uurl = "https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?" +
+                "w=450&h=300" +
+                "&center=" + d_xpos + "," + d_ypos +
+                "&level=16" +
+                "&markers=type:d|size:mid|pos:" + d_xpos + "%20" + d_ypos +
+                "&X-NCP-APIGW-API-KEY-ID=u1aee7mhqb" +
+                "&X-NCP-APIGW-API-KEY=2ctTFzgE3LR8q9CyqEbtEk3yLQu3L0IkRAymNpmy";
+
+
+        //Picasso.get().load("https://naveropenapi.apigw.ntruss.com/map-static/v2/raster-cors?w=300&h=300&center=127.1054221,37.3591614&level=16&X-NCP-APIGW-API-KEY-ID=u1aee7mhqb").into(iv_static);
+        Picasso.get().load(uurl).into(iv_static);
 
         tv_hospitalname.setText(tvhospitalname);
         tv_totalnum.setText(tvtotalnum + "명");
@@ -119,7 +129,7 @@ public class ListDialogActivity extends Activity implements View.OnClickListener
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(ListDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ListDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
@@ -145,7 +155,7 @@ public class ListDialogActivity extends Activity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.view_cardforlist:
-                Toast.makeText(ListDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ListDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_callforlist:
                 startActivity(new Intent("android.intent.action.DIAL", Uri.parse(callnum)));

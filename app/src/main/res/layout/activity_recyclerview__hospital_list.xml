@@ -19,7 +19,7 @@
             android:id="@+id/tv_hospitalCnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0개 검색됨"
+            android:text="병원"
             android:textColor="#000000"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -91,7 +91,6 @@
                 android:paddingRight="8dp"/>
         </LinearLayout>
     </HorizontalScrollView>
-
 
     <ScrollView
         android:id="@+id/scrollview"

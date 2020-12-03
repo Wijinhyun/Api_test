@@ -185,7 +185,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                             adapter = new CustomAdapter(getApplicationContext(), arr, subject);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
-                            Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
+                            //Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
                         }
                         base_progressBar.setVisibility(View.GONE);
                     }
@@ -410,21 +410,66 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             // 리사이클러뷰에서는 시도코드, 시군구코드 존재 여부와, 값에 따라서 panjung을 내린 후 arr.add 해야됨
             //int panjung = calculateDistanceInKilometer(temp_ypos,temp_xpos,lat,lng);
 
-            if(jagosipda.isEmpty() == false || jagosipda.size() != 0){
+//            if(search != null){
+//                if(entity.getHospitalname().contains(search)){
+//                    arr.add(entity);
+//                }
+//                else{
+//
+//                }
+//            }
+
+            if(jagosipda.isEmpty() == false || jagosipda.size() != 0){  // 경기 수원시 같은 사례의 경우 모든 구를 포함해야 하는데, 이런 경우 자고십다가 활성화됨
                 for(int i=0;i<jagosipda.size();i++){
                     if(jagosipda.get(i).equals(entity.getSigungucode())){
+                        if(search != null){
+                            if(entity.getHospitalname().contains(search)){  // 검색어가 포함된 경우
+                                arr.add(entity);
+                            }
+                            else{   // 검색어가 포함되지 않은 경우
+
+                            }
+                        } else{     // 검색어가 없는 경우
+                            arr.add(entity);
+                        }
+                    }
+                }
+            }else if(city_name == null && gu_name == null){ // 지역 설정 안한 상태라면
+                if(search != null){
+                    if(entity.getHospitalname().contains(search)){  // 검색어가 포함된 경우
+                        arr.add(entity);
+                    }
+                    else{   // 검색어가 포함되지 않은 경우
+
+                    }
+                } else{     // 검색어가 없는 경우
+                    arr.add(entity);
+                }
+            }else if(gu_name.equals("전체")){
+                if(city_name != null && sidoCd.equals(entity.getSidocode())){
+                    if(search != null){
+                        if(entity.getHospitalname().contains(search)){  // 검색어가 포함된 경우
+                            arr.add(entity);
+                        }
+                        else{   // 검색어가 포함되지 않은 경우
+
+                        }
+                    } else{     // 검색어가 없는 경우
                         arr.add(entity);
                     }
                 }
-            }else if(city_name == null && gu_name == null){
-                arr.add(entity);
-            }else if(gu_name.equals("전체")){
-                if(city_name != null && sidoCd.equals(entity.getSidocode())){
-                    arr.add(entity);
-                }
             }else if(gu_name != null){
                 if(sgguCd.equals(entity.getSigungucode())){
-                    arr.add(entity);
+                    if(search != null){
+                        if(entity.getHospitalname().contains(search)){  // 검색어가 포함된 경우
+                            arr.add(entity);
+                        }
+                        else{   // 검색어가 포함되지 않은 경우
+
+                        }
+                    } else{     // 검색어가 없는 경우
+                        arr.add(entity);
+                    }
                 }
                 // 인천부평구, 대구중구, 경기수원영통구 같은 사례들 걸러줘야함
             }

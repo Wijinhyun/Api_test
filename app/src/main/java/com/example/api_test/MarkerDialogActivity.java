@@ -142,7 +142,7 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.view_card:
-                Toast.makeText(MarkerDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MarkerDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_call:
                 startActivity(new Intent("android.intent.action.DIAL", Uri.parse(callnum)));
