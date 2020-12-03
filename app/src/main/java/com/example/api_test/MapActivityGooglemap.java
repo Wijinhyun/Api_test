@@ -152,6 +152,33 @@ public class MapActivityGooglemap extends AppCompatActivity
         Ypos = mapCenter.latitude;
 
         findHospital();
+
+        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+            @Override
+            public void onCameraIdle() {
+                Log.d("초기idleidleidle", arr.size() + "");
+                if(markerclicked_check == 1){
+                    markerclicked_check = 0;
+                }
+                else{
+                    Log.d("초기idleidleidle", arr.size() + "");
+
+                    LatLng mapCenter = mMap.getCameraPosition().target;
+                    Xpos = mapCenter.longitude;
+                    Ypos = mapCenter.latitude;
+                    int distance = calculateDistanceInKilometer(temp_ypos,temp_xpos,Ypos,Xpos);
+                    if(distance >= 10000){
+                        Log.d("초기idleidleidle", arr.size() + "");
+                        temp_xpos = Xpos;
+                        temp_ypos = Ypos;
+                        findHospital();
+                    }
+                    clusterManager.cluster();
+                }
+            }
+        });
+
+        clusterManager.cluster();
     }
 
     private void updateMapMarkers() {
@@ -344,19 +371,20 @@ public class MapActivityGooglemap extends AppCompatActivity
             mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
                 @Override
                 public void onCameraIdle() {
+                    Log.d("후기idleidleidle", arr.size() + "");
                     if(markerclicked_check == 1){
                         startActivity(intent);
                         markerclicked_check = 0;
                     }
                     else{
-                        Log.d("marker 눌러서 idle 들어옴", arr.size() + "");
+                        Log.d("후기idleidleidle", arr.size() + "");
 
                         LatLng mapCenter = mMap.getCameraPosition().target;
                         Xpos = mapCenter.longitude;
                         Ypos = mapCenter.latitude;
                         int distance = calculateDistanceInKilometer(temp_ypos,temp_xpos,Ypos,Xpos);
                         if(distance >= 10000){
-                            Log.d("oncameraidle들어왔다", arr.size() + "");
+                            Log.d("후기idleidleidle", arr.size() + "");
                             temp_xpos = Xpos;
                             temp_ypos = Ypos;
                             findHospital();
