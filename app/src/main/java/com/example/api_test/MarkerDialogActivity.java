@@ -116,7 +116,7 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(MarkerDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MarkerDialogActivity.this, "세부정보로 넘어가게 구현", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 

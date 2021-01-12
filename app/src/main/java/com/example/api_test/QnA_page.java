@@ -53,8 +53,8 @@ public class QnA_page extends AppCompatActivity {
         Answer5 = findViewById(R.id.answer5);
         Question5 = findViewById(R.id.question5);
 
-//        Answer6 = findViewById(R.id.answer6);
-//        Question6 = findViewById(R.id.question6);
+        Answer6 = findViewById(R.id.answer6);
+        Question6 = findViewById(R.id.question6);
 
         Question1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,20 +135,20 @@ public class QnA_page extends AppCompatActivity {
         });
 
 
-//        Question6.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(state6 == false){
-//                    Answer6.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-//                    Answer6.requestLayout();
-//                    state6 = true;
-//                }else if(state6 == true){
-//                    Answer6.getLayoutParams().height = 0;
-//                    Answer6.requestLayout();
-//                    state6 = false;
-//                }
-//            }
-//        });
+        Question6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(state6 == false){
+                    Answer6.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    Answer6.requestLayout();
+                    state6 = true;
+                }else if(state6 == true){
+                    Answer6.getLayoutParams().height = 0;
+                    Answer6.requestLayout();
+                    state6 = false;
+                }
+            }
+        });
 
 
     }
