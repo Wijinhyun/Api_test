@@ -1,4 +1,4 @@
-package com.example.api_test;
+package com.prodoc.api_test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.api_test.R;
+import com.prodoc.api_test.R;
 
 public class Seoul_listview extends AppCompatActivity {
 

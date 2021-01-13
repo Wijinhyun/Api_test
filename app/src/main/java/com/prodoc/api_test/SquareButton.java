@@ -1,8 +1,7 @@
-package com.example.api_test;
+package com.prodoc.api_test;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.Button;
 
 public class SquareButton extends androidx.appcompat.widget.AppCompatImageButton {
 

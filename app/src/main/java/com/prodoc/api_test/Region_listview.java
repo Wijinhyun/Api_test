@@ -1,4 +1,4 @@
-package com.example.api_test;
+package com.prodoc.api_test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Region_listview extends AppCompatActivity {
 

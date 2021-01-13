@@ -1,4 +1,4 @@
-package com.example.api_test;
+package com.prodoc.api_test;
 
 import android.content.Intent;
 import android.os.Bundle;

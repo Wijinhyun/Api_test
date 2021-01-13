@@ -91,7 +91,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <com.example.api_test.SquareButton
+            <com.prodoc.api_test.SquareButton
                 android:id="@+id/btn_Dermatology"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/icon_dermatology3" />
 
-            <com.example.api_test.SquareButton
+            <com.prodoc.api_test.SquareButton
                 android:id="@+id/btn_Ophthalmology"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/icon_ophthalmology" />
 
-            <com.example.api_test.SquareButton
+            <com.prodoc.api_test.SquareButton
                 android:id="@+id/btn_Cosmetic_Surgery"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <com.example.api_test.SquareButton
+            <com.prodoc.api_test.SquareButton
                 android:id="@+id/btn_Orthopedics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/icon_orthopedics" />
 
-            <com.example.api_test.SquareButton
+            <com.prodoc.api_test.SquareButton
                 android:id="@+id/btn_Otolaryngology"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/icon_ent2" />
 
-            <com.example.api_test.SquareButton
+            <com.prodoc.api_test.SquareButton
                 android:id="@+id/btn_Surgical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <com.example.api_test.SquareButton
+            <com.prodoc.api_test.SquareButton
                 android:id="@+id/btn_Internal_Medicine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/icon_internal_medicine" />
 
-            <com.example.api_test.SquareButton
+            <com.prodoc.api_test.SquareButton
                 android:id="@+id/btn_Urology"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -199,7 +199,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/icon_urology" />
 
-            <com.example.api_test.SquareButton
+            <com.prodoc.api_test.SquareButton
                 android:id="@+id/btn_Obstetrics_Gynecology"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
