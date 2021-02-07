@@ -224,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         backPressCloseHandler.onBackPressed();
     }
+
     private void getpermisson() {
 
         // 메니패스트에 권한이 있는지 확인

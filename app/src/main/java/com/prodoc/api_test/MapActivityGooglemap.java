@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,8 +80,12 @@ public class MapActivityGooglemap extends AppCompatActivity
             // Can't get location.
             // GPS or network is not enabled.
             // Ask user to enable GPS/network in settings.
+            Toast.makeText(getApplicationContext(), "GPS 활용 거부로 인해 초기위치값이 경북대로 설정되었습니다", Toast.LENGTH_LONG).show();
+            init_ypos = 35.887515;      // gps 거부한 경우에 초기위치값으로 경대 2호관 설정
+            init_xpos = 128.611553;
             gps.showSettingsAlert();
         }
+
         temp_xpos = init_xpos;
         temp_ypos = init_ypos;
 
@@ -142,7 +147,7 @@ public class MapActivityGooglemap extends AppCompatActivity
 
 
 
-        LatLng START = new LatLng(init_ypos, init_xpos);
+        LatLng START = new LatLng(init_ypos, init_xpos);            // 여기서 init 좌표값 못받은 거면 경대로 시작지점 정하면 될 듯
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START, 15));
 
         Log.d("movecamera", init_ypos + "");

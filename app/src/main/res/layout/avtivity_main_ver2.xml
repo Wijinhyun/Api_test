@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:background="@android:color/white"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:background="@android:color/white"
+                android:layout_width="fill_parent"
+                android:layout_height="47.0dip"
+                android:backgroundTint="@android:color/white"
+                app:layout_scrollFlags="enterAlways|scroll">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/conactivity_back"
+                        android:layout_width="17.0dip"
+                        android:layout_height="17.0dip"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/icon_menu" />
+
+                    <TextView
+                        android:textSize="14.0dip"
+                        android:textColor="#000000"
+                        android:ellipsize="end"
+                        android:layout_gravity="center"
+                        android:id="@+id/con_titles"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10.0dip"
+                        android:text="prodoc"
+                        android:maxLines="1"
+                        android:layout_weight="1.0"
+                        android:textAlignment="center" />
+
+                    <ImageView
+                        android:layout_gravity="center|right"
+                        android:id="@+id/con_D_serch_btn"
+                        android:layout_width="17.0dip"
+                        android:layout_height="17.0dip"
+                        android:layout_marginRight="22.0dip"
+                        app:srcCompat="@drawable/icon_bell" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <com.aqoong.lib.slidephotoviewer.SlidePhotoViewer
+                android:id="@+id/slideViewer"
+                android:background="@color/cardview_light_background"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:itemBackground="@drawable/slidephotoviewer_default_item_background"
+                app:sidePreview="true"
+                app:useIndicator="true"
+                app:autoSlide="true"
+                app:maxSize="10"
+                app:autoSlide_repeat_time="5000"
+                app:placeholder="@drawable/ic_placeholder"
+                android:layout_marginTop="0dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/main_hos"
+                    android:text="병원"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/main_pharm"
+                    android:text="약국"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/main_den"
+                    android:text="치과"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/main_kor"
+                    android:text="한의원"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

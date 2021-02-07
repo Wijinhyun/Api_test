@@ -431,7 +431,6 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                         arr.add(entity);
                     }
                     else{   // 검색어가 포함되지 않은 경우
-
                     }
                 } else{     // 검색어가 없는 경우
                     arr.add(entity);

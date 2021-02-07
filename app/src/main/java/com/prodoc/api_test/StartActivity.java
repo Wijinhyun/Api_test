@@ -33,7 +33,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 t1.setText("");
-                Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent1 = new Intent(getApplicationContext(), MainActivity_Ver2.class);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent1);
                 finish();

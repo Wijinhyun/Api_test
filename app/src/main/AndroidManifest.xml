@@ -45,9 +45,8 @@
         <activity android:name="com.prodoc.api_test.ListDialogActivity"
             android:theme="@style/Theme.AppCompat.Dialog"/>
         <activity android:name="com.prodoc.api_test.MapActivityGooglemap" />
-        <activity android:name="com.prodoc.api_test.MainActivity">
-
-        </activity>
+        <activity android:name="com.prodoc.api_test.MainActivity"/>
+        <activity android:name="com.prodoc.api_test.MainActivity_Ver2"/>
     </application>
 
 </manifest>
