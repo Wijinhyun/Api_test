@@ -1,3 +1,2 @@
-include ':slidephotoviewer'
 include ':app'
 rootProject.name = "Api_test"
