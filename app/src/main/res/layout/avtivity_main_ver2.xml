@@ -66,6 +66,37 @@
 
             </androidx.appcompat.widget.Toolbar>
 
+            <RelativeLayout
+                android:id="@+id/mainHighFreqLl"
+                android:background="#F2F2F2"
+                android:paddingLeft="16.0dip"
+                android:paddingRight="16.0dip"
+                android:visibility="visible"
+                android:layout_width="fill_parent"
+                android:layout_height="36.0dip"
+                android:layout_alignParentTop="true">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:id="@+id/mainHighFreqStoreLlBtn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerInParent="true">
+
+                    <TextView
+                        android:textSize="12.0sp"
+                        android:textStyle="bold"
+                        android:textColor="#666666"
+                        android:text="안녕하세요. 프로닥터입니다."
+                        android:id="@+id/mainHighFreqStoreNameTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
             <FrameLayout
                 android:id="@+id/framelayout_nestedviewpager"
                 android:layout_width="wrap_content"
@@ -83,58 +114,82 @@
                 <me.relex.circleindicator.CircleIndicator
                     android:layout_gravity="center_horizontal|bottom"
                     android:id="@+id/indicator"
-                    app:ci_drawable="@drawable/black_indicator"
-                    app:ci_width="5pt"
-                    app:ci_height="5pt"
+                    app:ci_drawable="@drawable/menu_indicator_s"
+                    app:ci_drawable_unselected="@drawable/menu_indicator_d"
+                    app:ci_width="10dp"
+                    app:ci_height="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="48dp" />
 
             </FrameLayout>
 
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/main_hos"
-                    android:text="병원"/>
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/main_pharm"
-                    android:text="약국"/>
-
-            </LinearLayout>
+            <View
+                android:layout_gravity="center"
+                android:id="@+id/homeDivider2"
+                android:background="#666666"
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:layout_marginLeft="14.0dip"
+                android:layout_marginRight="14.0dip" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="0.3">
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/main_den"
-                    android:text="치과"/>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:id="@id/homeSirenOrderBtn"
+                    android:background="@drawable/home_menu_btn"
+                    android:descendantFocusability="blocksDescendants"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0">
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/main_kor"
-                    android:text="한의원"/>
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
 
+                        <ImageView android:id="@id/homeSirenOrderImg" android:layout_width="39.0dip" android:layout_height="59.0dip" android:src="@drawable/home_siren_ic" android:layout_centerHorizontal="true" />
+                        <TextView android:textSize="19.0sp" android:textColor="@color/white" android:id="@id/homeSirenOrderTxt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:text="Siren Order" android:layout_below="@id/homeSirenOrderImg" android:layout_centerHorizontal="true" />
+                        <TextView android:textSize="10.0sp" android:textStyle="bold" android:textColor="@color/common_color_9C8856" android:gravity="center" android:id="@id/homeSirenOrderReservationTxt" android:background="@drawable/home_rounded_white" android:paddingLeft="4.0dip" android:paddingTop="1.0dip" android:paddingRight="5.0dip" android:paddingBottom="0.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="18.0dip" android:layout_marginLeft="2.0dip" android:layout_marginTop="-7.0dip" android:text="@string/home_siren_order_name_bubble_txt" android:includeFontPadding="false" android:layout_toRightOf="@id/homeSirenOrderTxt" android:layout_alignTop="@id/homeSirenOrderTxt" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <View android:id="@id/homeDivider3" android:background="@color/common_color_292929" android:layout_width="1.0dip" android:layout_height="fill_parent" android:layout_marginTop="29.0dip" android:layout_marginBottom="29.0dip" />
+                <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/homeGiftShopLayout" android:background="@drawable/home_menu_btn" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <ImageView android:id="@id/homeGiftShopImg" android:layout_width="59.0dip" android:layout_height="59.0dip" android:src="@drawable/home_ic_e_gift" android:layout_centerHorizontal="true" />
+                        <TextView android:textSize="19.0sp" android:textColor="@color/white" android:id="@id/homeGiftShopTxt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:text="@string/home_gift_shop_name" android:layout_below="@id/homeGiftShopImg" android:layout_centerHorizontal="true" />
+                        <View android:id="@id/homeGiftShopCountDot" android:background="@drawable/shape_common_dot_gold" android:visibility="gone" android:layout_width="6.0dip" android:layout_height="6.0dip" android:layout_marginLeft="4.0dip" android:layout_marginTop="-6.0dip" android:layout_toRightOf="@id/homeGiftShopTxt" android:layout_alignTop="@id/homeGiftShopTxt" />
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
 
+            <View android:layout_gravity="center" android:id="@id/homeDivider4" android:background="@color/common_color_292929" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="14.0dip" android:layout_marginRight="14.0dip" />
+
+            <LinearLayout android:gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="0.2">
+                <RelativeLayout android:id="@id/homeCouponBtn" android:background="@drawable/home_menu_btn" android:descendantFocusability="blocksDescendants" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:layout_centerInParent="true">
+                    <RelativeLayout android:id="@id/mainCouponLl" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_centerInParent="true">
+                        <TextView android:textSize="19.0sp" android:textColor="@color/white" android:layout_gravity="center_vertical" android:id="@id/homeCouponGift" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/home_ecoupon_name" android:layout_centerInParent="true" android:layout_centerHorizontal="true" android:lineSpacingExtra="3.0dip" />
+                        <View android:id="@id/homeCouponCountDot" android:background="@drawable/shape_common_dot_gold" android:visibility="gone" android:layout_width="6.0dip" android:layout_height="6.0dip" android:layout_marginLeft="4.0dip" android:layout_marginTop="-6.0dip" android:layout_toRightOf="@id/homeCouponGift" android:layout_alignTop="@id/homeCouponGift" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <View android:id="@id/homeDivider5" android:background="@color/common_color_292929" android:layout_marginTop="14.0dip" android:layout_marginBottom="14.0dip" style="@style/divider_vertical" />
+
+                <RelativeLayout android:gravity="center" android:orientation="vertical" android:id="@id/homeInboxBtn" android:background="@drawable/home_menu_btn" android:descendantFocusability="blocksDescendants" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                    <LinearLayout android:id="@id/mainInboxLl" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerHorizontal="true">
+                        <TextView android:textSize="20.0sp" android:textColor="@color/white" android:layout_gravity="center_vertical" android:id="@id/homeInBoxTxt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inbox_title" />
+                        <TextView android:textSize="12.0sp" android:textStyle="bold" android:textColor="@color/main_reward_level_text_color_gold" android:gravity="center" android:id="@id/homeInBoxCountTxt" android:background="@drawable/main_bubble" android:paddingLeft="7.0dip" android:paddingRight="7.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="18.0dip" android:layout_marginLeft="3.0dip" android:layout_marginBottom="20.0dip" />
+                    </LinearLayout>
+                    <TextView android:textSize="10.0sp" android:textColor="@color/main_post_text_color_gray" android:gravity="center" android:id="@id/homeInboxPostTxt" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:layout_below="@id/mainInboxLl" android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View android:layout_gravity="center" android:id="@id/homeEfreqDivider" android:background="@color/common_color_292929" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="14.0dip" android:layout_marginRight="14.0dip" />
 
 
         </LinearLayout>

@@ -72,11 +72,6 @@ public class MainActivity_Ver2 extends AppCompatActivity {
         //layout.setLayoutParams(new LinearLayout.LayoutParams(garo,sero));
         //layout.setGravity(Gravity.CENTER);
 
-/**
-
- * @return 4:2 사이즈 비율 세로사이즈 리턴
-
- */
 
     }
     public void setupViewPager(ViewPager viewPager) {
