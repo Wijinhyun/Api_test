@@ -17,9 +17,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import me.relex.circleindicator.CircleIndicator;
 
-public class MainActivity_Ver2 extends AppCompatActivity {
+public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClickListener{
 
     private ViewPager mViewPager;
+    private LinearLayout hospital, pharmacy, dental, oriental;
+
     SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
 
     @Override
@@ -28,24 +30,11 @@ public class MainActivity_Ver2 extends AppCompatActivity {
 
         setContentView(R.layout.avtivity_main_ver2);
 
-//        Intent intent = new Intent(this, LoadingActivity.class);
-//        startActivity(intent);
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
 
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mViewPager);
-
-
-//        Button btnStartLinkB = (Button)findViewById(R.id.btnStartLinkB);
-//
-//        btnStartLinkB.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(),login.class);
-//                startActivity(intent);
-//            }
-//        });
 
         Display display = getWindowManager().getDefaultDisplay();
         DisplayMetrics outMetrics = new DisplayMetrics();
@@ -65,13 +54,19 @@ public class MainActivity_Ver2 extends AppCompatActivity {
 
 //
         final FrameLayout layout = (FrameLayout) findViewById(R.id.framelayout_nestedviewpager);
-        //LinearLayout layout = (LinearLayout) findViewById(R.id.linearnestframe);
-//
+
         final LinearLayout.LayoutParams mLayoutParam = (LinearLayout.LayoutParams)layout.getLayoutParams();
         mLayoutParam.height = (width * 9) / 16;
-        //layout.setLayoutParams(new LinearLayout.LayoutParams(garo,sero));
-        //layout.setGravity(Gravity.CENTER);
 
+        hospital = (LinearLayout) findViewById(R.id.main_hospital);
+        pharmacy = (LinearLayout) findViewById(R.id.main_pharmacy);
+        dental = (LinearLayout) findViewById(R.id.main_dental);
+        oriental = (LinearLayout) findViewById(R.id.main_oriental);
+
+        hospital.setOnClickListener(this);
+        pharmacy.setOnClickListener(this);
+        dental.setOnClickListener(this);
+        oriental.setOnClickListener(this);
 
     }
     public void setupViewPager(ViewPager viewPager) {
@@ -79,5 +74,28 @@ public class MainActivity_Ver2 extends AppCompatActivity {
         adapter.addFragment(new MainActivityFrag2(), "2");
         adapter.addFragment(new MainActivityFrag3(), "3");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.main_hospital:
+                Intent intent = new Intent(MainActivity_Ver2.this, SubjectSelectActivity.class);
+                intent.putExtra("pagenumber", 0);
+                startActivity(intent);
+                break;
+            case R.id.main_dental:
+                Intent intent1 = new Intent(MainActivity_Ver2.this, SubjectSelectActivity.class);
+                intent1.putExtra("pagenumber", 1);
+                startActivity(intent1);
+                break;
+            case R.id.main_oriental:
+                Intent intent2 = new Intent(MainActivity_Ver2.this, SubjectSelectActivity.class);
+                intent2.putExtra("pagenumber", 2);
+                startActivity(intent2);
+                break;
+            case R.id.main_pharmacy:
+                break;
+        }
     }
 }
