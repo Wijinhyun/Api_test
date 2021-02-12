@@ -15,6 +15,11 @@ public class SubjectSelectActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     Fragment fragment0, fragment1, fragment2;
     private int posi;
+    private String city_name;
+    private String gu_name;
+    private String search;
+
+    private String MedicalsubCd;
 
     SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
 
@@ -26,8 +31,13 @@ public class SubjectSelectActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container1);
         setupViewPager(mViewPager);
 
+
         Intent intent = getIntent();
         posi = intent.getIntExtra("pagenumber",0);
+        city_name = intent.getStringExtra("city_name");
+        gu_name = intent.getStringExtra("gu_name");
+        search = intent.getStringExtra("search");
+
 
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(mViewPager);

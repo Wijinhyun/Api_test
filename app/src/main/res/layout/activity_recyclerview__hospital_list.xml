@@ -5,118 +5,257 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Recyclerview_HospitalList"
-    android:layout_margin="10dp">
+    tools:context=".Recyclerview_HospitalList">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_title"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/recycler_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="47.0dip"
+            android:backgroundTint="@android:color/white"
+            app:layout_scrollFlags="enterAlways">
 
-        <TextView
-            android:id="@+id/tv_hospitalCnt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/hangeulnurib"
-            android:text="병원"
-            android:textColor="#000000"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.0dip">
 
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/baseline_arrow_back_24"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/btn_back"
+                    android:layout_width="25.0dip"
+                    android:layout_height="25.0dip"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/icon_back" />
 
-    <HorizontalScrollView
-        android:id="@+id/linear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_title">
-        <LinearLayout
+                <TextView
+                    android:textSize="14.0dip"
+                    android:textColor="#000000"
+                    android:ellipsize="end"
+                    android:layout_gravity="center"
+                    android:id="@+id/con_titles"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:text="의원"
+                    android:maxLines="1"
+                    android:layout_weight="1.0"
+                    android:textAlignment="center" />
+
+                <ImageView
+                    android:layout_gravity="center|right"
+                    android:id="@+id/recycler_filter"
+                    android:layout_width="25.0dip"
+                    android:layout_height="25.0dip"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginRight="20.0dip"
+                    app:srcCompat="@drawable/icon_filter" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <HorizontalScrollView
+            android:id="@+id/linear"
+            android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:layout_below="@+id/recycler_toolbar">
 
-            <Button
-                android:id="@+id/btn_region_in_list"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@android:color/white"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="6dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/btn_top"
-                android:fontFamily="@font/hangeulnurib"
-                android:text="지역 설정"
-                android:stateListAnimator="@null"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                >
 
-            <Button
-                android:id="@+id/btn_medical_subject"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/hangeulnurib"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="6dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/btn_top"
-                android:textSize="15sp"
-                android:text=""
-                android:stateListAnimator="@null"/>
+                <Button
+                    android:id="@+id/btn_region_in_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:textSize="14dp"
+                    android:background="@drawable/btn_top"
+                    android:text="지역 설정"
+                    android:stateListAnimator="@null"/>
+
+                <Button
+                    android:id="@+id/btn_medical_subject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/btn_top"
+                    android:textSize="14dp"
+                    android:text=""
+                    android:stateListAnimator="@null"/>
 
 
-            <Button
-                android:id="@+id/btn_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/hangeulnurib"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/btn_top"
-                android:textSize="15sp"
-                android:text="검색할 병원명을 입력하세요"
-                android:stateListAnimator="@null"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"/>
-        </LinearLayout>
-    </HorizontalScrollView>
+                <Button
+                    android:id="@+id/btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/btn_top"
+                    android:textSize="14dp"
+                    android:text="검색할 병원명을 입력하세요"
+                    android:stateListAnimator="@null"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"/>
+            </LinearLayout>
+        </HorizontalScrollView>
 
+        <View
+            android:id="@+id/hide_filter_view"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_gravity="center"
+            android:layout_marginLeft="14.0dip"
+            android:layout_marginRight="14.0dip"
+            android:background="#DEDEDE" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/hide_filter_toolbar"
+            android:visibility="gone"
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="40.0dip"
+            android:backgroundTint="@android:color/white"
+            app:layout_scrollFlags="enterAlways">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/filter_ratio"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/mark_circle"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="전문의 비율순"
+                        android:layout_gravity="center"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="#DEDEDE" />
+
+                <LinearLayout
+                    android:id="@+id/filter_total"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/mark_circle"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="전문의 인원순"
+                        android:layout_gravity="center"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="#DEDEDE" />
+
+                <LinearLayout
+                    android:id="@+id/filter_distance"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/mark_circle"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="15dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="거리순"
+                        android:layout_gravity="center"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/hangeulnurib"
+        android:textColor="#F66911"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/recycler_toolbar"
+        android:id="@+id/tv_cnt"
+        android:text=""/>
 
 
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linear">
+        android:layout_below="@+id/tv_cnt">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/hangeulnurib"
-                android:textColor="#F66911"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:layout_below="@+id/scrollview"
-                android:id="@+id/tv_cnt"
-                android:text=""/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"

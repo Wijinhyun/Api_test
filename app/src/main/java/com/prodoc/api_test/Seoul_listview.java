@@ -64,37 +64,37 @@ public class Seoul_listview extends AppCompatActivity {
         Tv_precity = (TextView) findViewById(R.id.tv_precity);
 
         String[] gu;
-        if(city_name.equals("서울")) {
+        if(city_name.equals("서울특별시")) {
             gu = getResources().getStringArray(R.array.seoul_middle);
-        }else if(city_name.equals("경기")){
+        }else if(city_name.equals("경기도")){
             gu = getResources().getStringArray(R.array.geunggi_middle);
-        }else if(city_name.equals("부산")){
+        }else if(city_name.equals("부산광역시")){
             gu = getResources().getStringArray(R.array.busan_middle);
-        }else if(city_name.equals("인천")){
+        }else if(city_name.equals("인천광역시")){
             gu = getResources().getStringArray(R.array.incheon_middle);
-        }else if(city_name.equals("대구")){
+        }else if(city_name.equals("대구광역시")){
             gu = getResources().getStringArray(R.array.daegu_middle);
-        }else if(city_name.equals("대전")){
+        }else if(city_name.equals("대전광역시")){
             gu = getResources().getStringArray(R.array.daejeun_middle);
-        }else if(city_name.equals("광주")){
+        }else if(city_name.equals("광주광역시")){
             gu = getResources().getStringArray(R.array.gangju_middle);
-        }else if(city_name.equals("울산")){
+        }else if(city_name.equals("울산광역시")){
             gu = getResources().getStringArray(R.array.ulsan_middle);
-        }else if(city_name.equals("경남")){
+        }else if(city_name.equals("경상남도")){
             gu = getResources().getStringArray(R.array.geungnam_middle);
-        }else if(city_name.equals("경북")){
+        }else if(city_name.equals("경상북도")){
             gu = getResources().getStringArray(R.array.geungbook_middle);
-        }else if(city_name.equals("전남")){
+        }else if(city_name.equals("전라남도")){
             gu = getResources().getStringArray(R.array.junnam_midlle);
-        }else if(city_name.equals("전북")){
+        }else if(city_name.equals("전라북도")){
             gu = getResources().getStringArray(R.array.junbook_middle);
-        }else if(city_name.equals("충남")){
+        }else if(city_name.equals("충청남도")){
             gu = getResources().getStringArray(R.array.choongnam_middle);
-        }else if(city_name.equals("충북")){
+        }else if(city_name.equals("충청북도")){
             gu = getResources().getStringArray(R.array.choongbook_middle);
-        }else if(city_name.equals("강원")){
+        }else if(city_name.equals("강원도")){
             gu = getResources().getStringArray(R.array.gangwon_middle);
-        }else if(city_name.equals("세종")){
+        }else if(city_name.equals("세종특별자치시")){
             gu = getResources().getStringArray(R.array.sejong_middle);
         }else{
             gu = getResources().getStringArray(R.array.jeaju_middle);

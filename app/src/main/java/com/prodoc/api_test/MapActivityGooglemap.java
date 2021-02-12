@@ -1,7 +1,9 @@
 package com.prodoc.api_test;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -71,8 +75,17 @@ public class MapActivityGooglemap extends AppCompatActivity
         gps = new GPSTracker(MapActivityGooglemap.this);
         if(gps.canGetLocation()) {
 
+            getpermisson();
+
             init_ypos = gps.getLatitude();
             init_xpos = gps.getLongitude();
+
+            if(init_ypos == 0 || init_xpos == 0){
+                Toast.makeText(getApplicationContext(), "GPS 활용 거부로 인해 초기위치값이 경북대로 설정되었습니다", Toast.LENGTH_LONG).show();
+                init_ypos = 35.887515;      // gps 거부한 경우에 초기위치값으로 경대 2호관 설정
+                init_xpos = 128.611553;
+                Log.d("googlemap에서 위치정보 못얻", init_ypos + "");
+            }
 
             // \n is for new line
             //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
@@ -471,4 +484,21 @@ public class MapActivityGooglemap extends AppCompatActivity
             Log.d("onmarkerclick 여기 들어오나", arr.size() + "");
         }
     }
+
+    private void getpermisson() {
+
+        // 메니패스트에 권한이 있는지 확인
+        int permiCheck_loca = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        //앱권한이 없으면 권한 요청
+        if(permiCheck_loca == PackageManager.PERMISSION_DENIED){
+            Log.d("전화 권한 없는 상태", "");
+            ActivityCompat.requestPermissions(MapActivityGooglemap.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
+        //권한 있다면
+        else{
+            Log.d("전화 권한 있는 상태", "");
+        }
+    }
+
 }

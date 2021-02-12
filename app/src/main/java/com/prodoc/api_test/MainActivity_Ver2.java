@@ -1,8 +1,11 @@
 package com.prodoc.api_test;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -30,6 +35,8 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
 
         setContentView(R.layout.avtivity_main_ver2);
 
+        getpermisson();
+
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
 
@@ -45,6 +52,7 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
         float dpWidth = outMetrics.widthPixels / density; // dp단위
 
         float heig = (dpWidth * 9) / 16;
+        float empty_space_heig = dpHeight - (428 + heig);
 
         int garo = (int) dpWidth;
         int sero = (int) heig;
@@ -52,11 +60,19 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
         final int width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpWidth, getResources().getDisplayMetrics());
         final int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpHeight, getResources().getDisplayMetrics());
 
-//
         final FrameLayout layout = (FrameLayout) findViewById(R.id.framelayout_nestedviewpager);
 
+        // 뷰페이저 부분 16:9 계산
         final LinearLayout.LayoutParams mLayoutParam = (LinearLayout.LayoutParams)layout.getLayoutParams();
         mLayoutParam.height = (width * 9) / 16;
+
+        // 버튼들 margintop 주기 위한 계산
+        final int empty_space = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, empty_space_heig, getResources().getDisplayMetrics());
+        View view1 = (View)findViewById(R.id.homeDivider2);
+        LinearLayout.LayoutParams plControl = (LinearLayout.LayoutParams) view1.getLayoutParams();
+        if(empty_space_heig > 0.0){
+            plControl.topMargin = Math.round(empty_space / 3);
+        }
 
         hospital = (LinearLayout) findViewById(R.id.main_hospital);
         pharmacy = (LinearLayout) findViewById(R.id.main_pharmacy);
@@ -96,6 +112,22 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.main_pharmacy:
                 break;
+        }
+    }
+
+    private void getpermisson() {
+
+        // 메니패스트에 권한이 있는지 확인
+        int permiCheck_loca = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        //앱권한이 없으면 권한 요청
+        if(permiCheck_loca == PackageManager.PERMISSION_DENIED){
+            Log.d("전화 권한 없는 상태", "");
+            ActivityCompat.requestPermissions(MainActivity_Ver2.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
+        //권한 있다면
+        else{
+            Log.d("전화 권한 있는 상태", "");
         }
     }
 }

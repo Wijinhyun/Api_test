@@ -1,17 +1,24 @@
 package com.prodoc.api_test;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.opencsv.CSVReader;
@@ -35,6 +42,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private XmlPullParser xpp, xpp2;
 
     private String city_name;
+    private String city_name_for_text;
     private String gu_name;
     ArrayList<String> jagosipda = null;
 
@@ -59,7 +67,13 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
 
     private FloatingActionButton Fb_tomap, Fb_totop;
-    private Button Btn_region_in_list, Btn_medical_subject, Btn_back, Btn_search;
+    private Button Btn_region_in_list, Btn_medical_subject, Btn_search;
+
+    private ImageView Btn_back, Recycler_filter;
+    private View Hide_filter_view;
+    private Toolbar Hide_filter_toolbar;
+    private LinearLayout Filter_ratio, Filter_total, Filter_distance;
+
     private TextView Tv_hospitalCnt, Tv_cnt;
     private LinearLayout base_progressBar;
     GPSTracker gps;
@@ -72,6 +86,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recyclerview__hospital_list);
+
         init();
 
         Intent intent = getIntent();
@@ -86,8 +101,16 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         // Check if GPS enabled
         if(gps.canGetLocation()) {
 
+            getpermisson();
+
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
+
+            if(latitude == 0 || longitude == 0){
+                Toast.makeText(getApplicationContext(), "GPS 활용 거부로 인해 초기위치값이 경북대로 설정되었습니다", Toast.LENGTH_LONG).show();
+                latitude = 35.887515;      // gps 거부한 경우에 초기위치값으로 경대 2호관 설정
+                longitude = 128.611553;
+            }
 
             // \n is for new line
             //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
@@ -142,13 +165,51 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             Btn_medical_subject.setText("산부인과");
             subject = "산부인과";
         }
+
+        // geocoder로인해 대구 -> 대구광역시 로 표현됨에 따라 다시 간소화 해주는 코드 필요
+        if(city_name.equals("서울특별시")){
+            city_name_for_text = "서울";
+        }else if(city_name.equals("경기도")){
+            city_name_for_text = "경기";
+        }else if(city_name.equals("부산광역시")){
+            city_name_for_text = "부산";
+        }else if(city_name.equals("인천광역시")){
+            city_name_for_text = "인천";
+        }else if(city_name.equals("대구광역시")){
+            city_name_for_text = "대구";
+        }else if(city_name.equals("대전광역시")){
+            city_name_for_text = "대전";
+        }else if(city_name.equals("광주광역시")){
+            city_name_for_text = "광주";
+        }else if(city_name.equals("울산광역시")){
+            city_name_for_text = "울산";
+        }else if(city_name.equals("세종특별자치시")){
+            city_name_for_text = "세종";
+        }else if(city_name.equals("경상남도")){
+            city_name_for_text = "경남";
+        }else if(city_name.equals("경상북도")){
+            city_name_for_text = "경북";
+        }else if(city_name.equals("전라남도")){
+            city_name_for_text = "전남";
+        }else if(city_name.equals("전라북도")){
+            city_name_for_text = "전북";
+        }else if(city_name.equals("충청남도")){
+            city_name_for_text = "충남";
+        }else if(city_name.equals("충청북도")){
+            city_name_for_text = "충북";
+        }else if(city_name.equals("강원도")){
+            city_name_for_text = "강원";
+        }else if(city_name.equals("제주도")){
+            city_name_for_text = "제주";
+        }
+
         if (city_name != null && gu_name != null) {
-            Btn_region_in_list.setText(city_name + " - " + gu_name);
+            Btn_region_in_list.setText(city_name_for_text + " - " + gu_name);
         }
         if(search != null){
             Btn_search.setText("검색어 : " + search);
         }
-        base_progressBar.setVisibility(View.VISIBLE);
+        base_progressBar.setVisibility(View.GONE);
 
         new Thread(new Runnable() {
             @Override
@@ -174,7 +235,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                             adapter = new CustomAdapter(getApplicationContext(), arr, subject);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
-                            Tv_cnt.setText(arr.size()+ "개 검색됨");
+                            Tv_cnt.setText(arr.size()+ "개의 의원을 찾았어요.");
                             //Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
                         }
                         base_progressBar.setVisibility(View.GONE);
@@ -182,6 +243,39 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 });
             }
         }).start();
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                //list = new ArrayList<HospitalItem>();
+//                arr = new ArrayList<>();
+//                //getXmlData();
+//                getcode();
+//                try { readDataFromCsv(); } catch (IOException e) { e.printStackTrace(); }
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+////                        if (list.isEmpty() == false || list.size() != 0) {
+////                            Log.d("list_check", list.size() + "");
+////                            adapter = new CustomAdapter(getApplicationContext(), list, subject);
+////                            recyclerView.setAdapter(adapter);
+////                            adapter.notifyDataSetChanged();
+////                            Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
+////                        }
+//                        Log.d("list_check", arr.size() + "");
+//                        if(arr.isEmpty() == false || arr.size() != 0){
+//                            Log.d("list_check", arr.size() + "");
+//                            adapter = new CustomAdapter(getApplicationContext(), arr, subject);
+//                            recyclerView.setAdapter(adapter);
+//                            adapter.notifyDataSetChanged();
+//                            Tv_cnt.setText(arr.size()+ "개의 의원을 찾았어요.");
+//                            //Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
+//                        }
+//                        base_progressBar.setVisibility(View.GONE);
+//                    }
+//                });
+//            }
+//        }).start();
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -274,6 +368,16 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
         Btn_back = findViewById(R.id.btn_back);
         Btn_back.setOnClickListener(this);
+        Recycler_filter = findViewById(R.id.recycler_filter);
+        Recycler_filter.setOnClickListener(this);
+        Hide_filter_view = findViewById(R.id.hide_filter_view);
+        Hide_filter_toolbar = findViewById(R.id.hide_filter_toolbar);
+        Filter_ratio = findViewById(R.id.filter_ratio);
+        Filter_ratio.setOnClickListener(this);
+        Filter_total = findViewById(R.id.filter_total);
+        Filter_total.setOnClickListener(this);
+        Filter_distance = findViewById(R.id.filter_distance);
+        Filter_distance.setOnClickListener(this);
 
         Btn_search = findViewById(R.id.btn_search);
         Btn_search.setOnClickListener(this);
@@ -318,8 +422,36 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             case R.id.btn_back:
                 onBackPressed();
                 break;
+            case R.id.recycler_filter:
+                if(Hide_filter_toolbar.getVisibility() == View.GONE){
+                    Hide_filter_view.setVisibility(View.VISIBLE);
+                    Hide_filter_toolbar.setVisibility(View.VISIBLE);
+                }else{
+                    Hide_filter_view.setVisibility(View.GONE);
+                    Hide_filter_toolbar.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.filter_ratio:
+                Log.d("filter_ratio", "");
+                renewlist();
+                Hide_filter_view.setVisibility(View.GONE);
+                Hide_filter_toolbar.setVisibility(View.GONE);
+                break;
+            case R.id.filter_total:
+                Log.d("filter_total", "");
+                renewlist();
+                Hide_filter_view.setVisibility(View.GONE);
+                Hide_filter_toolbar.setVisibility(View.GONE);
+                break;
+            case R.id.filter_distance:
+                Log.d("filter_distance", "");
+                renewlist();
+                Hide_filter_view.setVisibility(View.GONE);
+                Hide_filter_toolbar.setVisibility(View.GONE);
+                break;
             case R.id.btn_medical_subject:
-                Intent intent2 = new Intent(getApplicationContext(), Medical_subject.class);
+                Intent intent2 = new Intent(getApplicationContext(), SubjectSelectActivity.class);
+                intent2.putExtra("pagenumber", 0);
                 intent2.putExtra("city_name", city_name);
                 intent2.putExtra("gu_name", gu_name);
                 intent2.putExtra("search",search);
@@ -337,6 +469,41 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
                 break;
         }
+    }
+
+    private void renewlist(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //list = new ArrayList<HospitalItem>();
+                arr = new ArrayList<>();
+                //getXmlData();
+                getcode();
+                try { readDataFromCsv(); } catch (IOException e) { e.printStackTrace(); }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+//                        if (list.isEmpty() == false || list.size() != 0) {
+//                            Log.d("list_check", list.size() + "");
+//                            adapter = new CustomAdapter(getApplicationContext(), list, subject);
+//                            recyclerView.setAdapter(adapter);
+//                            adapter.notifyDataSetChanged();
+//                            Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
+//                        }
+                        Log.d("list_check", arr.size() + "");
+                        if(arr.isEmpty() == false || arr.size() != 0){
+                            Log.d("list_check", arr.size() + "");
+                            adapter = new CustomAdapter(getApplicationContext(), arr, subject);
+                            recyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                            Tv_cnt.setText(arr.size()+ "개의 의원을 찾았어요.");
+                            //Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
+                        }
+                        base_progressBar.setVisibility(View.GONE);
+                    }
+                });
+            }
+        }).start();
     }
 
     public void readDataFromCsv() throws IOException {
@@ -477,7 +644,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         jagosipda = new ArrayList<>();
 
         if (city_name != null) {
-            if (city_name.equals("서울")) {
+            if (city_name.equals("서울특별시")) {
                 sidoCd = "110000";
                 if (gu_name.equals("강남구")) {
                     sgguCd = "110001";
@@ -531,7 +698,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                     sgguCd = "110025";
                 }
 
-            } else if (city_name.equals("경기")) {
+            } else if (city_name.equals("경기도")) {
                 sidoCd = "310000";
                 if (gu_name.equals("가평군")) {
                     sgguCd = "310001";
@@ -629,7 +796,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("화성시")) {
                     sgguCd = "312500";
                 }
-            } else if (city_name.equals("부산")) {
+            } else if (city_name.equals("부산광역시")) {
                 sidoCd = "210000";
                 if (gu_name.equals("강서구")) {
                     sgguCd = "210012";
@@ -662,7 +829,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("해운대구")) {
                     sgguCd = "210009";
                 }
-            } else if (city_name.equals("인천")) {
+            } else if (city_name.equals("인천광역시")) {
                 sidoCd = "220000";
                 if (gu_name.equals("강화군")) {
                     sgguCd = "220100";
@@ -685,7 +852,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("중구")) {
                     sgguCd = "220004";
                 }
-            } else if (city_name.equals("대구")) {
+            } else if (city_name.equals("대구광역시")) {
                 sidoCd = "230000";
                 if (gu_name.equals("남구")) {
                     sgguCd = "230001";
@@ -704,7 +871,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("중구")) {
                     sgguCd = "230006";
                 }
-            } else if (city_name.equals("대전")) {
+            } else if (city_name.equals("대전광역시")) {
                 sidoCd = "250000";
                 if (gu_name.equals("대덕구")) {
                     sgguCd = "250002";
@@ -717,7 +884,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("중구")) {
                     sgguCd = "250005";
                 }
-            } else if (city_name.equals("광주")) {
+            } else if (city_name.equals("광주광역시")) {
                 sidoCd = "240000";
                 if (gu_name.equals("광산구")) {
                     sgguCd = "240004";
@@ -730,7 +897,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("서구")) {
                     sgguCd = "240003";
                 }
-            } else if (city_name.equals("울산")) {
+            } else if (city_name.equals("울산광역시")) {
                 sidoCd = "260000";
                 if (gu_name.equals("중구")) {
                     sgguCd = "260003";
@@ -743,7 +910,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("울주군")) {
                     sgguCd = "260100";
                 }
-            } else if (city_name.equals("경남")) {
+            } else if (city_name.equals("경상남도")) {
                 sidoCd = "380000";
                 if (gu_name.equals("거제시")) {
                     sgguCd = "381000";
@@ -798,7 +965,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("합천군")) {
                     sgguCd = "380019";
                 }
-            } else if (city_name.equals("경북")) {
+            } else if (city_name.equals("경상북도")) {
                 sidoCd = "370000";
                 if (gu_name.equals("경산시")) {
                     sgguCd = "371000";
@@ -850,7 +1017,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                     jagosipda.add("370701");
                     jagosipda.add("370702");
                 }
-            } else if (city_name.equals("전남")) {
+            } else if (city_name.equals("전라남도")) {
                 sidoCd = "360000";
                 if (gu_name.equals("강진군")) {
                     sgguCd = "360001";
@@ -897,7 +1064,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("화순군")) {
                     sgguCd = "360022";
                 }
-            } else if (city_name.equals("전북")) {
+            } else if (city_name.equals("전라북도")) {
                 sidoCd = "350000";
                 if (gu_name.equals("고창군")) {
                     sgguCd = "350001";
@@ -931,7 +1098,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("진안군")) {
                     sgguCd = "350013";
                 }
-            } else if (city_name.equals("충남")) {
+            } else if (city_name.equals("충청남도")) {
                 sidoCd = "340000";
                 if (gu_name.equals("공주시")) {
                     sgguCd = "340300";
@@ -967,7 +1134,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("계룡시")) {
                     sgguCd = "340800";
                 }
-            } else if (city_name.equals("충북")) {
+            } else if (city_name.equals("충청북도")) {
                 sidoCd = "330000";
                 if (gu_name.equals("괴산군")) {
                     sgguCd = "330001";
@@ -999,7 +1166,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("증평군")) {
                     sgguCd = "330011";
                 }
-            } else if (city_name.equals("강원")) {
+            } else if (city_name.equals("강원도")) {
                 sidoCd = "320000";
                 if (gu_name.equals("강릉시")) {
                     sgguCd = "320100";
@@ -1038,7 +1205,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 } else if (gu_name.equals("횡성군")) {
                     sgguCd = "320015";
                 }
-            } else if (city_name.equals("세종")) {
+            } else if (city_name.equals("세종특별자치시")) {
                 sidoCd = "410000";
                 if(gu_name.equals("세종특별자치시")){
                     sgguCd = "410000";
@@ -1795,4 +1962,21 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
         return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_M * c));
     }
+
+    private void getpermisson() {
+
+        // 메니패스트에 권한이 있는지 확인
+        int permiCheck_loca = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        //앱권한이 없으면 권한 요청
+        if(permiCheck_loca == PackageManager.PERMISSION_DENIED){
+            Log.d("전화 권한 없는 상태", "");
+            ActivityCompat.requestPermissions(Recyclerview_HospitalList.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
+        //권한 있다면
+        else{
+            Log.d("전화 권한 있는 상태", "");
+        }
+    }
+
 }

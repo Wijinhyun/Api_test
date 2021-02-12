@@ -24,9 +24,9 @@
 
                 <ImageView
                     android:layout_gravity="center_vertical"
-                    android:id="@+id/conactivity_back"
-                    android:layout_width="17.0dip"
-                    android:layout_height="17.0dip"
+                    android:id="@+id/select_subject_back"
+                    android:layout_width="25.0dip"
+                    android:layout_height="25.0dip"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/icon_menu" />
 
@@ -46,10 +46,11 @@
 
                 <ImageView
                     android:layout_gravity="center|right"
-                    android:id="@+id/con_D_serch_btn"
-                    android:layout_width="17.0dip"
-                    android:layout_height="17.0dip"
-                    android:layout_marginRight="22.0dip"
+                    android:id="@+id/select_subject_empty"
+                    android:layout_width="25.0dip"
+                    android:layout_height="25.0dip"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginRight="20.0dip"
                     app:srcCompat="@drawable/icon_bell"
                     android:visibility="invisible"/>
 

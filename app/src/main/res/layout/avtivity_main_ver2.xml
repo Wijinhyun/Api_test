@@ -20,7 +20,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="47.0dip"
                 android:backgroundTint="@android:color/white"
-                app:layout_scrollFlags="enterAlways|scroll">
+                app:layout_scrollFlags="enterAlways">
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -30,9 +30,9 @@
 
                     <ImageView
                         android:layout_gravity="center_vertical"
-                        android:id="@+id/conactivity_back"
-                        android:layout_width="17.0dip"
-                        android:layout_height="17.0dip"
+                        android:id="@+id/main_back"
+                        android:layout_width="25.0dip"
+                        android:layout_height="25.0dip"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/icon_menu" />
 
@@ -52,10 +52,11 @@
 
                     <ImageView
                         android:layout_gravity="center|right"
-                        android:id="@+id/con_D_serch_btn"
-                        android:layout_width="17.0dip"
-                        android:layout_height="17.0dip"
-                        android:layout_marginRight="22.0dip"
+                        android:id="@+id/main_alarm"
+                        android:layout_width="25.0dip"
+                        android:layout_height="25.0dip"
+                        android:layout_marginLeft="10.0dip"
+                        android:layout_marginRight="20.0dip"
                         app:srcCompat="@drawable/icon_bell" />
 
                 </LinearLayout>
@@ -114,10 +115,10 @@
                     android:id="@+id/framelayout_nestedviewpager"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
                     <androidx.viewpager.widget.ViewPager
@@ -125,7 +126,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:overScrollMode="never"></androidx.viewpager.widget.ViewPager>
+                        android:overScrollMode="never"/>
 
                     <me.relex.circleindicator.CircleIndicator
                         android:id="@+id/indicator"
@@ -146,14 +147,13 @@
                     android:layout_height="1.0dip"
                     android:layout_gravity="center"
                     android:layout_marginLeft="14.0dip"
-                    android:layout_marginTop="20dp"
                     android:layout_marginRight="14.0dip"
                     android:background="#666666" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.0dip"
-                    android:layout_weight="0.3"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -174,8 +174,8 @@
 
                             <ImageView
                                 android:id="@+id/homeSirenOrderImg"
-                                android:layout_width="59.0dip"
-                                android:layout_height="59.0dip"
+                                android:layout_width="40.0dip"
+                                android:layout_height="40.0dip"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/icon_hospital" />
 
@@ -218,8 +218,8 @@
 
                             <ImageView
                                 android:id="@+id/homeGiftShopImg"
-                                android:layout_width="59.0dip"
-                                android:layout_height="59.0dip"
+                                android:layout_width="40.0dip"
+                                android:layout_height="40.0dip"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/icon_pharmacy" />
 
@@ -262,7 +262,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0.0dip"
-                    android:layout_weight="0.3"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -283,8 +283,8 @@
 
                             <ImageView
                                 android:id="@+id/homeSirenOrderImg1"
-                                android:layout_width="59.0dip"
-                                android:layout_height="59.0dip"
+                                android:layout_width="40.0dip"
+                                android:layout_height="40.0dip"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/icon_dental" />
 
@@ -327,8 +327,8 @@
 
                             <ImageView
                                 android:id="@+id/homeGiftShopImg1"
-                                android:layout_width="59.0dip"
-                                android:layout_height="59.0dip"
+                                android:layout_width="40.0dip"
+                                android:layout_height="40.0dip"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/icon_oriental" />
 
