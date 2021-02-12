@@ -50,7 +50,8 @@
                     android:layout_width="17.0dip"
                     android:layout_height="17.0dip"
                     android:layout_marginRight="22.0dip"
-                    app:srcCompat="@drawable/icon_bell" />
+                    app:srcCompat="@drawable/icon_bell"
+                    android:visibility="invisible"/>
 
             </LinearLayout>
 
@@ -86,6 +87,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tabs"
-        ></FrameLayout>
+        >
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/container1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:overScrollMode="never"/>
+
+    </FrameLayout>
 
 </LinearLayout>
