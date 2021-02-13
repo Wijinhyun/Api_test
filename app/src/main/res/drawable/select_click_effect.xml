@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--눌렀을때 색상-->
+    <item
+        android:state_pressed="true"
+        android:drawable="@drawable/after_click_effect"/>
+
+    <!--현재 포커스를 가진 경우-->
+    <item
+        android:state_focused="true"
+        android:drawable="@drawable/after_click_effect"/>
+
+    <!--클릭전 보여지는 색상 : before_click_effect 에서 지정한 색상-->
+    <item
+        android:drawable="@drawable/before_click_effect"/>
+
+    <!--또는 pressed를 false로 줘서 처리 가능 맨 마지막에 있는 속성에 따라 값이 바뀌니 주의 필요-->
+    <!--<item android:state_pressed="false" android:drawable="@drawable/before_click_effect"/>-->
+
+
+    <!--android:state_enabled = 현재 사용 가능 상태일 경우 (true / false)-->
+    <!--android:state_selected = 현재 선택된 경우 (true / false)-->
+    <!--android:state_pressed = 현재 클릭이 된 경우 (true / false)-->
+    <!--android:state_focused = 현재 포커스를 가진 경우 (true / false)-->
+    <!--android:state_selected = 현재 선택된 경우 (true / false)-->
+    <!--android:state_checked = 현재 체크된 경우 (true / false)-->
+
+</selector>

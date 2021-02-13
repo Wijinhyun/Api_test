@@ -21,6 +21,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_ori1"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -51,6 +52,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_ori2"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -89,6 +91,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_ori3"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -119,6 +122,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_ori4"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -157,6 +161,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_ori5"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -187,6 +192,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_ori6"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -225,6 +231,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_ori7"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -255,6 +262,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_ori8"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">

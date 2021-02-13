@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!--shape를 이용해 클릭했을 때 채워질 모형, 크기 색등을 줄 수 있다. -->
+    <solid android:color="#DEDEDE"/>
+    <!--@color/colorClick 의 색상은 #DA7A63 위에 있던 color.xml 색상과 동일-->
+</shape>

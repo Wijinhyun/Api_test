@@ -119,7 +119,7 @@
 
         <View
             android:id="@+id/hide_filter_view"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="fill_parent"
             android:layout_height="1.0dip"
             android:layout_gravity="center"
@@ -129,7 +129,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/hide_filter_toolbar"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@android:color/white"
             android:layout_width="fill_parent"
             android:layout_height="40.0dip"
@@ -144,6 +144,7 @@
                 <LinearLayout
                     android:id="@+id/filter_ratio"
                     android:layout_width="0dp"
+                    android:background="@drawable/select_click_effect"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
@@ -174,6 +175,7 @@
                 <LinearLayout
                     android:id="@+id/filter_total"
                     android:layout_width="0dp"
+                    android:background="@drawable/select_click_effect"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
@@ -204,6 +206,7 @@
                 <LinearLayout
                     android:id="@+id/filter_distance"
                     android:layout_width="0dp"
+                    android:background="@drawable/select_click_effect"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1">

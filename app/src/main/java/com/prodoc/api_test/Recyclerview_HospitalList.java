@@ -616,6 +616,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                     }
                 }
             }else if(gu_name != null){
+                Log.d("뭐가 문제일까",  "gu_name = " + gu_name);
+                Log.d("뭐가 문제일까", "sgguCd = " + sgguCd + " entity.get = " + entity.getSigungucode());
                 if(sgguCd.equals(entity.getSigungucode())){
                     if(search != null){
                         if(entity.getHospitalname().contains(search)){  // 검색어가 포함된 경우

@@ -21,6 +21,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den1"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -51,6 +52,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den2"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -89,6 +91,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den3"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -119,6 +122,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den4"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -157,6 +161,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den5"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -187,6 +192,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den6"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -225,6 +231,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den7"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -255,6 +262,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den8"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -293,6 +301,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den9"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -323,6 +332,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den10"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -361,6 +371,7 @@
 
                 <LinearLayout
                     android:id="@+id/tab_den11"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">

@@ -102,4 +102,6 @@ public class SubjectSelectActivity extends AppCompatActivity {
         adapter.addFragment(new TabFragment2(), "한의원");
         viewPager.setAdapter(adapter);
     }
+
+
 }
