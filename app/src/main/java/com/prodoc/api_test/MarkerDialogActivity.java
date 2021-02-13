@@ -34,6 +34,7 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
     private CardView cardView;
     private String tvpercent, tvhospitalname, tvdistance, tvaddr, tvsbj, tvpronum, tvtotalnum, tvtel, tvpark, tvurl;
     private String callnum;
+    private View view_item3;
 
     private double init_xpos;
     private double init_ypos;
@@ -95,12 +96,15 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
         if(Double.parseDouble(percent) >= 66.6){
             //iv_circle.setImageResource(R.drawable.greencircle);
             tv_percent.setTextColor(Color.parseColor("#0A640A"));
+            view_item3.setBackgroundColor(Color.parseColor("#0A640A"));
         }else if(Double.parseDouble(percent) >= 33.3){
             //iv_circle.setImageResource(R.drawable.yellowcircle);
             tv_percent.setTextColor(Color.parseColor("#FFCC42"));
+            view_item3.setBackgroundColor(Color.parseColor("#FFCC42"));
         }else if(Double.parseDouble(percent) >= 0.1) {          // 전문의가 아예 없으면 지도에 띄우지 않음
             //iv_circle.setImageResource(R.drawable.redcircle);
             tv_percent.setTextColor(Color.parseColor("#C03713"));
+            view_item3.setBackgroundColor(Color.parseColor("#C03713"));
         }
 
         String temp2 = "0.0";
@@ -131,6 +135,7 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
         tv_totalnum = (TextView) findViewById(R.id.tv_totalnum);
         btn_call = (Button) findViewById(R.id.btn_call);
         btn_route = (Button) findViewById(R.id.btn_route);
+        view_item3 = findViewById(R.id.view_item3);
 
         cardView.setOnClickListener(this);
         btn_call.setOnClickListener(this);

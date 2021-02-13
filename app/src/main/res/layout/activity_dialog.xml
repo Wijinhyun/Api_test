@@ -44,7 +44,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="의원"
-                        android:textColor="#F66911"
+                        android:textColor="#49654C"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +55,7 @@
                     <TextView
                         android:id="@+id/tv_hospitalname"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
                         android:text="의원/약국"
@@ -91,13 +94,14 @@
                         android:id="@+id/tv_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:textColor="#000000"
                         android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/hangeulnurib"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:text=" | "
                         android:textColor="#000000"
                         android:textSize="14sp" />
@@ -106,6 +110,7 @@
                         android:id="@+id/tv_addr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:textColor="#000000"
                         android:textSize="14sp" />
 
@@ -135,7 +140,7 @@
                                 android:id="@+id/tv_sbj"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/hangeulnurir"
+                                android:fontFamily="@font/applesdgothicneob"
                                 android:textSize="15sp"
                                 android:gravity="center"
                                 android:text=""
@@ -152,7 +157,7 @@
                                 android:id="@+id/tv_pronum"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/hangeulnurir"
+                                android:fontFamily="@font/applesdgothicneob"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
                                 android:gravity="center"
@@ -177,7 +182,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:fontFamily="@font/hangeulnurir"
+                                android:fontFamily="@font/applesdgothicneob"
                                 android:textSize="15sp"
                                 android:gravity="center"
                                 android:text="전체의사"
@@ -194,7 +199,7 @@
                                 android:id="@+id/tv_totalnum"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/hangeulnurir"
+                                android:fontFamily="@font/applesdgothicneob"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
                                 android:gravity="center"
@@ -228,7 +233,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:fontFamily="@font/hangeulnurir"
+                                android:fontFamily="@font/applesdgothicneob"
                                 android:textSize="15sp"
                                 android:gravity="center"
                                 android:text="비율"
@@ -246,8 +251,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:fontFamily="@font/hangeulnurir"
-                                android:textSize="20sp"
+                                android:fontFamily="@font/applesdgothicneob"
+                                android:textSize="25sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -262,10 +267,12 @@
                     android:layout_marginBottom="40dp"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/line"/>
+                    <View
+                        android:id="@+id/view_item3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="5.0dip"
+                        android:layout_gravity="center"
+                        android:background="#807F89" />
 
 
                 </LinearLayout>

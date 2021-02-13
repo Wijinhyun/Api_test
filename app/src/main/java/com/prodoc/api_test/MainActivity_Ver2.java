@@ -111,6 +111,9 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
                 startActivity(intent2);
                 break;
             case R.id.main_pharmacy:
+                Intent intent3 = new Intent(MainActivity_Ver2.this, SubjectSelectActivity.class);
+                intent3.putExtra("pagenumber", 3);
+                startActivity(intent3);
                 break;
         }
     }

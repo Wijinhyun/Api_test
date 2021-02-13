@@ -58,7 +58,8 @@ public class Search_btn extends AppCompatActivity {
                             intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent1);
                         }else {
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MapActivityGooglemap.class);
+                            intent.putExtra("MedicalsubCd", MedicalsubCd);
                             if (editText.getText().toString().length() != 0) {
                                 search = editText.getText().toString();
                                 intent.putExtra("search", search);

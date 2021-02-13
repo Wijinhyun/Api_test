@@ -35,7 +35,7 @@
                     app:srcCompat="@drawable/icon_back" />
 
                 <TextView
-                    android:textSize="14.0dip"
+                    android:textSize="18.0dip"
                     android:textColor="#000000"
                     android:ellipsize="end"
                     android:layout_gravity="center"
@@ -43,6 +43,7 @@
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10.0dip"
+                    android:fontFamily="@font/applesdgothicneob"
                     android:text="의원"
                     android:maxLines="1"
                     android:layout_weight="1.0"
@@ -83,6 +84,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="6dp"
+                    android:fontFamily="@font/applesdgothicneob"
                     android:layout_marginBottom="4dp"
                     android:textSize="14dp"
                     android:background="@drawable/btn_top"
@@ -95,6 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="6dp"
+                    android:fontFamily="@font/applesdgothicneob"
                     android:layout_marginBottom="4dp"
                     android:background="@drawable/btn_top"
                     android:textSize="14dp"
@@ -106,11 +109,12 @@
                     android:id="@+id/btn_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/applesdgothicneob"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="4dp"
                     android:background="@drawable/btn_top"
                     android:textSize="14dp"
-                    android:text="검색할 병원명을 입력하세요"
+                    android:text=" 병원명을 검색해보세요 "
                     android:stateListAnimator="@null"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"/>
@@ -119,7 +123,7 @@
 
         <View
             android:id="@+id/hide_filter_view"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_width="fill_parent"
             android:layout_height="1.0dip"
             android:layout_gravity="center"
@@ -129,7 +133,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/hide_filter_toolbar"
-            android:visibility="visible"
+            android:visibility="gone"
             android:background="@android:color/white"
             android:layout_width="fill_parent"
             android:layout_height="40.0dip"
@@ -144,14 +148,15 @@
                 <LinearLayout
                     android:id="@+id/filter_ratio"
                     android:layout_width="0dp"
-                    android:background="@drawable/select_click_effect"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
                     <ImageView
+                        android:id="@+id/filter_ratio_iv"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/mark_circle"
+                        android:src="@drawable/icon_uncheck"
                         android:layout_gravity="center"
                         android:layout_marginLeft="15dp"/>
 
@@ -159,6 +164,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:text="전문의 비율순"
                         android:layout_gravity="center"
                         android:textSize="14dp"/>
@@ -175,14 +181,15 @@
                 <LinearLayout
                     android:id="@+id/filter_total"
                     android:layout_width="0dp"
-                    android:background="@drawable/select_click_effect"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
                     <ImageView
+                        android:id="@+id/filter_total_iv"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/mark_circle"
+                        android:src="@drawable/icon_uncheck"
                         android:layout_gravity="center"
                         android:layout_marginLeft="15dp"/>
 
@@ -190,6 +197,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:text="전문의 인원순"
                         android:layout_gravity="center"
                         android:textSize="14dp"/>
@@ -206,15 +214,16 @@
                 <LinearLayout
                     android:id="@+id/filter_distance"
                     android:layout_width="0dp"
-                    android:background="@drawable/select_click_effect"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1">
 
                     <ImageView
+                        android:id="@+id/filter_distance_iv"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/mark_circle"
+                        android:src="@drawable/icon_uncheck"
                         android:layout_gravity="center"
                         android:layout_marginLeft="15dp"/>
 
@@ -222,7 +231,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="거리순"
+                        android:text="가까운 거리순"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:layout_gravity="center"
                         android:textSize="14dp"/>
 
@@ -235,26 +245,35 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/hangeulnurib"
-        android:textColor="#F66911"
-        android:textSize="15sp"
-        android:textStyle="bold"
         android:layout_below="@+id/recycler_toolbar"
-        android:id="@+id/tv_cnt"
-        android:text=""/>
+        android:gravity="center"
+        android:id="@+id/linearfortv"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/applesdgothicneob"
+            android:textColor="#253628"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:id="@+id/tv_cnt"
+            android:text=""/>
+
+    </LinearLayout>
+
 
 
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_cnt">
+        android:layout_below="@+id/linearfortv">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -279,9 +298,9 @@
             android:id="@+id/fb_totop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#F87D4B"
+            android:backgroundTint="#253628"
             android:elevation="0dp"
-            android:fontFamily="@font/hangeulnurib"
+            android:fontFamily="@font/applesdgothicneob"
             android:foregroundGravity="center"
             android:text="^"
             android:textColor="#ffffff"
@@ -302,16 +321,16 @@
         android:gravity="bottom"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp">
+        android:layout_margin="20dp">
 
         <com.github.edsergeev.TextFloatingActionButton
             android:id="@+id/fb_tomap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#F87D4B"
-            android:fontFamily="@font/hangeulnurib"
+            android:backgroundTint="#253628"
+            android:fontFamily="@font/applesdgothicneob"
             android:foregroundGravity="bottom"
-            android:text="MAP"
+            android:text="map"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold"

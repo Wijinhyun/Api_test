@@ -28,6 +28,8 @@ import org.xmlpull.v1.XmlPullParser;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Recyclerview_HospitalList extends AppCompatActivity implements View.OnClickListener {
@@ -69,10 +71,15 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     private FloatingActionButton Fb_tomap, Fb_totop;
     private Button Btn_region_in_list, Btn_medical_subject, Btn_search;
 
-    private ImageView Btn_back, Recycler_filter;
+
+    // ver 2 를 위한 것들
+    private ImageView Btn_back, Recycler_filter, Filter_ratio_iv, Filter_total_iv, Filter_distance_iv;
     private View Hide_filter_view;
     private Toolbar Hide_filter_toolbar;
     private LinearLayout Filter_ratio, Filter_total, Filter_distance;
+    private int filtering_num = 0;
+
+
 
     private TextView Tv_hospitalCnt, Tv_cnt;
     private LinearLayout base_progressBar;
@@ -209,40 +216,42 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         if(search != null){
             Btn_search.setText("검색어 : " + search);
         }
-        base_progressBar.setVisibility(View.GONE);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //list = new ArrayList<HospitalItem>();
-                arr = new ArrayList<>();
-                //getXmlData();
-                getcode();
-                try { readDataFromCsv(); } catch (IOException e) { e.printStackTrace(); }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-//                        if (list.isEmpty() == false || list.size() != 0) {
-//                            Log.d("list_check", list.size() + "");
-//                            adapter = new CustomAdapter(getApplicationContext(), list, subject);
+
+        renewlist();
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                //list = new ArrayList<HospitalItem>();
+//                arr = new ArrayList<>();
+//                //getXmlData();
+//                getcode();
+//                try { readDataFromCsv(); } catch (IOException e) { e.printStackTrace(); }
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+////                        if (list.isEmpty() == false || list.size() != 0) {
+////                            Log.d("list_check", list.size() + "");
+////                            adapter = new CustomAdapter(getApplicationContext(), list, subject);
+////                            recyclerView.setAdapter(adapter);
+////                            adapter.notifyDataSetChanged();
+////                            Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
+////                        }
+//                        Log.d("list_check", arr.size() + "");
+//                        if(arr.isEmpty() == false || arr.size() != 0){
+//                            Log.d("list_check", arr.size() + "");
+//                            adapter = new CustomAdapter(getApplicationContext(), arr, subject);
 //                            recyclerView.setAdapter(adapter);
 //                            adapter.notifyDataSetChanged();
-//                            Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
+//                            Tv_cnt.setText(arr.size()+ "개의 의원을 찾았어요.");
+//                            //Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
 //                        }
-                        Log.d("list_check", arr.size() + "");
-                        if(arr.isEmpty() == false || arr.size() != 0){
-                            Log.d("list_check", arr.size() + "");
-                            adapter = new CustomAdapter(getApplicationContext(), arr, subject);
-                            recyclerView.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-                            Tv_cnt.setText(arr.size()+ "개의 의원을 찾았어요.");
-                            //Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
-                        }
-                        base_progressBar.setVisibility(View.GONE);
-                    }
-                });
-            }
-        }).start();
+//                        base_progressBar.setVisibility(View.GONE);
+//                    }
+//                });
+//            }
+//        }).start();
 
 //        new Thread(new Runnable() {
 //            @Override
@@ -366,6 +375,9 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         recyclerView.setLayoutManager(manager);
         base_progressBar = findViewById(R.id.base_progressBar);
 
+
+
+
         Btn_back = findViewById(R.id.btn_back);
         Btn_back.setOnClickListener(this);
         Recycler_filter = findViewById(R.id.recycler_filter);
@@ -378,6 +390,11 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         Filter_total.setOnClickListener(this);
         Filter_distance = findViewById(R.id.filter_distance);
         Filter_distance.setOnClickListener(this);
+        Filter_ratio_iv = findViewById(R.id.filter_ratio_iv);
+        Filter_total_iv = findViewById(R.id.filter_total_iv);
+        Filter_distance_iv = findViewById(R.id.filter_distance_iv);
+
+
 
         Btn_search = findViewById(R.id.btn_search);
         Btn_search.setOnClickListener(this);
@@ -431,27 +448,46 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                     Hide_filter_toolbar.setVisibility(View.GONE);
                 }
                 break;
+                // 비율순 - 다른 곳에 버튼 눌려져 있으면 비활성화 시키고 버튼 눌리도록 + 데이터 정렬하고
             case R.id.filter_ratio:
+                filtering_num = 1;
+                Filter_ratio_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_check));
+                Filter_total_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
+                Filter_distance_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
                 Log.d("filter_ratio", "");
+                base_progressBar.setVisibility(View.VISIBLE);
                 renewlist();
                 Hide_filter_view.setVisibility(View.GONE);
                 Hide_filter_toolbar.setVisibility(View.GONE);
                 break;
+                // 인원순
             case R.id.filter_total:
+                filtering_num = 2;
+                Filter_ratio_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
+                Filter_total_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_check));
+                Filter_distance_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
                 Log.d("filter_total", "");
+                base_progressBar.setVisibility(View.VISIBLE);
                 renewlist();
                 Hide_filter_view.setVisibility(View.GONE);
                 Hide_filter_toolbar.setVisibility(View.GONE);
                 break;
+                // 거리순
             case R.id.filter_distance:
+                filtering_num = 3;
+                Filter_ratio_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
+                Filter_total_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
+                Filter_distance_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_check));
                 Log.d("filter_distance", "");
+                base_progressBar.setVisibility(View.VISIBLE);
                 renewlist();
                 Hide_filter_view.setVisibility(View.GONE);
                 Hide_filter_toolbar.setVisibility(View.GONE);
                 break;
             case R.id.btn_medical_subject:
                 Intent intent2 = new Intent(getApplicationContext(), SubjectSelectActivity.class);
-                intent2.putExtra("pagenumber", 0);
+                intent2.putExtra("pagenumber", 0);  // 의원 - 0, 치과의원 - 1, 한의원 - 2, 약국 - 3
+                intent2.putExtra("Imfrom", "recyclerview");
                 intent2.putExtra("city_name", city_name);
                 intent2.putExtra("gu_name", gu_name);
                 intent2.putExtra("search",search);
@@ -493,11 +529,29 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                         Log.d("list_check", arr.size() + "");
                         if(arr.isEmpty() == false || arr.size() != 0){
                             Log.d("list_check", arr.size() + "");
+
+                            // filtering_num 에 따라서 sorting 하고 어뎁터에 연결
+                            if(filtering_num == 1){
+                                Collections.sort(arr,new Filtering_for_ratio());
+                                Tv_cnt.setText(arr.size()+ "개의 의원을 전문의 비율순으로 나열했어요");
+                            }else if(filtering_num == 2){
+                                Collections.sort(arr,new Filtering_for_total());
+                                Tv_cnt.setText(arr.size()+ "개의 의원을 전문의 인원순으로 나열했어요");
+                            }else if(filtering_num == 3){
+                                Collections.sort(arr,new Filtering_for_distance());
+                                Tv_cnt.setText(arr.size()+ "개의 의원을 가까운 거리순으로 나열했어요");
+                            }else if(filtering_num == 0){
+                                Collections.sort(arr,new Filtering_for_ganada());
+                                Tv_cnt.setText(arr.size()+ "개의 의원을 나열했어요");
+                            }
+
                             adapter = new CustomAdapter(getApplicationContext(), arr, subject);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
-                            Tv_cnt.setText(arr.size()+ "개의 의원을 찾았어요.");
+                            //Tv_cnt.setText(arr.size()+ "개의 의원을 찾았어요.");
                             //Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
+                        }else if(arr.size() == 0){
+                            Tv_cnt.setText("검색 결과가 없어요.");
                         }
                         base_progressBar.setVisibility(View.GONE);
                     }
@@ -623,10 +677,10 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                         if(entity.getHospitalname().contains(search)){  // 검색어가 포함된 경우
                             arr.add(entity);
                         }
-                        else{   // 검색어가 포함되지 않은 경우
+                        else {   // 검색어가 포함되지 않은 경우
 
                         }
-                    } else{     // 검색어가 없는 경우
+                    } else {     // 검색어가 없는 경우
                         arr.add(entity);
                     }
                 }
@@ -1981,4 +2035,57 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         }
     }
 
+    class Filtering_for_ratio implements Comparator<HospitalItemForCsv> {
+        public int compare(HospitalItemForCsv a, HospitalItemForCsv b){
+
+            double ratio_a = Double.parseDouble(a.getPercent());
+            double ratio_b = Double.parseDouble(b.getPercent());
+            if(ratio_a == ratio_b){
+                return 0;
+            }else if(ratio_b > ratio_a){
+                return 1;
+            }else{
+                return -1;
+            }
+
+        }
+    }
+
+    class Filtering_for_total implements Comparator<HospitalItemForCsv> {
+        public int compare(HospitalItemForCsv a, HospitalItemForCsv b){
+
+            double total_a = Double.parseDouble(a.getPronum());
+            double total_b = Double.parseDouble(b.getPronum());
+            if(total_a == total_b){
+                return 0;
+            }else if(total_b > total_a){
+                return 1;
+            }else{
+                return -1;
+            }
+
+        }
+    }
+
+    class Filtering_for_distance implements Comparator<HospitalItemForCsv> {
+        public int compare(HospitalItemForCsv a, HospitalItemForCsv b){
+
+            double distance_a = Double.parseDouble(a.getDistance());
+            double distance_b = Double.parseDouble(b.getDistance());
+            if(distance_b == distance_a){
+                return 0;
+            }else if(distance_a > distance_b){
+                return 1;
+            }else{
+                return -1;
+            }
+
+        }
+    }
+
+    class Filtering_for_ganada implements Comparator<HospitalItemForCsv> {
+        public int compare(HospitalItemForCsv a, HospitalItemForCsv b){
+            return a.getHospitalname().compareTo(b.getHospitalname());
+        }
+    }
 }

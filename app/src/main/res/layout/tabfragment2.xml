@@ -37,6 +37,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:text="한방내과"
                         android:layout_gravity="center"
                         android:textSize="20sp"/>
@@ -67,6 +68,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:layout_marginLeft="15dp"
                         android:text="침구과"
                         android:layout_gravity="center"
@@ -108,6 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:text="한방안ㆍ이비인후ㆍ피부과"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:layout_gravity="center"
                         android:textSize="20sp"/>
 
@@ -139,6 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:text="한방재활의학과"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:layout_gravity="center"
                         android:textSize="20sp"/>
 
@@ -177,6 +181,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:text="한방소아과"
                         android:layout_gravity="center"
                         android:textSize="20sp"/>
@@ -206,6 +211,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:text="한방신경정신과"
@@ -246,6 +252,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:layout_marginLeft="15dp"
                         android:text="사상체질과"
                         android:layout_gravity="center"
@@ -278,6 +285,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
+                        android:fontFamily="@font/applesdgothicneob"
                         android:text="한방부인과"
                         android:layout_gravity="center"
                         android:textSize="20sp"/>

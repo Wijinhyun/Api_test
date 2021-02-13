@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -59,6 +60,8 @@ public class MapActivityGooglemap extends AppCompatActivity
     private String search;
     private String subject;
     private FloatingActionButton Fb_tolist;
+    private ImageView map_Btn_back, map_Search;
+    private Button map_Btn_medical_subject, map_Btn_search;
 
     private int markerclicked_check;
 
@@ -111,6 +114,54 @@ public class MapActivityGooglemap extends AppCompatActivity
 //        init_xpos = intent.getDoubleExtra("longitude",128.611553);
 //        init_ypos = intent.getDoubleExtra("latitude",35.887515);
 
+
+        map_Btn_back = findViewById(R.id.map_btn_back);
+        map_Search = findViewById(R.id.map_search);
+        map_Btn_search = findViewById(R.id.map_btn_search);
+        map_Btn_medical_subject = findViewById(R.id.map_btn_medical_subject);
+
+        map_Btn_back.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        map_Search.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3 = new Intent(getApplicationContext(), Search_btn.class);
+                intent3.putExtra("Imfrom", "googlemap");
+                intent3.putExtra("MedicalsubCd", MedicalsubCd);
+                intent3.putExtra("city_name", city_name);
+                intent3.putExtra("gu_name", gu_name);
+                startActivity(intent3);
+            }
+        });
+        map_Btn_search.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3 = new Intent(getApplicationContext(), Search_btn.class);
+                intent3.putExtra("Imfrom", "googlemap");
+                intent3.putExtra("MedicalsubCd", MedicalsubCd);
+                intent3.putExtra("city_name", city_name);
+                intent3.putExtra("gu_name", gu_name);
+                startActivity(intent3);
+            }
+        });
+        map_Btn_medical_subject.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(getApplicationContext(), SubjectSelectActivity.class);
+                intent2.putExtra("pagenumber", 0);  // 의원 - 0, 치과의원 - 1, 한의원 - 2, 약국 - 3
+                intent2.putExtra("Imfrom", "googlemap");
+                intent2.putExtra("city_name", city_name);
+                intent2.putExtra("gu_name", gu_name);
+                intent2.putExtra("search",search);
+                startActivity(intent2);
+            }
+        });
+
+
         Fb_tolist = findViewById(R.id.fb_tolist);
         Fb_tolist.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -124,6 +175,39 @@ public class MapActivityGooglemap extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+        if(MedicalsubCd.equals("01")){
+            map_Btn_medical_subject.setText("내과");
+            subject = "내과";
+        }else if(MedicalsubCd.equals("14")){
+            map_Btn_medical_subject.setText("피부과");
+            subject = "피부과";
+        }else if(MedicalsubCd.equals("12")){
+            map_Btn_medical_subject.setText("안과");
+            subject = "안과";
+        }else if(MedicalsubCd.equals("08")){
+            map_Btn_medical_subject.setText("성형외과");
+            subject = "성형외과";
+        }else if(MedicalsubCd.equals("05")) {
+            map_Btn_medical_subject.setText("정형외과");
+            subject = "정형외과";
+        }else if(MedicalsubCd.equals("13")){
+            map_Btn_medical_subject.setText("이비인후과");
+            subject = "이비인후과";
+        }else if(MedicalsubCd.equals("04")){
+            map_Btn_medical_subject.setText("외과");
+            subject = "외과";
+        }else if(MedicalsubCd.equals("15")){
+            map_Btn_medical_subject.setText("비뇨기의학과");
+            subject = "비뇨기의학과";
+        }else if(MedicalsubCd.equals("10")){
+            map_Btn_medical_subject.setText("산부인과");
+            subject = "산부인과";
+        }
+
+        if(search != null){
+            map_Btn_search.setText("검색어 : " + search);
+        }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -149,6 +233,27 @@ public class MapActivityGooglemap extends AppCompatActivity
                 return true;
             }
         });
+
+        int permiCheck_loca = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        //앱권한이 없으면 권한 요청
+        if(permiCheck_loca == PackageManager.PERMISSION_DENIED){
+            Log.d("전화 권한 없는 상태", "");
+            ActivityCompat.requestPermissions(MapActivityGooglemap.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
+        //권한 있다면
+        else{
+            mMap.setMyLocationEnabled(true);
+            mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+                @Override
+                public boolean onMyLocationButtonClick() {
+                    Log.d("mylocationbutton 눌러진 상태", "");
+                    return false;
+                }
+            });
+            Log.d("전화 권한 있는 상태", "");
+        }
+
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -161,7 +266,12 @@ public class MapActivityGooglemap extends AppCompatActivity
 
 
         LatLng START = new LatLng(init_ypos, init_xpos);            // 여기서 init 좌표값 못받은 거면 경대로 시작지점 정하면 될 듯
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START, 15));
+
+        if(search == null){
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START, 15));
+        }else{
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START, 8));
+        }
 
         Log.d("movecamera", init_ypos + "");
 
@@ -234,6 +344,7 @@ public class MapActivityGooglemap extends AppCompatActivity
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         if(arr.isEmpty() == false || arr.size() != 0) {
                             Log.d("list_check", arr.size() + "");
 
@@ -339,7 +450,15 @@ public class MapActivityGooglemap extends AppCompatActivity
 
             int panjung = calculateDistanceInKilometer(temp_ypos,temp_xpos,lat,lng);
 
-            if(panjung <= 10000){
+            // 검색어 있으면, 범위 상관없이 다 add, 검색어 없으면 범위 안에 있는 거만
+            if(search != null){
+                if(entity.getHospitalname().contains(search)){  // 검색어가 포함된 경우
+                    arr.add(entity);
+                }
+                else{   // 검색어가 포함되지 않은 경우
+
+                }
+            } else if(panjung <= 10000){
                 arr.add(entity);
             }
 

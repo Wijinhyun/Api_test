@@ -30,6 +30,7 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
     private String gu_name;
     private String search;
     private String MedicalsubCd;
+    private String Imfrom;
 
     GPSTracker gps;
     private double latitude;
@@ -47,6 +48,8 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
         city_name = getActivity().getIntent().getStringExtra("city_name");
         gu_name = getActivity().getIntent().getStringExtra("gu_name");
         search = getActivity().getIntent().getStringExtra("search");
+        Imfrom = getActivity().getIntent().getStringExtra("Imfrom");
+
         final Geocoder geocoder = new Geocoder(getActivity());
 
         if (city_name == null && gu_name == null) {
@@ -120,14 +123,33 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
 
         switch (view.getId()) {
             case R.id.tab_DER:
-                Log.e("geocode_check", "city_name" + city_name + "gu_name" + gu_name);
-                MedicalsubCd = "14";
-                Intent intent14 = new Intent(getActivity(), Recyclerview_HospitalList.class);
-                intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
-                intent14.putExtra("city_name", city_name);
-                intent14.putExtra("gu_name", gu_name);
-                intent14.putExtra("search", search);
-                startActivity(intent14);
+                if(Imfrom == null){
+                    MedicalsubCd = "14";
+                    Intent intent14 = new Intent(getActivity(), Recyclerview_HospitalList.class);
+                    intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
+                    intent14.putExtra("city_name", city_name);
+                    intent14.putExtra("gu_name", gu_name);
+                    intent14.putExtra("search", search);
+                    startActivity(intent14);
+                }else if(Imfrom.equals("recyclerview")) {
+                    Log.e("geocode_check", "city_name" + city_name + "gu_name" + gu_name);
+                    MedicalsubCd = "14";
+                    Intent intent14 = new Intent(getActivity(), Recyclerview_HospitalList.class);
+                    intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
+                    intent14.putExtra("city_name", city_name);
+                    intent14.putExtra("gu_name", gu_name);
+                    intent14.putExtra("search", search);
+                    startActivity(intent14);
+                }else if(Imfrom.equals("googlemap")){
+                    Log.e("geocode_check", "city_name" + city_name + "gu_name" + gu_name);
+                    MedicalsubCd = "14";
+                    Intent intent14 = new Intent(getActivity(), MapActivityGooglemap.class);
+                    intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
+                    intent14.putExtra("city_name", city_name);
+                    intent14.putExtra("gu_name", gu_name);
+                    intent14.putExtra("search", search);
+                    startActivity(intent14);
+                }
                 break;
         }
     }

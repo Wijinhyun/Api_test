@@ -2,6 +2,8 @@ package com.prodoc.api_test;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +15,13 @@ import com.google.android.material.tabs.TabLayout;
 public class SubjectSelectActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
-    Fragment fragment0, fragment1, fragment2;
+    Fragment fragment0, fragment1, fragment2, fragment3;
     private int posi;
     private String city_name;
     private String gu_name;
     private String search;
+    private String Imfrom;
+    private ImageView select_subject_Back;
 
     private String MedicalsubCd;
 
@@ -37,7 +41,15 @@ public class SubjectSelectActivity extends AppCompatActivity {
         city_name = intent.getStringExtra("city_name");
         gu_name = intent.getStringExtra("gu_name");
         search = intent.getStringExtra("search");
+        Imfrom = intent.getStringExtra("Imfrom");
 
+        select_subject_Back = findViewById(R.id.select_subject_back);
+        select_subject_Back.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(mViewPager);
@@ -45,6 +57,7 @@ public class SubjectSelectActivity extends AppCompatActivity {
         fragment0 = new TabFragment0();
         fragment1 = new TabFragment1();
         fragment2 = new TabFragment2();
+        fragment3 = new TabFragment3();
 
         if(posi == 0){
             TabLayout.Tab tab = tabs.getTabAt(0);
@@ -56,6 +69,10 @@ public class SubjectSelectActivity extends AppCompatActivity {
             //getSupportFragmentManager().beginTransaction().add(R.id.frame, fragment1).commit();
         }else if(posi == 2){
             TabLayout.Tab tab = tabs.getTabAt(2);
+            tab.select();
+            //getSupportFragmentManager().beginTransaction().add(R.id.frame, fragment2).commit();
+        }else if(posi == 3){
+            TabLayout.Tab tab = tabs.getTabAt(3);
             tab.select();
             //getSupportFragmentManager().beginTransaction().add(R.id.frame, fragment2).commit();
         }
@@ -100,6 +117,7 @@ public class SubjectSelectActivity extends AppCompatActivity {
         adapter.addFragment(new TabFragment0(), "의원");
         adapter.addFragment(new TabFragment1(), "치과의원");
         adapter.addFragment(new TabFragment2(), "한의원");
+        adapter.addFragment(new TabFragment3(), "약국");
         viewPager.setAdapter(adapter);
     }
 

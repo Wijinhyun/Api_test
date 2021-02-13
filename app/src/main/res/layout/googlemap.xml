@@ -7,11 +7,115 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/map_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/map_toolbar"
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="47.0dip"
+            android:backgroundTint="@android:color/white"
+            app:layout_scrollFlags="enterAlways">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.0dip">
+
+                <ImageView
+                    android:id="@+id/map_btn_back"
+                    android:layout_width="25.0dip"
+                    android:layout_height="25.0dip"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/icon_back" />
+
+                <TextView
+                    android:textSize="18.0dip"
+                    android:textColor="#000000"
+                    android:ellipsize="end"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/applesdgothicneob"
+                    android:id="@+id/map_con_titles"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:text="의원"
+                    android:maxLines="1"
+                    android:layout_weight="1.0"
+                    android:textAlignment="center" />
+
+                <ImageView
+                    android:layout_gravity="center|right"
+                    android:visibility="visible"
+                    android:id="@+id/map_search"
+                    android:layout_width="20.0dip"
+                    android:layout_height="20.0dip"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginRight="20.0dip"
+                    app:srcCompat="@drawable/icon_search" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <HorizontalScrollView
+            android:id="@+id/map_linear"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/map_appbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@android:color/white"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                >
+
+                <Button
+                    android:id="@+id/map_btn_medical_subject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/applesdgothicneob"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/btn_top"
+                    android:textSize="14dp"
+                    android:text=""
+                    android:stateListAnimator="@null"/>
+
+
+                <Button
+                    android:id="@+id/map_btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/applesdgothicneob"
+                    android:background="@drawable/btn_top"
+                    android:textSize="14dp"
+                    android:text=" 병원명을 검색해보세요 "
+                    android:stateListAnimator="@null"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_below="@+id/map_appbar"
         android:id="@+id/linearlay">
 
         <fragment
@@ -29,17 +133,17 @@
         android:gravity="bottom"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp">
+        android:layout_margin="20dp">
 
 
         <com.github.edsergeev.TextFloatingActionButton
             android:id="@+id/fb_tolist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#F87D4B"
+            android:backgroundTint="#253628"
             android:fontFamily="@font/hangeulnurib"
             android:foregroundGravity="bottom"
-            android:text="LIST"
+            android:text="list"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold"

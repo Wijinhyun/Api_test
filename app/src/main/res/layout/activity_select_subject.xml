@@ -28,16 +28,17 @@
                     android:layout_width="25.0dip"
                     android:layout_height="25.0dip"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/icon_menu" />
+                    app:srcCompat="@drawable/icon_back" />
 
                 <TextView
-                    android:textSize="14.0dip"
+                    android:textSize="18.0dip"
                     android:textColor="#000000"
                     android:ellipsize="end"
                     android:layout_gravity="center"
                     android:id="@+id/con_titles"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/applesdgothicneob"
                     android:layout_marginLeft="10.0dip"
                     android:text="진료과목"
                     android:maxLines="1"
@@ -64,7 +65,10 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
+        android:fontFamily="@font/applesdgothicneob"
         android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/colorPrimaryDark"
+        app:tabIndicatorHeight="4dp"
         android:background="@android:color/white"
         >
 
@@ -80,6 +84,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="한의원"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="약국"/>
 
     </com.google.android.material.tabs.TabLayout>
 

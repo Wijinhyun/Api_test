@@ -23,10 +23,13 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         private TextView addrtxt,clCdNmtxt,estbDdtxt,gdrCnttxt,hospUrltxt,intnCnttxt,postNotxt,resdntCnttxt,sdrCnttxt,telnotxt,yadmNmtxt,ykihotxt, Tv_list, Code_list;
-        private TextView Tv_percent, Tv_sdrdgsCnt, Tv_drTotCnt, Tv_adress, Tv_sbj, Tv_distance;
+        private TextView Tv_percent, Tv_sdrdgsCnt, Tv_drTotCnt, Tv_adress, Tv_sbj, Tv_distance, Hos_phar1;
+        private View view_item;
 
         public CustomViewHolder(View view) {
             super(view);
+            this.Hos_phar1 = (TextView) view.findViewById(R.id.hos_phar1);
+            this.view_item = view.findViewById(R.id.view_item);
             this.Tv_sbj = view.findViewById(R.id.tv_sbj1);
             //this.estbDdtxt = (TextView) view.findViewById(R.id.estbDd);
             this.yadmNmtxt = (TextView) view.findViewById(R.id.tv_hospitalname1);
@@ -83,13 +86,19 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
 
         if(Double.parseDouble(percent) >= 66.6){
             //iv_circle.setImageResource(R.drawable.greencircle);
+            viewholder.Hos_phar1.setTextColor(Color.parseColor("#49654C"));
             viewholder.Tv_percent.setTextColor(Color.parseColor("#0A640A"));
+            viewholder.view_item.setBackgroundColor(Color.parseColor("#0A640A"));
         }else if(Double.parseDouble(percent) >= 33.3){
             //iv_circle.setImageResource(R.drawable.yellowcircle);
+            viewholder.Hos_phar1.setTextColor(Color.parseColor("#49654C"));
             viewholder.Tv_percent.setTextColor(Color.parseColor("#FFCC42"));
+            viewholder.view_item.setBackgroundColor(Color.parseColor("#FFCC42"));
         }else if(Double.parseDouble(percent) >= 0.1) {          // 전문의가 아예 없으면 지도에 띄우지 않음
             //iv_circle.setImageResource(R.drawable.redcircle);
+            viewholder.Hos_phar1.setTextColor(Color.parseColor("#49654C"));
             viewholder.Tv_percent.setTextColor(Color.parseColor("#C03713"));
+            viewholder.view_item.setBackgroundColor(Color.parseColor("#C03713"));
         }
 
         double temp = Double.parseDouble(mList.get(position).getDistance());
