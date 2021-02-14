@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/linearfor1111tv"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="50dp"
+            android:textColor="#253628"
+            android:text="prodoc"
+            android:fontFamily="@font/applesdgothicneob"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="#253628"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:fontFamily="@font/applesdgothicneob"
+        android:layout_height="20dp"
+        android:text="프로닥터를 사용해주셔서 감사합니다."
+        android:id="@+id/textView"/>
+
+    <View
+        android:id="@+id/homeDivider332"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="14.0dip"
+        android:layout_marginRight="14.0dip"
+        android:background="#666666" />
+
+</LinearLayout>

@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/image"
             android:scaleType="centerCrop"
-            android:src="@drawable/mobisumnail"
+            android:src="@drawable/prodoccollabo1"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

@@ -149,7 +149,7 @@
             android:textStyle="bold"
             app:borderWidth="0dp"
             app:fabCustomSize="70dp"
-            app:text_y_offset="6dp"
+            app:text_y_offset="5dp"
             android:elevation="0dp"
             app:elevation="0dp"/>
     </LinearLayout>

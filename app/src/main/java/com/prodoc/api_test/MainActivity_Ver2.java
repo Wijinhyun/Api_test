@@ -1,6 +1,7 @@
 package com.prodoc.api_test;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -9,16 +10,24 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.navigation.NavigationView;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -27,6 +36,11 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
     private ViewPager mViewPager;
     private LinearLayout hospital, pharmacy, dental, oriental;
 
+    // drawerview 관련
+    private DrawerLayout mDrawerLayout;
+    private Context context = this;
+    private ImageView Main_menu;
+
     SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
 
     @Override
@@ -34,6 +48,36 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.avtivity_main_ver2);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        Main_menu = findViewById(R.id.main_menu);
+        Main_menu.setOnClickListener(this);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+
+                int id = menuItem.getItemId();
+                String title = menuItem.getTitle().toString();
+
+                if(id == R.id.account){
+                    Intent qna = new Intent(MainActivity_Ver2.this, QnA_page.class);
+                /*qna.putExtra("city_name", city_name);
+                qna.putExtra("gu_name", gu_name);
+                qna.putExtra("search", search);*/
+                    startActivity(qna);
+                }
+                else if(id == R.id.setting){
+                }
+                else if(id == R.id.logout){
+                }
+
+                return true;
+            }
+        });
+
 
         getpermisson();
 
@@ -114,6 +158,9 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
                 Intent intent3 = new Intent(MainActivity_Ver2.this, SubjectSelectActivity.class);
                 intent3.putExtra("pagenumber", 3);
                 startActivity(intent3);
+                break;
+            case R.id.main_menu:
+                mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
         }
     }

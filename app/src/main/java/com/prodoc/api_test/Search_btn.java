@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class Search_btn extends AppCompatActivity {
@@ -19,6 +21,7 @@ public class Search_btn extends AppCompatActivity {
     private String gu_name;
     private String Imfrom;
     private String MedicalsubCd;
+    private LinearLayout ll11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,38 @@ public class Search_btn extends AppCompatActivity {
         editText.requestFocus();
         final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+
+        ll11 = findViewById(R.id.search_search_button);
+        ll11.setOnClickListener(new LinearLayout.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                if(Imfrom.equals("recyclerview")) {
+                    Intent intent1 = new Intent(getApplicationContext(), Recyclerview_HospitalList.class);
+                    intent1.putExtra("MedicalsubCd", MedicalsubCd);
+                    if (editText.getText().toString().length() != 0) {
+                        search = editText.getText().toString();
+                        intent1.putExtra("search", search);
+                    }
+                    intent1.putExtra("city_name", city_name);
+                    intent1.putExtra("gu_name", gu_name);
+                    intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent1);
+                }else {
+                    Intent intent = new Intent(getApplicationContext(), MapActivityGooglemap.class);
+                    intent.putExtra("MedicalsubCd", MedicalsubCd);
+                    if (editText.getText().toString().length() != 0) {
+                        search = editText.getText().toString();
+                        intent.putExtra("search", search);
+                    }
+                    intent.putExtra("city_name", city_name);
+                    intent.putExtra("gu_name", gu_name);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            }
+        });
 
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

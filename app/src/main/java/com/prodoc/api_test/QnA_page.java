@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class QnA_page extends AppCompatActivity {
     private Button Btn_back;
+    private ImageView Faq_map_btn_back;
 
     private Button Question1, Question2, Question3, Question4, Question5, Question6;
 
@@ -25,9 +27,8 @@ public class QnA_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qn_a_page);
 
-
-        Btn_back = findViewById(R.id.btn_back);
-        Btn_back.setOnClickListener(new View.OnClickListener() {
+        Faq_map_btn_back = findViewById(R.id.faq_map_btn_back);
+        Faq_map_btn_back.setOnClickListener(new ImageView.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
