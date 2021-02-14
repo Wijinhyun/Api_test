@@ -39,6 +39,7 @@ public class Region_listview extends AppCompatActivity {
                 intent.putExtra("search", search);
 
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
 

@@ -45,6 +45,7 @@ public class Seoul_listview extends AppCompatActivity {
                     intent.putExtra("search", search);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
                 else{
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -54,6 +55,7 @@ public class Seoul_listview extends AppCompatActivity {
                     intent.putExtra("search", search);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
             }
         });

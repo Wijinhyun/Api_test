@@ -131,6 +131,7 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
                     intent14.putExtra("gu_name", gu_name);
                     intent14.putExtra("search", search);
                     startActivity(intent14);
+                    getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }else if(Imfrom.equals("recyclerview")) {
                     Log.e("geocode_check", "city_name" + city_name + "gu_name" + gu_name);
                     MedicalsubCd = "14";
@@ -140,6 +141,7 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
                     intent14.putExtra("gu_name", gu_name);
                     intent14.putExtra("search", search);
                     startActivity(intent14);
+                    getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }else if(Imfrom.equals("googlemap")){
                     Log.e("geocode_check", "city_name" + city_name + "gu_name" + gu_name);
                     MedicalsubCd = "14";
@@ -149,6 +151,7 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
                     intent14.putExtra("gu_name", gu_name);
                     intent14.putExtra("search", search);
                     startActivity(intent14);
+                    getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
                 break;
         }

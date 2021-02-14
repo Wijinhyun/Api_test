@@ -32,6 +32,7 @@ public class QnA_page extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
 

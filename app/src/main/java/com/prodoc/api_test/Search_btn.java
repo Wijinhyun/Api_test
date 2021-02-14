@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class Search_btn extends AppCompatActivity {
     private String Imfrom;
     private String MedicalsubCd;
     private LinearLayout ll11;
+    private ImageView Sch_map_btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,15 @@ public class Search_btn extends AppCompatActivity {
         final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
+        Sch_map_btn_back = findViewById(R.id.sch_map_btn_back);
+        Sch_map_btn_back.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                onBackPressed();
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            }
+        });
 
         ll11 = findViewById(R.id.search_search_button);
         ll11.setOnClickListener(new LinearLayout.OnClickListener() {
@@ -56,6 +67,7 @@ public class Search_btn extends AppCompatActivity {
                     intent1.putExtra("gu_name", gu_name);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent1);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }else {
                     Intent intent = new Intent(getApplicationContext(), MapActivityGooglemap.class);
                     intent.putExtra("MedicalsubCd", MedicalsubCd);
@@ -67,6 +79,7 @@ public class Search_btn extends AppCompatActivity {
                     intent.putExtra("gu_name", gu_name);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
             }
         });
@@ -92,6 +105,7 @@ public class Search_btn extends AppCompatActivity {
                             intent1.putExtra("gu_name", gu_name);
                             intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent1);
+                            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                         }else {
                             Intent intent = new Intent(getApplicationContext(), MapActivityGooglemap.class);
                             intent.putExtra("MedicalsubCd", MedicalsubCd);
@@ -103,6 +117,7 @@ public class Search_btn extends AppCompatActivity {
                             intent.putExtra("gu_name", gu_name);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                         }
                         return false;
                 }

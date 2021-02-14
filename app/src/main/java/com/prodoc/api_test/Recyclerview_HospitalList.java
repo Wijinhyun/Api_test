@@ -359,6 +359,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                         intent.putExtra("d_ypos",arr.get(position).getYpos());
                         intent.putExtra("d_xpos",arr.get(position).getXpos());
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     }
 
                     @Override
@@ -428,6 +429,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent1.putExtra("subject", subject);
                 startActivity(intent1);
                 finish();
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             case R.id.btn_region_in_list:
                 Intent intent = new Intent(getApplicationContext(), Region_listview.class);
@@ -435,9 +437,12 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent.putExtra("MedicalsubCd", MedicalsubCd);
                 intent.putExtra("search",search);
                 startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             case R.id.btn_back:
                 onBackPressed();
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             case R.id.recycler_filter:
                 if(Hide_filter_toolbar.getVisibility() == View.GONE){
@@ -492,6 +497,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent2.putExtra("gu_name", gu_name);
                 intent2.putExtra("search",search);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             case R.id.btn_search:
                 Intent intent3 = new Intent(getApplicationContext(), Search_btn.class);
@@ -500,6 +506,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent3.putExtra("city_name", city_name);
                 intent3.putExtra("gu_name", gu_name);
                 startActivity(intent3);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             default:
 

@@ -47,7 +47,10 @@
         <activity android:name="com.prodoc.api_test.MapActivityGooglemap" />
         <activity android:name="com.prodoc.api_test.MainActivity"/>
         <activity android:name="com.prodoc.api_test.MainActivity_Ver2"/>
+        <activity android:name="com.prodoc.api_test.OnebyoneDialogActivity"/>
         <activity android:name="com.prodoc.api_test.SubjectSelectActivity"/>
+        <activity android:name="com.prodoc.api_test.Onebyone"/>
+        <activity android:name="com.prodoc.api_test.Adver"/>
     </application>
 
 </manifest>

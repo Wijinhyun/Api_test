@@ -135,6 +135,7 @@ public class MapActivityGooglemap extends AppCompatActivity
                 intent3.putExtra("city_name", city_name);
                 intent3.putExtra("gu_name", gu_name);
                 startActivity(intent3);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
         map_Btn_search.setOnClickListener(new Button.OnClickListener() {
@@ -146,6 +147,7 @@ public class MapActivityGooglemap extends AppCompatActivity
                 intent3.putExtra("city_name", city_name);
                 intent3.putExtra("gu_name", gu_name);
                 startActivity(intent3);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
         map_Btn_medical_subject.setOnClickListener(new Button.OnClickListener() {
@@ -158,6 +160,7 @@ public class MapActivityGooglemap extends AppCompatActivity
                 intent2.putExtra("gu_name", gu_name);
                 intent2.putExtra("search",search);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
 
@@ -173,6 +176,7 @@ public class MapActivityGooglemap extends AppCompatActivity
                 intent.putExtra("search", search);
                 finish();
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
 

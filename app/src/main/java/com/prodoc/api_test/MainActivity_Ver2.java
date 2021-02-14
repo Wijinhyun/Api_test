@@ -10,6 +10,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -68,10 +70,19 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
                 qna.putExtra("gu_name", gu_name);
                 qna.putExtra("search", search);*/
                     startActivity(qna);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
                 else if(id == R.id.setting){
+                    Intent one = new Intent(MainActivity_Ver2.this, Onebyone.class);
+//                    Intent intent = new Intent(MainActivity_Ver2.this,OnebyoneDialogActivity.class);
+//                    startActivity(intent);
+                    startActivity(one);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
                 else if(id == R.id.logout){
+                    Intent ad = new Intent(MainActivity_Ver2.this, Adver.class);
+                    startActivity(ad);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
 
                 return true;
@@ -143,21 +154,25 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
                 Intent intent = new Intent(MainActivity_Ver2.this, SubjectSelectActivity.class);
                 intent.putExtra("pagenumber", 0);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             case R.id.main_dental:
                 Intent intent1 = new Intent(MainActivity_Ver2.this, SubjectSelectActivity.class);
                 intent1.putExtra("pagenumber", 1);
                 startActivity(intent1);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             case R.id.main_oriental:
                 Intent intent2 = new Intent(MainActivity_Ver2.this, SubjectSelectActivity.class);
                 intent2.putExtra("pagenumber", 2);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             case R.id.main_pharmacy:
                 Intent intent3 = new Intent(MainActivity_Ver2.this, SubjectSelectActivity.class);
                 intent3.putExtra("pagenumber", 3);
                 startActivity(intent3);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             case R.id.main_menu:
                 mDrawerLayout.openDrawer(GravityCompat.START);
@@ -180,4 +195,5 @@ public class MainActivity_Ver2 extends AppCompatActivity implements View.OnClick
             Log.d("전화 권한 있는 상태", "");
         }
     }
+
 }
