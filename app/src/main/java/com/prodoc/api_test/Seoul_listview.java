@@ -44,6 +44,7 @@ public class Seoul_listview extends AppCompatActivity {
                     intent.putExtra("MedicalsubCd", MedicalsubCd);
                     intent.putExtra("search", search);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    finish();
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
@@ -54,6 +55,7 @@ public class Seoul_listview extends AppCompatActivity {
                     intent.putExtra("gu_name", (String) Lv_gu.getAdapter().getItem(position)); /*송신*/
                     intent.putExtra("search", search);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    finish();
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }

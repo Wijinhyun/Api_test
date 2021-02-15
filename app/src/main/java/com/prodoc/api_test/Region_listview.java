@@ -37,6 +37,7 @@ public class Region_listview extends AppCompatActivity {
                 intent.putExtra("Imfrom", Imfrom); /*송신*/
                 intent.putExtra("MedicalsubCd", MedicalsubCd);
                 intent.putExtra("search", search);
+                finish();
 
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
