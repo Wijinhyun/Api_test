@@ -183,7 +183,7 @@ public class ListDialogActivity extends Activity implements View.OnClickListener
                 //String url = "http://stackoverflow.com/search?q=" + query;
 
                 String url =
-                        "nmap://route/public?slat="+init_ypos+"&slng="+init_xpos+"&sname="+sname+"&dlat="+d_ypos+"&dlng="+d_xpos+"&dname="+dname+"&appname=com.example.api_test";
+                        "nmap://route/public?slat="+init_ypos+"&slng="+init_xpos+"&sname="+sname+"&dlat="+d_ypos+"&dlng="+d_xpos+"&dname="+dname+"&appname=com.prodoc.api_test";
                 //"nmap://route/public?slat=37.4640070&slng=126.9522394&sname=&dlat=37.5209436&dlng=127.1230074&dname=&appname=com.example.api_test";
                 Log.d("init, d 값",init_ypos + "  " + init_xpos + "  " + d_ypos + "  " + d_xpos);
                 Log.d("init, d 값",sname + "  " + dname);
@@ -194,8 +194,11 @@ public class ListDialogActivity extends Activity implements View.OnClickListener
 
                 List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
                 if (list == null || list.isEmpty()) {
-                    this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.nmap")));
+                    Log.d("list 비었다", "  ");
+                    this.startActivity(intent);
+                    //this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.nmap")));
                 } else {
+                    Log.d("list 안 비었다","  ");
                     this.startActivity(intent);
                 }
 
