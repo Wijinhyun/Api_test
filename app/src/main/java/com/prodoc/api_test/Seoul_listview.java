@@ -44,21 +44,23 @@ public class Seoul_listview extends AppCompatActivity {
                     intent.putExtra("MedicalsubCd", MedicalsubCd);
                     intent.putExtra("search", search);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    finish();
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
+                /*
                 else{
+
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
                     intent.putExtra("city_name", city_name);
-                    intent.putExtra("gu_name", (String) Lv_gu.getAdapter().getItem(position)); /*송신*/
+                    intent.putExtra("gu_name", (String) Lv_gu.getAdapter().getItem(position));
                     intent.putExtra("search", search);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     finish();
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
+                */
             }
         });
     }

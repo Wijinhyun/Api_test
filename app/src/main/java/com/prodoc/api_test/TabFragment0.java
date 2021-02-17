@@ -126,7 +126,7 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
                 if(Imfrom == null){
                     MedicalsubCd = "14";
                     Intent intent14 = new Intent(getActivity(), Recyclerview_HospitalList.class);
-                    intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
+                    intent14.putExtra("MedicalsubCd", MedicalsubCd);
                     intent14.putExtra("city_name", city_name);
                     intent14.putExtra("gu_name", gu_name);
                     intent14.putExtra("search", search);
@@ -140,6 +140,7 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
                     intent14.putExtra("city_name", city_name);
                     intent14.putExtra("gu_name", gu_name);
                     intent14.putExtra("search", search);
+                    intent14.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent14);
                     getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }else if(Imfrom.equals("googlemap")){
@@ -150,6 +151,7 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
                     intent14.putExtra("city_name", city_name);
                     intent14.putExtra("gu_name", gu_name);
                     intent14.putExtra("search", search);
+                    intent14.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent14);
                     getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }

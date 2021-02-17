@@ -174,7 +174,7 @@ public class MapActivityGooglemap extends AppCompatActivity
                 intent.putExtra("city_name", city_name);
                 intent.putExtra("gu_name", gu_name);
                 intent.putExtra("search", search);
-                finish();
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }

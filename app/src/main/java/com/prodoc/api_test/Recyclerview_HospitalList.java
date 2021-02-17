@@ -428,7 +428,6 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent1.putExtra("search", search);
                 intent1.putExtra("subject", subject);
                 startActivity(intent1);
-                finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             case R.id.btn_region_in_list:
@@ -437,7 +436,6 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 intent.putExtra("MedicalsubCd", MedicalsubCd);
                 intent.putExtra("search",search);
                 startActivity(intent);
-                finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 break;
             case R.id.btn_back:
