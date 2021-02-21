@@ -8,6 +8,11 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.DIAL_PHONE"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+
+    <queries>
+        <package android:name="com.naver.maps" />
+    </queries>
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
@@ -21,9 +26,7 @@
         <activity android:name="com.prodoc.api_test.Medical_subject"></activity>
         <activity android:name="com.prodoc.api_test.QnA_page" />
         <activity android:name="com.prodoc.api_test.Hospital_Detail" />
-        <activity
-            android:name="com.prodoc.api_test.Search_btn"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name="com.prodoc.api_test.Search_btn" android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name="com.prodoc.api_test.Recyclerview_HospitalList" />
 
         <meta-data
@@ -40,10 +43,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.prodoc.api_test.MapActivity" />
-        <activity android:name="com.prodoc.api_test.MarkerDialogActivity"
-        android:theme="@style/CustomDialogThemee"/>
-        <activity android:name="com.prodoc.api_test.ListDialogActivity"
-            android:theme="@style/Theme.AppCompat.Dialog"/>
+        <activity android:name="com.prodoc.api_test.MarkerDialogActivity" android:theme="@style/CustomDialogThemee"/>
+        <activity android:name="com.prodoc.api_test.ListDialogActivity" android:theme="@style/Theme.AppCompat.Dialog"/>
         <activity android:name="com.prodoc.api_test.MapActivityGooglemap" />
         <activity android:name="com.prodoc.api_test.MainActivity"/>
         <activity android:name="com.prodoc.api_test.MainActivity_Ver2"/>

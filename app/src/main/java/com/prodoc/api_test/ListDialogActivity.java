@@ -3,6 +3,7 @@ package com.prodoc.api_test;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
@@ -27,6 +28,8 @@ import com.squareup.picasso.Picasso;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class ListDialogActivity extends Activity implements View.OnClickListener {
     private ImageView iv_static;
@@ -182,24 +185,26 @@ public class ListDialogActivity extends Activity implements View.OnClickListener
                 }
                 //String url = "http://stackoverflow.com/search?q=" + query;
 
-                String url =
-                        "nmap://route/public?slat="+init_ypos+"&slng="+init_xpos+"&sname="+sname+"&dlat="+d_ypos+"&dlng="+d_xpos+"&dname="+dname+"&appname=com.prodoc.api_test";
+                String url = "nmap://route/public?slat="+init_ypos+"&slng="+init_xpos+"&sname="+sname+"&dlat="+d_ypos+"&dlng="+d_xpos+"&dname="+dname+"&appname=com.example.api_test";
                 //"nmap://route/public?slat=37.4640070&slng=126.9522394&sname=&dlat=37.5209436&dlng=127.1230074&dname=&appname=com.example.api_test";
                 Log.d("init, d 값",init_ypos + "  " + init_xpos + "  " + d_ypos + "  " + d_xpos);
                 Log.d("init, d 값",sname + "  " + dname);
 
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                intent2.addCategory(Intent.CATEGORY_BROWSABLE);
 
-                List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent2, PackageManager.MATCH_DEFAULT_ONLY);
+                //List<ResolveInfo> list = getPackageManager().getInstalledPackages(0);
+
+
                 if (list == null || list.isEmpty()) {
-                    Log.d("list 비었다", "  ");
-                    this.startActivity(intent);
-                    //this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.nmap")));
+                    Log.d("list 비었다", list + "  ");
+                    //this.startActivity(intent2);
+                    this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nhn.android.nmap")));
                 } else {
-                    Log.d("list 안 비었다","  ");
-                    this.startActivity(intent);
+                    Log.d("list 안 비었다",list + "  ");
+                    this.startActivity(intent2);
                 }
 
                 //Toast.makeText(MarkerDialogActivity.this, "네이버 지도 길찾기로 넘어가게 구현", Toast.LENGTH_SHORT).show();

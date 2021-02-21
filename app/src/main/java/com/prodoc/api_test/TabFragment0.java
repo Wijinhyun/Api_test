@@ -112,8 +112,56 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
 
         }
 
-        LinearLayout l1 = view.findViewById(R.id.tab_DER);
-        l1.setOnClickListener(this);
+        LinearLayout l01 = view.findViewById(R.id.tab_IM);
+        LinearLayout l02 = view.findViewById(R.id.tab_NR);
+        LinearLayout l03 = view.findViewById(R.id.tab_NP);
+        LinearLayout l04 = view.findViewById(R.id.tab_GS);
+        LinearLayout l05 = view.findViewById(R.id.tab_OS);
+        LinearLayout l06 = view.findViewById(R.id.tab_NS);
+        LinearLayout l07 = view.findViewById(R.id.tab_CS);
+        LinearLayout l08 = view.findViewById(R.id.tab_PS);
+        LinearLayout l09 = view.findViewById(R.id.tab_AN);
+        LinearLayout l10 = view.findViewById(R.id.tab_OBGY);
+        LinearLayout l11 = view.findViewById(R.id.tab_PED);
+        LinearLayout l12 = view.findViewById(R.id.tab_EY);
+        LinearLayout l13 = view.findViewById(R.id.tab_ENT);
+        LinearLayout l14 = view.findViewById(R.id.tab_DER);
+        LinearLayout l15 = view.findViewById(R.id.tab_UR);
+        LinearLayout l16 = view.findViewById(R.id.tab_DR);
+        LinearLayout l17 = view.findViewById(R.id.tab_RO);
+        LinearLayout l19 = view.findViewById(R.id.tab_LM);
+        LinearLayout l20 = view.findViewById(R.id.tab_TB);
+        LinearLayout l21 = view.findViewById(R.id.tab_RM);
+        LinearLayout l22 = view.findViewById(R.id.tab_NM);
+        LinearLayout l23 = view.findViewById(R.id.tab_FM);
+        LinearLayout l24 = view.findViewById(R.id.tab_EM);
+        LinearLayout l25 = view.findViewById(R.id.tab_OEM);
+
+        l01.setOnClickListener(this);
+        l02.setOnClickListener(this);
+        l03.setOnClickListener(this);
+        l04.setOnClickListener(this);
+        l05.setOnClickListener(this);
+        l06.setOnClickListener(this);
+        l07.setOnClickListener(this);
+        l08.setOnClickListener(this);
+        l09.setOnClickListener(this);
+        l10.setOnClickListener(this);
+        l11.setOnClickListener(this);
+        l12.setOnClickListener(this);
+        l13.setOnClickListener(this);
+        l14.setOnClickListener(this);
+        l15.setOnClickListener(this);
+        l16.setOnClickListener(this);
+        l17.setOnClickListener(this);
+        l19.setOnClickListener(this);
+        l20.setOnClickListener(this);
+        l21.setOnClickListener(this);
+        l22.setOnClickListener(this);
+        l23.setOnClickListener(this);
+        l24.setOnClickListener(this);
+        l25.setOnClickListener(this);
+
 
         return view;
     }
@@ -122,40 +170,57 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.tab_DER:
-                if(Imfrom == null){
-                    MedicalsubCd = "14";
-                    Intent intent14 = new Intent(getActivity(), Recyclerview_HospitalList.class);
-                    intent14.putExtra("MedicalsubCd", MedicalsubCd);
-                    intent14.putExtra("city_name", city_name);
-                    intent14.putExtra("gu_name", gu_name);
-                    intent14.putExtra("search", search);
-                    startActivity(intent14);
-                    getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                }else if(Imfrom.equals("recyclerview")) {
-                    Log.e("geocode_check", "city_name" + city_name + "gu_name" + gu_name);
-                    MedicalsubCd = "14";
-                    Intent intent14 = new Intent(getActivity(), Recyclerview_HospitalList.class);
-                    intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
-                    intent14.putExtra("city_name", city_name);
-                    intent14.putExtra("gu_name", gu_name);
-                    intent14.putExtra("search", search);
-                    intent14.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent14);
-                    getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                }else if(Imfrom.equals("googlemap")){
-                    Log.e("geocode_check", "city_name" + city_name + "gu_name" + gu_name);
-                    MedicalsubCd = "14";
-                    Intent intent14 = new Intent(getActivity(), MapActivityGooglemap.class);
-                    intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
-                    intent14.putExtra("city_name", city_name);
-                    intent14.putExtra("gu_name", gu_name);
-                    intent14.putExtra("search", search);
-                    intent14.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent14);
-                    getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                }
+            case R.id.tab_IM:
+                PushIntent("01");
                 break;
+            case R.id.tab_NR:
+                PushIntent("02");
+                break;
+            case R.id.tab_NP:
+                PushIntent("03");
+                break;
+            case R.id.tab_GS:
+                PushIntent("04");
+                break;
+            case R.id.tab_OS:
+                PushIntent("05");
+                break;
+            case R.id.tab_DER:
+                PushIntent("14");
+                break;
+        }
+    }
+
+    private void PushIntent(String code){
+        MedicalsubCd = code;
+        if(Imfrom == null){
+            Intent intent14 = new Intent(getActivity(), Recyclerview_HospitalList.class);
+            intent14.putExtra("MedicalsubCd", MedicalsubCd);
+            intent14.putExtra("city_name", city_name);
+            intent14.putExtra("gu_name", gu_name);
+            intent14.putExtra("search", search);
+            startActivity(intent14);
+            getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        }else if(Imfrom.equals("recyclerview")) {
+            Log.e("geocode_check", "city_name" + city_name + "gu_name" + gu_name);
+            Intent intent14 = new Intent(getActivity(), Recyclerview_HospitalList.class);
+            intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
+            intent14.putExtra("city_name", city_name);
+            intent14.putExtra("gu_name", gu_name);
+            intent14.putExtra("search", search);
+            intent14.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent14);
+            getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        }else if(Imfrom.equals("googlemap")){
+            Log.e("geocode_check", "city_name" + city_name + "gu_name" + gu_name);
+            Intent intent14 = new Intent(getActivity(), MapActivityGooglemap.class);
+            intent14.putExtra("MedicalsubCd", MedicalsubCd); /*송신*/
+            intent14.putExtra("city_name", city_name);
+            intent14.putExtra("gu_name", gu_name);
+            intent14.putExtra("search", search);
+            intent14.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent14);
+            getActivity().overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         }
     }
 

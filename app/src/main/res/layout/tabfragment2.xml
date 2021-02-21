@@ -20,7 +20,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/tab_ori1"
+                    android:id="@+id/tab_or80"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -52,7 +52,7 @@
                     android:background="#DEDEDE" />
 
                 <LinearLayout
-                    android:id="@+id/tab_ori2"
+                    android:id="@+id/tab_or85"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -92,7 +92,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/tab_ori3"
+                    android:id="@+id/tab_or83"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -124,7 +124,7 @@
                     android:background="#DEDEDE" />
 
                 <LinearLayout
-                    android:id="@+id/tab_ori4"
+                    android:id="@+id/tab_or86"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -164,7 +164,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/tab_ori5"
+                    android:id="@+id/tab_or82"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -196,7 +196,7 @@
                     android:background="#DEDEDE" />
 
                 <LinearLayout
-                    android:id="@+id/tab_ori6"
+                    android:id="@+id/tab_or84"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -236,7 +236,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/tab_ori7"
+                    android:id="@+id/tab_or87"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -268,7 +268,7 @@
                     android:background="#DEDEDE" />
 
                 <LinearLayout
-                    android:id="@+id/tab_ori8"
+                    android:id="@+id/tab_or81"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

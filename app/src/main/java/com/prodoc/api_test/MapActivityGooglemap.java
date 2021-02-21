@@ -183,6 +183,18 @@ public class MapActivityGooglemap extends AppCompatActivity
         if(MedicalsubCd.equals("01")){
             map_Btn_medical_subject.setText("내과");
             subject = "내과";
+        }else if(MedicalsubCd.equals("02")){
+            map_Btn_medical_subject.setText("신경과");
+            subject = "신경과";
+        }else if(MedicalsubCd.equals("03")) {
+            map_Btn_medical_subject.setText("정신건강의학과");
+            subject = "정신건강의학과";
+        }else if(MedicalsubCd.equals("04")){
+            map_Btn_medical_subject.setText("외과");
+            subject = "외과";
+        }else if(MedicalsubCd.equals("05")) {
+            map_Btn_medical_subject.setText("정형외과");
+            subject = "정형외과";
         }else if(MedicalsubCd.equals("14")){
             map_Btn_medical_subject.setText("피부과");
             subject = "피부과";
@@ -192,15 +204,9 @@ public class MapActivityGooglemap extends AppCompatActivity
         }else if(MedicalsubCd.equals("08")){
             map_Btn_medical_subject.setText("성형외과");
             subject = "성형외과";
-        }else if(MedicalsubCd.equals("05")) {
-            map_Btn_medical_subject.setText("정형외과");
-            subject = "정형외과";
         }else if(MedicalsubCd.equals("13")){
             map_Btn_medical_subject.setText("이비인후과");
             subject = "이비인후과";
-        }else if(MedicalsubCd.equals("04")){
-            map_Btn_medical_subject.setText("외과");
-            subject = "외과";
         }else if(MedicalsubCd.equals("15")){
             map_Btn_medical_subject.setText("비뇨기의학과");
             subject = "비뇨기의학과";
@@ -208,6 +214,35 @@ public class MapActivityGooglemap extends AppCompatActivity
             map_Btn_medical_subject.setText("산부인과");
             subject = "산부인과";
         }
+
+//        if(MedicalsubCd.equals("01")){
+//            map_Btn_medical_subject.setText("내과");
+//            subject = "내과";
+//        }else if(MedicalsubCd.equals("14")){
+//            map_Btn_medical_subject.setText("피부과");
+//            subject = "피부과";
+//        }else if(MedicalsubCd.equals("12")){
+//            map_Btn_medical_subject.setText("안과");
+//            subject = "안과";
+//        }else if(MedicalsubCd.equals("08")){
+//            map_Btn_medical_subject.setText("성형외과");
+//            subject = "성형외과";
+//        }else if(MedicalsubCd.equals("05")) {
+//            map_Btn_medical_subject.setText("정형외과");
+//            subject = "정형외과";
+//        }else if(MedicalsubCd.equals("13")){
+//            map_Btn_medical_subject.setText("이비인후과");
+//            subject = "이비인후과";
+//        }else if(MedicalsubCd.equals("04")){
+//            map_Btn_medical_subject.setText("외과");
+//            subject = "외과";
+//        }else if(MedicalsubCd.equals("15")){
+//            map_Btn_medical_subject.setText("비뇨기의학과");
+//            subject = "비뇨기의학과";
+//        }else if(MedicalsubCd.equals("10")){
+//            map_Btn_medical_subject.setText("산부인과");
+//            subject = "산부인과";
+//        }
 
         if(search != null){
             map_Btn_search.setText("검색어 : " + search);
@@ -396,21 +431,25 @@ public class MapActivityGooglemap extends AppCompatActivity
     public void readDataFromCsv() throws IOException {
         // 진료과목 코드에 따라 어떤 csv파일 읽을지 여기서 스위치문 설정
 
-        InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.plastic));
+        InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.plastic));        // 용량 작은 거 읽게 하던가 해야될 거 같음
         if(MedicalsubCd.equals("01")){
-            is = new InputStreamReader(getResources().openRawResource(R.raw.inside));
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi01));
+        }else if(MedicalsubCd.equals("02")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi02));
+        }else if(MedicalsubCd.equals("03")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi03));
+        }else if(MedicalsubCd.equals("04")){
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi04));
+        }else if(MedicalsubCd.equals("05")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi05));
         }else if(MedicalsubCd.equals("14")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.pbu));
         }else if(MedicalsubCd.equals("12")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.eye));
         }else if(MedicalsubCd.equals("08")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.plastic));
-        }else if(MedicalsubCd.equals("05")) {
-            is = new InputStreamReader(getResources().openRawResource(R.raw.jeonghyeong));
         }else if(MedicalsubCd.equals("13")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.ebinhu));
-        }else if(MedicalsubCd.equals("04")){
-            is = new InputStreamReader(getResources().openRawResource(R.raw.outside));
         }else if(MedicalsubCd.equals("15")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.benyo));
         }else if(MedicalsubCd.equals("10")){

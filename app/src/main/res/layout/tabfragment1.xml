@@ -20,7 +20,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/tab_den1"
+                    android:id="@+id/tab_den52"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -52,7 +52,7 @@
                     android:background="#DEDEDE" />
 
                 <LinearLayout
-                    android:id="@+id/tab_den2"
+                    android:id="@+id/tab_den51"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -92,7 +92,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/tab_den3"
+                    android:id="@+id/tab_den50"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -124,7 +124,7 @@
                     android:background="#DEDEDE" />
 
                 <LinearLayout
-                    android:id="@+id/tab_den4"
+                    android:id="@+id/tab_den54"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -164,7 +164,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/tab_den5"
+                    android:id="@+id/tab_den53"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -196,7 +196,7 @@
                     android:background="#DEDEDE" />
 
                 <LinearLayout
-                    android:id="@+id/tab_den6"
+                    android:id="@+id/tab_den56"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -236,7 +236,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/tab_den7"
+                    android:id="@+id/tab_den55"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -268,7 +268,7 @@
                     android:background="#DEDEDE" />
 
                 <LinearLayout
-                    android:id="@+id/tab_den8"
+                    android:id="@+id/tab_den61"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -308,7 +308,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/tab_den9"
+                    android:id="@+id/tab_den58"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -340,7 +340,7 @@
                     android:background="#DEDEDE" />
 
                 <LinearLayout
-                    android:id="@+id/tab_den10"
+                    android:id="@+id/tab_den59"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -380,7 +380,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/tab_den11"
+                    android:id="@+id/tab_den57"
                     android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

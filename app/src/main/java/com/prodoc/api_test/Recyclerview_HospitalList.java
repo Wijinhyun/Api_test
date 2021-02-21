@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,6 +36,7 @@ import java.util.List;
 
 public class Recyclerview_HospitalList extends AppCompatActivity implements View.OnClickListener {
 
+    private NestedScrollView nested;
     private RecyclerView recyclerView;
     private CustomAdapter adapter;
     private LinearLayoutManager manager;
@@ -147,6 +150,18 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         if(MedicalsubCd.equals("01")){
             Btn_medical_subject.setText("내과");
             subject = "내과";
+        }else if(MedicalsubCd.equals("02")){
+            Btn_medical_subject.setText("신경과");
+            subject = "신경과";
+        }else if(MedicalsubCd.equals("03")) {
+            Btn_medical_subject.setText("정신건강의학과");
+            subject = "정신건강의학과";
+        }else if(MedicalsubCd.equals("04")){
+            Btn_medical_subject.setText("외과");
+            subject = "외과";
+        }else if(MedicalsubCd.equals("05")) {
+            Btn_medical_subject.setText("정형외과");
+            subject = "정형외과";
         }else if(MedicalsubCd.equals("14")){
             Btn_medical_subject.setText("피부과");
             subject = "피부과";
@@ -156,15 +171,9 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         }else if(MedicalsubCd.equals("08")){
             Btn_medical_subject.setText("성형외과");
             subject = "성형외과";
-        }else if(MedicalsubCd.equals("05")) {
-            Btn_medical_subject.setText("정형외과");
-            subject = "정형외과";
         }else if(MedicalsubCd.equals("13")){
             Btn_medical_subject.setText("이비인후과");
             subject = "이비인후과";
-        }else if(MedicalsubCd.equals("04")){
-            Btn_medical_subject.setText("외과");
-            subject = "외과";
         }else if(MedicalsubCd.equals("15")){
             Btn_medical_subject.setText("비뇨기의학과");
             subject = "비뇨기의학과";
@@ -174,6 +183,12 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         }
 
         // geocoder로인해 대구 -> 대구광역시 로 표현됨에 따라 다시 간소화 해주는 코드 필요
+        if(city_name == null){
+            city_name = "대구광역시";
+            gu_name = "북구";
+        }
+
+
         if(city_name.equals("서울특별시")){
             city_name_for_text = "서울";
         }else if(city_name.equals("경기도")){
@@ -286,23 +301,42 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 //            }
 //        }).start();
 
-        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
+        nested.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int firstVisibleItem = manager.findFirstVisibleItemPosition();
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Display display = getWindowManager().getDefaultDisplay();
+                final int stageHeight = display.getHeight();
+                int currentheight = stageHeight+scrollY;
+                int maxheight = recyclerView.getHeight();
 
-                if (firstVisibleItem > 1) {
-                    //Show FAB
+                if(currentheight >= 8000){
                     Fb_totop.setVisibility(View.VISIBLE);
                 }
                 else{
                     //Hide FAB
                     Fb_totop.setVisibility(View.GONE);
                 }
+
             }
         });
+
+//        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                int firstVisibleItem = manager.findFirstVisibleItemPosition();
+//
+//                if (firstVisibleItem > 1) {
+//                    //Show FAB
+//                    Fb_totop.setVisibility(View.VISIBLE);
+//                }
+//                else{
+//                    //Hide FAB
+//                    Fb_totop.setVisibility(View.GONE);
+//                }
+//            }
+//        });
 
 //        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
@@ -371,6 +405,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     }
 
     private void init() {
+        nested = (NestedScrollView) findViewById(R.id.scrollview);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         manager = new LinearLayoutManager(Recyclerview_HospitalList.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
@@ -411,7 +446,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         Fb_totop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recyclerView.smoothScrollToPosition(0);
+                nested.smoothScrollTo(0,0);
+                //recyclerView.smoothScrollToPosition(0);
             }
         });
         Btn_region_in_list.setOnClickListener(this);
@@ -570,19 +606,23 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
         InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.plastic));
         if(MedicalsubCd.equals("01")){
-            is = new InputStreamReader(getResources().openRawResource(R.raw.inside));
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi01));
+        }else if(MedicalsubCd.equals("02")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi02));
+        }else if(MedicalsubCd.equals("03")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi03));
+        }else if(MedicalsubCd.equals("04")){
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi04));
+        }else if(MedicalsubCd.equals("05")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi05));
         }else if(MedicalsubCd.equals("14")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.pbu));
         }else if(MedicalsubCd.equals("12")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.eye));
         }else if(MedicalsubCd.equals("08")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.plastic));
-        }else if(MedicalsubCd.equals("05")) {
-            is = new InputStreamReader(getResources().openRawResource(R.raw.jeonghyeong));
         }else if(MedicalsubCd.equals("13")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.ebinhu));
-        }else if(MedicalsubCd.equals("04")){
-            is = new InputStreamReader(getResources().openRawResource(R.raw.outside));
         }else if(MedicalsubCd.equals("15")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.benyo));
         }else if(MedicalsubCd.equals("10")){
