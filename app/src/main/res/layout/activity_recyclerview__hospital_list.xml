@@ -39,7 +39,7 @@
                     android:textColor="#000000"
                     android:ellipsize="end"
                     android:layout_gravity="center"
-                    android:id="@+id/con_titles"
+                    android:id="@+id/con_titles_forlist"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10.0dip"

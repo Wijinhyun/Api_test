@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -63,6 +64,8 @@ public class MapActivityGooglemap extends AppCompatActivity
     private ImageView map_Btn_back, map_Search;
     private Button map_Btn_medical_subject, map_Btn_search;
 
+    private TextView Tv_con_titles;
+
     private int markerclicked_check;
 
     List<Marker> AllMarkers = new ArrayList<Marker>();
@@ -114,6 +117,7 @@ public class MapActivityGooglemap extends AppCompatActivity
 //        init_xpos = intent.getDoubleExtra("longitude",128.611553);
 //        init_ypos = intent.getDoubleExtra("latitude",35.887515);
 
+        Tv_con_titles = findViewById(R.id.map_con_titles);
 
         map_Btn_back = findViewById(R.id.map_btn_back);
         map_Search = findViewById(R.id.map_search);
@@ -181,38 +185,181 @@ public class MapActivityGooglemap extends AppCompatActivity
         });
 
         if(MedicalsubCd.equals("01")){
-            map_Btn_medical_subject.setText("내과");
+            Tv_con_titles.setText("의원");        // 맵에선 조금 다르게 할 거니까 이따가 일괄 삽입
+            map_Btn_medical_subject.setText(" 내과 ");
             subject = "내과";
         }else if(MedicalsubCd.equals("02")){
-            map_Btn_medical_subject.setText("신경과");
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText(" 신경과 ");
             subject = "신경과";
         }else if(MedicalsubCd.equals("03")) {
-            map_Btn_medical_subject.setText("정신건강의학과");
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText(" 정신건강의학과 ");
             subject = "정신건강의학과";
         }else if(MedicalsubCd.equals("04")){
+            Tv_con_titles.setText("의원");
             map_Btn_medical_subject.setText("외과");
             subject = "외과";
         }else if(MedicalsubCd.equals("05")) {
+            Tv_con_titles.setText("의원");
             map_Btn_medical_subject.setText("정형외과");
             subject = "정형외과";
-        }else if(MedicalsubCd.equals("14")){
-            map_Btn_medical_subject.setText("피부과");
-            subject = "피부과";
-        }else if(MedicalsubCd.equals("12")){
-            map_Btn_medical_subject.setText("안과");
-            subject = "안과";
+        }else if(MedicalsubCd.equals("06")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("신경외과");
+            subject = "신경외과";
+        }else if(MedicalsubCd.equals("07")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("흉부외과");
+            subject = "흉부외과";
         }else if(MedicalsubCd.equals("08")){
+            Tv_con_titles.setText("의원");
             map_Btn_medical_subject.setText("성형외과");
             subject = "성형외과";
-        }else if(MedicalsubCd.equals("13")){
-            map_Btn_medical_subject.setText("이비인후과");
-            subject = "이비인후과";
-        }else if(MedicalsubCd.equals("15")){
-            map_Btn_medical_subject.setText("비뇨기의학과");
-            subject = "비뇨기의학과";
+        }else if(MedicalsubCd.equals("09")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("마취통증의학과");
+            subject = "마취통증의학과";
         }else if(MedicalsubCd.equals("10")){
+            Tv_con_titles.setText("의원");
             map_Btn_medical_subject.setText("산부인과");
             subject = "산부인과";
+        }else if(MedicalsubCd.equals("11")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("소아청소년과");
+            subject = "소아청소년과";
+        }else if(MedicalsubCd.equals("12")){
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("안과");
+            subject = "안과";
+        }else if(MedicalsubCd.equals("13")){
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("이비인후과");
+            subject = "이비인후과";
+        }else if(MedicalsubCd.equals("14")){
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("피부과");
+            subject = "피부과";
+        }else if(MedicalsubCd.equals("15")){
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("비뇨기의학과");
+            subject = "비뇨기의학과";
+        }else if(MedicalsubCd.equals("16")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("영상의학과");
+            subject = "영상의학과";
+        }else if(MedicalsubCd.equals("17")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("방사선종양학과");
+            subject = "방사선종양학과";
+        }else if(MedicalsubCd.equals("19")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("진단검사의학과");
+            subject = "진단검사의학과";
+        }else if(MedicalsubCd.equals("20")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("결핵과");
+            subject = "결핵과";
+        }else if(MedicalsubCd.equals("21")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("재활의학과");
+            subject = "재활의학과";
+        }else if(MedicalsubCd.equals("22")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("핵의학과");
+            subject = "핵의학과";
+        }else if(MedicalsubCd.equals("23")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("가정의학과");
+            subject = "가정의학과";
+        }else if(MedicalsubCd.equals("24")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("응급의학과");
+            subject = "응급의학과";
+        }else if(MedicalsubCd.equals("25")) {
+            Tv_con_titles.setText("의원");
+            map_Btn_medical_subject.setText("직업환경의학과");
+            subject = "직업환경의학과";
+        }else if(MedicalsubCd.equals("30")) {
+            Tv_con_titles.setText("약국");
+            map_Btn_medical_subject.setText("약국");
+            subject = "약국";
+        }else if(MedicalsubCd.equals("50")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("구강악안면외과");
+            subject = "구강악안면외과";
+        }else if(MedicalsubCd.equals("51")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("치과보철과");
+            subject = "치과보철과";
+        }else if(MedicalsubCd.equals("52")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("치과교정과");
+            subject = "치과교정과";
+        }else if(MedicalsubCd.equals("53")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("소아치과");
+            subject = "소아치과";
+        }else if(MedicalsubCd.equals("54")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("치주과");
+            subject = "치주과";
+        }else if(MedicalsubCd.equals("55")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("치과보존과");
+            subject = "치과보존과";
+        }else if(MedicalsubCd.equals("56")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("구강내과");
+            subject = "구강내과";
+        }else if(MedicalsubCd.equals("57")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("영상치의학과");
+            subject = "영상치의학과";
+        }else if(MedicalsubCd.equals("58")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("구강병리과");
+            subject = "구강병리과";
+        }else if(MedicalsubCd.equals("59")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("예방치과");
+            subject = "예방치과";
+        }else if(MedicalsubCd.equals("61")) {
+            Tv_con_titles.setText("치과의원");
+            map_Btn_medical_subject.setText("통합치의학과");
+            subject = "통합치의학과";
+        }else if(MedicalsubCd.equals("80")) {
+            Tv_con_titles.setText("한의원");
+            map_Btn_medical_subject.setText("한방내과");
+            subject = "한방내과";
+        }else if(MedicalsubCd.equals("81")) {
+            Tv_con_titles.setText("한의원");
+            map_Btn_medical_subject.setText("한방부인과");
+            subject = "한방부인과";
+        }else if(MedicalsubCd.equals("82")) {
+            Tv_con_titles.setText("한의원");
+            map_Btn_medical_subject.setText("한방소아과");
+            subject = "한방소아과";
+        }else if(MedicalsubCd.equals("83")) {
+            Tv_con_titles.setText("한의원");
+            map_Btn_medical_subject.setText("한방안ㆍ이비인후ㆍ피부과");
+            subject = "한방안ㆍ이비인후ㆍ피부과";
+        }else if(MedicalsubCd.equals("84")) {
+            Tv_con_titles.setText("한의원");
+            map_Btn_medical_subject.setText("한방신경정신과");
+            subject = "한방신경정신과";
+        }else if(MedicalsubCd.equals("85")) {
+            Tv_con_titles.setText("한의원");
+            map_Btn_medical_subject.setText("침구과");
+            subject = "침구과";
+        }else if(MedicalsubCd.equals("86")) {
+            Tv_con_titles.setText("한의원");
+            map_Btn_medical_subject.setText("한방재활의학과");
+            subject = "한방재활의학과";
+        }else if(MedicalsubCd.equals("87")) {
+            Tv_con_titles.setText("한의원");
+            map_Btn_medical_subject.setText("사상체질과");
+            subject = "사상체질과";
         }
 
 //        if(MedicalsubCd.equals("01")){
@@ -431,7 +578,7 @@ public class MapActivityGooglemap extends AppCompatActivity
     public void readDataFromCsv() throws IOException {
         // 진료과목 코드에 따라 어떤 csv파일 읽을지 여기서 스위치문 설정
 
-        InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.plastic));        // 용량 작은 거 읽게 하던가 해야될 거 같음
+        InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.medi17));
         if(MedicalsubCd.equals("01")){
             is = new InputStreamReader(getResources().openRawResource(R.raw.medi01));
         }else if(MedicalsubCd.equals("02")) {
@@ -442,18 +589,82 @@ public class MapActivityGooglemap extends AppCompatActivity
             is = new InputStreamReader(getResources().openRawResource(R.raw.medi04));
         }else if(MedicalsubCd.equals("05")) {
             is = new InputStreamReader(getResources().openRawResource(R.raw.medi05));
-        }else if(MedicalsubCd.equals("14")){
-            is = new InputStreamReader(getResources().openRawResource(R.raw.pbu));
-        }else if(MedicalsubCd.equals("12")){
-            is = new InputStreamReader(getResources().openRawResource(R.raw.eye));
-        }else if(MedicalsubCd.equals("08")){
-            is = new InputStreamReader(getResources().openRawResource(R.raw.plastic));
-        }else if(MedicalsubCd.equals("13")){
-            is = new InputStreamReader(getResources().openRawResource(R.raw.ebinhu));
-        }else if(MedicalsubCd.equals("15")){
-            is = new InputStreamReader(getResources().openRawResource(R.raw.benyo));
-        }else if(MedicalsubCd.equals("10")){
-            is = new InputStreamReader(getResources().openRawResource(R.raw.sanbu));
+        }else if(MedicalsubCd.equals("06")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi06));
+        }else if(MedicalsubCd.equals("07")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi07));
+        }else if(MedicalsubCd.equals("08")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi08));
+        }else if(MedicalsubCd.equals("09")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi09));
+        }else if(MedicalsubCd.equals("10")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi10));
+        }else if(MedicalsubCd.equals("11")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi11));
+        }else if(MedicalsubCd.equals("12")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi12));
+        }else if(MedicalsubCd.equals("13")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi13));
+        }else if(MedicalsubCd.equals("14")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi14));
+        }else if(MedicalsubCd.equals("15")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi15));
+        }else if(MedicalsubCd.equals("16")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi16));
+        }else if(MedicalsubCd.equals("17")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi17));
+        }else if(MedicalsubCd.equals("19")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi19));
+        }else if(MedicalsubCd.equals("20")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi20));
+        }else if(MedicalsubCd.equals("21")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi21));
+        }else if(MedicalsubCd.equals("22")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi22));
+        }else if(MedicalsubCd.equals("23")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi23));
+        }else if(MedicalsubCd.equals("24")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi24));
+        }else if(MedicalsubCd.equals("25")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.medi25));
+        }else if(MedicalsubCd.equals("50")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent50));
+        }else if(MedicalsubCd.equals("51")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent51));
+        }else if(MedicalsubCd.equals("52")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent52));
+        }else if(MedicalsubCd.equals("53")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent53));
+        }else if(MedicalsubCd.equals("54")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent54));
+        }else if(MedicalsubCd.equals("55")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent55));
+        }else if(MedicalsubCd.equals("56")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent56));
+        }else if(MedicalsubCd.equals("57")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent57));
+        }else if(MedicalsubCd.equals("58")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent58));
+        }else if(MedicalsubCd.equals("59")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent59));
+        }else if(MedicalsubCd.equals("61")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.dent61));
+        }else if(MedicalsubCd.equals("80")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.orie80));
+        }else if(MedicalsubCd.equals("81")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.orie81));
+        }else if(MedicalsubCd.equals("82")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.orie82));
+        }else if(MedicalsubCd.equals("83")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.orie83));
+        }else if(MedicalsubCd.equals("84")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.orie84));
+        }else if(MedicalsubCd.equals("85")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.orie85));
+        }else if(MedicalsubCd.equals("86")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.orie86));
+        }else if(MedicalsubCd.equals("87")) {
+            is = new InputStreamReader(getResources().openRawResource(R.raw.orie87));
         }
 
         //InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.dataneakwa2));

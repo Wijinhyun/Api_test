@@ -185,8 +185,62 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
             case R.id.tab_OS:
                 PushIntent("05");
                 break;
+            case R.id.tab_NS:
+                PushIntent("06");
+                break;
+            case R.id.tab_CS:
+                PushIntent("07");
+                break;
+            case R.id.tab_PS:
+                PushIntent("08");
+                break;
+            case R.id.tab_AN:
+                PushIntent("09");
+                break;
+            case R.id.tab_OBGY:
+                PushIntent("10");
+                break;
+            case R.id.tab_PED:
+                PushIntent("11");
+                break;
+            case R.id.tab_EY:
+                PushIntent("12");
+                break;
+            case R.id.tab_ENT:
+                PushIntent("13");
+                break;
             case R.id.tab_DER:
                 PushIntent("14");
+                break;
+            case R.id.tab_UR:
+                PushIntent("15");
+                break;
+            case R.id.tab_DR:
+                PushIntent("16");
+                break;
+            case R.id.tab_RO:
+                PushIntent("17");
+                break;
+            case R.id.tab_LM:
+                PushIntent("19");
+                break;
+            case R.id.tab_TB:
+                PushIntent("20");
+                break;
+            case R.id.tab_RM:
+                PushIntent("21");
+                break;
+            case R.id.tab_NM:
+                PushIntent("22");
+                break;
+            case R.id.tab_FM:
+                PushIntent("23");
+                break;
+            case R.id.tab_EM:
+                PushIntent("24");
+                break;
+            case R.id.tab_OEM:
+                PushIntent("25");
                 break;
         }
     }
