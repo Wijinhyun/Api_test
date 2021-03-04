@@ -37,7 +37,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:text="약국"
+                        android:text="약국 (예정)"
                         android:fontFamily="@font/applesdgothicneob"
                         android:layout_gravity="center"
                         android:textSize="20sp"/>
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:fontFamily="@font/applesdgothicneob"
-                        android:text="한약국 (추후 업데이트 예정)"
+                        android:text="한약국 (예정)"
                         android:layout_gravity="center"
                         android:textSize="20sp"/>
 

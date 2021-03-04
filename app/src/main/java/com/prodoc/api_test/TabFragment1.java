@@ -45,6 +45,7 @@ public class TabFragment1 extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tabfragment1, container, false);
 
+
         city_name = getActivity().getIntent().getStringExtra("city_name");
         gu_name = getActivity().getIntent().getStringExtra("gu_name");
         search = getActivity().getIntent().getStringExtra("search");

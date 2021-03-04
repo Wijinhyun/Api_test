@@ -112,9 +112,9 @@ public class TabFragment3 extends Fragment implements View.OnClickListener {
 
         }
 
-        LinearLayout l01 = view.findViewById(R.id.tab_pha1);
+        //LinearLayout l01 = view.findViewById(R.id.tab_pha1);
 
-        l01.setOnClickListener(this);
+        //l01.setOnClickListener(this);
 
         return view;
     }

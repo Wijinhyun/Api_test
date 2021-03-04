@@ -174,7 +174,7 @@
                 android:id="@+id/answer3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="대한민국의 중앙행정기관 보건복지부 산하의 공공기관인 건강보험심사평가원에서 제공하는 2020년 4분기 정보예요."
+                android:text="대한민국의 중앙행정기관 보건복지부 산하의 공공기관인 건강보험심사평가원에서 제공하는 2021년 1분기 정보예요."
                 android:textColor="#433E3E"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_marginLeft="15dp"
