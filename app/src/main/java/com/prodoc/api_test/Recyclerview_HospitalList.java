@@ -366,6 +366,13 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             city_name_for_text = "강원";
         }else if(city_name.equals("제주도")){
             city_name_for_text = "제주";
+        }else{      // geocoder 문제로 city값이 제대로 전달받지 못한 경우
+            city_name = "대구광역시";
+            gu_name = "북구";
+            city_name_for_text = "대구";
+            Toast.makeText(getApplicationContext(), "Geocoder 오류로 인해 초기위치값이 경북대로 설정되었습니다", Toast.LENGTH_LONG).show();
+            latitude = 35.887515;      // gps 거부한 경우에 초기위치값으로 경대 2호관 설정
+            longitude = 128.611553;
         }
 
         if (city_name != null && gu_name != null) {
