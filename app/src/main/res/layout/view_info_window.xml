@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/hangeulnurib"
                     android:textColor="#FFFFFF"
-                    android:textSize="30sp"
+                    android:textSize="30dp"
                     android:textStyle="bold" />
             </LinearLayout>
 

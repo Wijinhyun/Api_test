@@ -107,7 +107,7 @@
                             android:text="안녕하세요. 프로닥터입니다."
                             android:fontFamily="@font/applesdgothicneob"
                             android:textColor="#666666"
-                            android:textSize="12.0sp"
+                            android:textSize="12.0dp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -191,7 +191,7 @@
                                 android:layout_marginTop="12.0dip"
                                 android:text="의원"
                                 android:textColor="#000000"
-                                android:textSize="19.0sp" />
+                                android:textSize="19.0dp" />
 
                         </RelativeLayout>
 
@@ -236,7 +236,7 @@
                                 android:layout_marginTop="12.0dip"
                                 android:text="약국"
                                 android:textColor="#000000"
-                                android:textSize="19.0sp" />
+                                android:textSize="19.0dp" />
 
                             <View
                                 android:id="@+id/homeGiftShopCountDot"
@@ -302,7 +302,7 @@
                                 android:layout_marginTop="12.0dip"
                                 android:text="치과의원"
                                 android:textColor="#000000"
-                                android:textSize="19.0sp" />
+                                android:textSize="19.0dp" />
 
                         </RelativeLayout>
 
@@ -347,7 +347,7 @@
                                 android:layout_marginTop="12.0dip"
                                 android:text="한의원"
                                 android:textColor="#000000"
-                                android:textSize="19.0sp" />
+                                android:textSize="19.0dp" />
 
                             <View
                                 android:id="@+id/homeGiftShopCountDot1"

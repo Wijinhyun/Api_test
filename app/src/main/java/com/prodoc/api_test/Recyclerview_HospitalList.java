@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,8 @@ import java.util.List;
 
 public class Recyclerview_HospitalList extends AppCompatActivity implements View.OnClickListener {
 
-    private NestedScrollView nested;
+    //private NestedScrollView nested;
+    private ScrollView nested;
     private RecyclerView recyclerView;
     private CustomAdapter adapter;
     private LinearLayoutManager manager;
@@ -305,8 +307,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             subject = "한방소아과";
         }else if(MedicalsubCd.equals("83")) {
             Tv_con_titles.setText("한의원");
-            Btn_medical_subject.setText("한방안ㆍ이비인후ㆍ피부과");
-            subject = "한방안ㆍ이비인후ㆍ피부과";
+            Btn_medical_subject.setText("한방안·이비인후·피부과");
+            subject = "한방안·이비인후·피부과";
         }else if(MedicalsubCd.equals("84")) {
             Tv_con_titles.setText("한의원");
             Btn_medical_subject.setText("한방신경정신과");
@@ -326,7 +328,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         }
 
         // geocoder로인해 대구 -> 대구광역시 로 표현됨에 따라 다시 간소화 해주는 코드 필요
-        if(city_name == null){
+        if(city_name == null || gu_name == null){
             city_name = "대구광역시";
             gu_name = "북구";
         }
@@ -385,6 +387,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
         renewlist();
 
+        /*
         nested.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -401,6 +404,25 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                     Fb_totop.setVisibility(View.GONE);
                 }
 
+            }
+        });*/
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(final RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int firstVisibleItem = manager.findFirstVisibleItemPosition();
+
+                if (firstVisibleItem > 1) {
+                    //Show FAB
+                    Fb_totop.setVisibility(View.VISIBLE);
+                }
+                else{
+                    //Hide FAB
+                    Fb_totop.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -439,7 +461,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     }
 
     private void init() {
-        nested = (NestedScrollView) findViewById(R.id.scrollview);
+        //nested = (NestedScrollView) findViewById(R.id.scrollview);
+        nested = (ScrollView) findViewById(R.id.scrollview);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         manager = new LinearLayoutManager(Recyclerview_HospitalList.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
@@ -481,8 +504,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         Fb_totop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nested.smoothScrollTo(0,0);
-                //recyclerView.smoothScrollToPosition(0);
+                //nested.smoothScrollTo(0,0);
+                recyclerView.smoothScrollToPosition(0);
             }
         });
         Btn_region_in_list.setOnClickListener(this);

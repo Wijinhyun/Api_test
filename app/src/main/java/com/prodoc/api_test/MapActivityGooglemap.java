@@ -342,8 +342,8 @@ public class MapActivityGooglemap extends AppCompatActivity
             subject = "한방소아과";
         }else if(MedicalsubCd.equals("83")) {
             Tv_con_titles.setText("한의원");
-            map_Btn_medical_subject.setText("한방안ㆍ이비인후ㆍ피부과");
-            subject = "한방안ㆍ이비인후ㆍ피부과";
+            map_Btn_medical_subject.setText("한방안·이비인후·피부과");
+            subject = "한방안·이비인후·피부과";
         }else if(MedicalsubCd.equals("84")) {
             Tv_con_titles.setText("한의원");
             map_Btn_medical_subject.setText("한방신경정신과");

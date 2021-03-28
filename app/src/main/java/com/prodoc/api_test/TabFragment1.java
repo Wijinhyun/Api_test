@@ -100,7 +100,8 @@ public class TabFragment1 extends Fragment implements View.OnClickListener {
             }
             if (list != null) {
                 if (list.size()==0) {
-
+                    city_name = "대구광역시";
+                    gu_name = "북구";
                 } else {
                     city_name = list.get(0).getAdminArea();
                     if(list.get(0).getLocality() != null && list.get(0).getLocality().length() > 0){
@@ -109,6 +110,9 @@ public class TabFragment1 extends Fragment implements View.OnClickListener {
                         gu_name = list.get(0).getSubLocality();
                     }
                 }
+            }else{
+                city_name = "대구광역시";
+                gu_name = "북구";
             }
 
         }

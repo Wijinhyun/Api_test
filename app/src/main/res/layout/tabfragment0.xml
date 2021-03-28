@@ -40,7 +40,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="피부과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -72,7 +72,7 @@
                 android:text="성형외과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -112,7 +112,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="안과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -144,7 +144,7 @@
                 android:text="정형외과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -184,7 +184,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="신경과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -216,7 +216,7 @@
                 android:fontFamily="@font/applesdgothicneob"
                 android:text="신경외과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -256,7 +256,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="정신건강의학과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -288,7 +288,7 @@
                 android:text="이비인후과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -328,7 +328,7 @@
                 android:fontFamily="@font/applesdgothicneob"
                 android:text="내과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -360,7 +360,7 @@
                 android:text="외과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -400,7 +400,7 @@
                 android:fontFamily="@font/applesdgothicneob"
                 android:text="가정의학과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -432,7 +432,7 @@
                 android:fontFamily="@font/applesdgothicneob"
                 android:text="소아청소년과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -472,7 +472,7 @@
                 android:text="비뇨의학과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -504,7 +504,7 @@
                 android:text="산부인과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -544,7 +544,7 @@
                 android:text="재활의학과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -576,7 +576,7 @@
                 android:fontFamily="@font/applesdgothicneob"
                 android:text="마취통증의학과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -616,7 +616,7 @@
                 android:fontFamily="@font/applesdgothicneob"
                 android:text="흉부외과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -648,7 +648,7 @@
                 android:fontFamily="@font/applesdgothicneob"
                 android:text="영상의학과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -688,7 +688,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="진단검사의학과"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -720,7 +720,7 @@
                 android:text="응급의학과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -760,7 +760,7 @@
                 android:text="방사선종양학과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -792,7 +792,7 @@
                 android:text="직업환경의학과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -832,7 +832,7 @@
                 android:text="결핵과"
                 android:fontFamily="@font/applesdgothicneob"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -864,7 +864,7 @@
                 android:text="핵의학과"
                 android:layout_gravity="center"
                 android:fontFamily="@font/applesdgothicneob"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 

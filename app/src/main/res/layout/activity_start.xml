@@ -13,7 +13,7 @@
         android:fontFamily="@font/applesdgothicneob"
         android:text="prodoc"
         android:textColor="#49654C"
-        android:textSize="50sp"
+        android:textSize="50dp"
         android:textStyle="bold">
 
     </TextView>

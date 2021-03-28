@@ -22,6 +22,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
+import org.w3c.dom.Text;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -29,7 +31,7 @@ import java.util.List;
 public class MarkerDialogActivity extends Activity implements View.OnClickListener {
 
     private ImageView iv_circle;
-    private TextView tv_percent, tv_hospitalname, tv_distance, tv_addr, tv_sbj, tv_pronum, tv_totalnum;
+    private TextView tv_percent, tv_hospitalname, tv_distance, tv_addr, tv_sbj, tv_pronum, tv_totalnum, tv_hos_phar;
     private Button btn_call, btn_route;
     private CardView cardView;
     private String tvpercent, tvhospitalname, tvdistance, tvaddr, tvsbj, tvpronum, tvtotalnum, tvtel, tvpark, tvurl;
@@ -89,6 +91,101 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
         //tv_distance.setText(item.getDistance());
         //tv_percent.setText(tvpercent);
 
+
+
+        if(tvsbj.equals("피부과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("성형외과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("안과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("정형외과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("신경과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("신경외과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("정신건강의학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("이비인후과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("내과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("외과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("가정의학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("소아청소년과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("비뇨의학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("산부인과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("재활의학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("마취통증의학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("흉부외과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("영상의학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("진단검사의학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("응급의학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("방사선종양학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("직업환경의학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("결핵과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("핵의학과")){
+            tv_hos_phar.setText("의원");
+        }else if(tvsbj.equals("치과교정과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("치과보철과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("구강악안면외과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("치주과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("소아치과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("구강내과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("치과보존과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("통합치의학과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("구강병리과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("예방치과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("영상치의학과")){
+            tv_hos_phar.setText("치과의원");
+        }else if(tvsbj.equals("한방내과")){
+            tv_hos_phar.setText("한의원");
+        }else if(tvsbj.equals("침구과")){
+            tv_hos_phar.setText("한의원");
+        }else if(tvsbj.equals("한방안·이비인후·피부과")){
+            tv_hos_phar.setText("한의원");
+        }else if(tvsbj.equals("한방재활의학과")){
+            tv_hos_phar.setText("한의원");
+        }else if(tvsbj.equals("한방소아과")){
+            tv_hos_phar.setText("한의원");
+        }else if(tvsbj.equals("한방신경정신과")){
+            tv_hos_phar.setText("한의원");
+        }else if(tvsbj.equals("사상체질과")){
+            tv_hos_phar.setText("한의원");
+        }else if(tvsbj.equals("한방부인과")){
+            tv_hos_phar.setText("한의원");
+        }
+
+
+
+
+
+
         String percent = "0.0";
         percent = String.format("%.1f", Double.parseDouble(tvpercent));
         tv_percent.setText(percent + "%");
@@ -136,6 +233,8 @@ public class MarkerDialogActivity extends Activity implements View.OnClickListen
         btn_call = (Button) findViewById(R.id.btn_call);
         btn_route = (Button) findViewById(R.id.btn_route);
         view_item3 = findViewById(R.id.view_item3);
+
+        tv_hos_phar = (TextView) findViewById(R.id.hos_phar);
 
         cardView.setOnClickListener(this);
         btn_call.setOnClickListener(this);

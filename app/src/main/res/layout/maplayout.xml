@@ -40,7 +40,7 @@
             android:foregroundGravity="bottom"
             android:text="LIST"
             android:textColor="#ffffff"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:borderWidth="0dp"
             app:fabCustomSize="70dp"

@@ -40,7 +40,7 @@
                         android:text="치과교정과"
                         android:fontFamily="@font/applesdgothicneob"
                         android:layout_gravity="center"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -72,7 +72,7 @@
                         android:fontFamily="@font/applesdgothicneob"
                         android:text="치과보철과"
                         android:layout_gravity="center"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -112,7 +112,7 @@
                         android:fontFamily="@font/applesdgothicneob"
                         android:text="구강악안면외과"
                         android:layout_gravity="center"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -144,7 +144,7 @@
                         android:text="치주과"
                         android:layout_gravity="center"
                         android:fontFamily="@font/applesdgothicneob"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -184,7 +184,7 @@
                         android:layout_marginLeft="15dp"
                         android:text="소아치과"
                         android:layout_gravity="center"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -216,7 +216,7 @@
                         android:fontFamily="@font/applesdgothicneob"
                         android:text="구강내과"
                         android:layout_gravity="center"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -256,7 +256,7 @@
                         android:layout_marginLeft="15dp"
                         android:text="치과보존과"
                         android:layout_gravity="center"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -288,7 +288,7 @@
                         android:text="통합치의학과"
                         android:layout_gravity="center"
                         android:fontFamily="@font/applesdgothicneob"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -328,7 +328,7 @@
                         android:layout_marginLeft="15dp"
                         android:text="구강병리과"
                         android:layout_gravity="center"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -360,7 +360,7 @@
                         android:text="예방치과"
                         android:fontFamily="@font/applesdgothicneob"
                         android:layout_gravity="center"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -400,7 +400,7 @@
                         android:text="영상치의학과"
                         android:layout_gravity="center"
                         android:fontFamily="@font/applesdgothicneob"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 
@@ -423,7 +423,7 @@
                         android:layout_marginLeft="15dp"
                         android:text=""
                         android:layout_gravity="center"
-                        android:textSize="20sp"/>
+                        android:textSize="20dp"/>
 
                 </LinearLayout>
 

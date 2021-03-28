@@ -80,6 +80,97 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
 //        }
         //viewholder.Tv_percent.setText(mList.get(position).getPercent() + "%");
 
+
+        if(subject.equals("피부과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("성형외과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("안과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("정형외과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("신경과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("신경외과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("정신건강의학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("이비인후과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("내과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("외과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("가정의학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("소아청소년과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("비뇨의학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("산부인과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("재활의학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("마취통증의학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("흉부외과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("영상의학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("진단검사의학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("응급의학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("방사선종양학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("직업환경의학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("결핵과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("핵의학과")){
+            viewholder.Hos_phar1.setText("의원");
+        }else if(subject.equals("치과교정과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("치과보철과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("구강악안면외과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("치주과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("소아치과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("구강내과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("치과보존과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("통합치의학과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("구강병리과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("예방치과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("영상치의학과")){
+            viewholder.Hos_phar1.setText("치과의원");
+        }else if(subject.equals("한방내과")){
+            viewholder.Hos_phar1.setText("한의원");
+        }else if(subject.equals("침구과")){
+            viewholder.Hos_phar1.setText("한의원");
+        }else if(subject.equals("한방안·이비인후·피부과")){
+            viewholder.Hos_phar1.setText("한의원");
+        }else if(subject.equals("한방재활의학과")){
+            viewholder.Hos_phar1.setText("한의원");
+        }else if(subject.equals("한방소아과")){
+            viewholder.Hos_phar1.setText("한의원");
+        }else if(subject.equals("한방신경정신과")){
+            viewholder.Hos_phar1.setText("한의원");
+        }else if(subject.equals("사상체질과")){
+            viewholder.Hos_phar1.setText("한의원");
+        }else if(subject.equals("한방부인과")){
+            viewholder.Hos_phar1.setText("한의원");
+        }
+
+
+
         String percent = "0.0";
         percent = String.format("%.1f", Double.parseDouble(mList.get(position).getPercent()));
         viewholder.Tv_percent.setText(percent + "%");
