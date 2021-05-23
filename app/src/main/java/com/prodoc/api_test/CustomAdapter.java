@@ -2,6 +2,7 @@ package com.prodoc.api_test;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,6 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
 
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-
         View view = mInflate.inflate(R.layout.hospital_infor_layout, viewGroup, false);
         CustomViewHolder viewHolder = new CustomViewHolder(view);
         return viewHolder;
@@ -63,7 +63,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder viewholder, int position) {
 
-
+        Log.d("Bind_check", position +"개 bind");
         //viewholder.estbDdtxt.setText(mList.get(position).getEstbDd());
 
         viewholder.yadmNmtxt.setText(mList.get(position).getHospitalname());

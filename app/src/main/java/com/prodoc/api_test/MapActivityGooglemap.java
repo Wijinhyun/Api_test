@@ -41,6 +41,11 @@ import java.util.List;
 public class MapActivityGooglemap extends AppCompatActivity
         implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, ClusterManager.OnClusterClickListener<Cluster_item>, ClusterManager.OnClusterItemClickListener<Cluster_item> {
 
+    private static final int NORMAL_HOSPITAL_RANGE = 25;
+    private static final int PHARMACY_RANGE = 30;
+    private static final int DENTIST_RANGE = 61;
+    private static final int ORIENTAL_HOSPITAL_RANGE = 87;
+
     private static final int ACCESS_LOCATION_PERMISSION_REQUEST_CODE = 100;
     private GoogleMap mMap;
     private double Xpos;
@@ -158,7 +163,15 @@ public class MapActivityGooglemap extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent2 = new Intent(getApplicationContext(), SubjectSelectActivity.class);
-                intent2.putExtra("pagenumber", 0);  // 의원 - 0, 치과의원 - 1, 한의원 - 2, 약국 - 3
+                if(Integer.parseInt(MedicalsubCd) <= NORMAL_HOSPITAL_RANGE){
+                    intent2.putExtra("pagenumber", 0);
+                }else if(Integer.parseInt(MedicalsubCd) <= PHARMACY_RANGE){
+                    intent2.putExtra("pagenumber", 3);
+                }else if(Integer.parseInt(MedicalsubCd) <= DENTIST_RANGE){
+                    intent2.putExtra("pagenumber", 1);
+                }else{
+                    intent2.putExtra("pagenumber", 2);
+                }
                 intent2.putExtra("Imfrom", "googlemap");
                 intent2.putExtra("city_name", city_name);
                 intent2.putExtra("gu_name", gu_name);

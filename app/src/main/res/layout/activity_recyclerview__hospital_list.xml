@@ -123,7 +123,6 @@
 
         <View
             android:id="@+id/hide_filter_view"
-            android:visibility="gone"
             android:layout_width="fill_parent"
             android:layout_height="1.0dip"
             android:layout_gravity="center"
@@ -131,7 +130,6 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/hide_filter_toolbar"
-            android:visibility="gone"
             android:background="@android:color/white"
             android:layout_width="fill_parent"
             android:layout_height="40.0dip"
@@ -266,27 +264,13 @@
 
     </LinearLayout>
 
-
-
-    <ScrollView
-        android:id="@+id/scrollview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_below="@+id/linearfortv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:overScrollMode="never"
-        android:layout_below="@+id/linearfortv">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        android:layout_height="wrap_content" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
-        </LinearLayout>
-
-    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

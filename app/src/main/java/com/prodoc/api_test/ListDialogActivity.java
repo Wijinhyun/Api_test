@@ -48,6 +48,7 @@ public class ListDialogActivity extends Activity implements View.OnClickListener
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        Log.d("chk_img", "생섬됨");
         //WindowManager.LayoutParams  layoutParams = new WindowManager.LayoutParams();
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;

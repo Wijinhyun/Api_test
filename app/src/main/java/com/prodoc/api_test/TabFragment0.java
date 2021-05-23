@@ -108,6 +108,7 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
                     }else{
                         gu_name = list.get(0).getSubLocality();
                     }
+
                 }
             }else{
                 city_name = "대구광역시";
@@ -115,6 +116,7 @@ public class TabFragment0 extends Fragment implements View.OnClickListener{
             }
 
         }
+
 
 
         LinearLayout l01 = view.findViewById(R.id.tab_IM);

@@ -1,32 +1,26 @@
 package com.prodoc.api_test;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.opencsv.CSVReader;
-
-import org.xmlpull.v1.XmlPullParser;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,62 +31,47 @@ import java.util.List;
 
 public class Recyclerview_HospitalList extends AppCompatActivity implements View.OnClickListener {
 
-    //private NestedScrollView nested;
-    private ScrollView nested;
+    private static final int NORMAL_HOSPITAL_RANGE = 25;
+    private static final int PHARMACY_RANGE = 30;
+    private static final int DENTIST_RANGE = 61;
+    private static final int ORIENTAL_HOSPITAL_RANGE = 87;
+
     private RecyclerView recyclerView;
     private CustomAdapter adapter;
     private LinearLayoutManager manager;
 
-    private int Pagenumber = 1;
     private ArrayList<HospitalItem> list = null;
     private HospitalItem item = null;
-    private XmlPullParser xpp, xpp2;
 
     private String city_name;
     private String city_name_for_text;
     private String gu_name;
     ArrayList<String> jagosipda = null;
 
-    private String hospitalCode;
-    private String temp, temp2;
-    private String temp_cnt;
-    private String mykey = "%2BHeQuB3%2FCasGAbmRnedYca%2B6ESWu%2FcHnzFBtykDvwHZZLfz0ZTTJ2mANSme5%2Blr1DgBnQ4WJnmLXPwxsatF3Pw%3D%3D";
     private String MedicalsubCd;
-    private Boolean lock = false;
     private String search;
-    private int hospital_Cnt = 0;
-    //private int Tv_cnt = 0;
     private String subject;
 
-    private double Xpos;
-    private double Ypos;
-
-    private Location location;
-    private String provider;
     private double latitude;
     private double longitude;
-
 
     private FloatingActionButton Fb_tomap, Fb_totop;
     private Button Btn_region_in_list, Btn_medical_subject, Btn_search;
 
-
-    // ver 2 를 위한 것들
     private ImageView Btn_back, Recycler_filter, Filter_ratio_iv, Filter_total_iv, Filter_distance_iv;
     private View Hide_filter_view;
     private Toolbar Hide_filter_toolbar;
     private LinearLayout Filter_ratio, Filter_total, Filter_distance;
     private int filtering_num = 0;
 
-
-
-    private TextView Tv_hospitalCnt, Tv_cnt, Tv_con_titles;
+    private TextView Tv_cnt, Tv_con_titles;
     private LinearLayout base_progressBar;
-    GPSTracker gps;
 
-    ArrayList<HospitalItemForCsv> arr = null; //new ArrayList<>();
+    ArrayList<HospitalItemForCsv> arr = null;
     String sidoCd = null;
     String sgguCd = null;
+
+    private GPSTracker gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +86,8 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         MedicalsubCd = intent.getStringExtra("MedicalsubCd");
         search = intent.getStringExtra("search");
 
-        // Create class object
         gps = new GPSTracker(Recyclerview_HospitalList.this);
 
-        // Check if GPS enabled
         if(gps.canGetLocation()) {
 
             getpermisson();
@@ -120,261 +97,215 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
 
             if(latitude == 0 || longitude == 0){
                 Toast.makeText(getApplicationContext(), "GPS 활용 거부로 인해 초기위치값이 경북대로 설정되었습니다", Toast.LENGTH_LONG).show();
-                latitude = 35.887515;      // gps 거부한 경우에 초기위치값으로 경대 2호관 설정
+                latitude = 35.887515;
                 longitude = 128.611553;
             }
 
-            // \n is for new line
-            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
         } else {
-            // Can't get location.
-            // GPS or network is not enabled.
-            // Ask user to enable GPS/network in settings.
             gps.showSettingsAlert();
         }
 
-//        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//
-//        if ( Build.VERSION.SDK_INT >= 23 &&
-//                ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-//            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
-//                    0 );
-//            latitude = 35.887515;       // 위치정보 못얻었으면 초기 위치로 IT2호관 부여
-//            longitude = 128.611553;
-//        }
-//        else{
-//            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//            longitude = location.getLongitude();
-//            latitude = location.getLatitude();
-//        }
-        Log.d("Wi", latitude +" " + longitude);
-
-        if(MedicalsubCd.equals("01")){
-            Tv_con_titles.setText("의원");        // 맵에선 조금 다르게 할 거니까 이따가 일괄 삽입
-            Btn_medical_subject.setText(" 내과 ");
-            subject = "내과";
-        }else if(MedicalsubCd.equals("02")){
+        if(Integer.parseInt(MedicalsubCd) <= NORMAL_HOSPITAL_RANGE) {
             Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText(" 신경과 ");
-            subject = "신경과";
-        }else if(MedicalsubCd.equals("03")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText(" 정신건강의학과 ");
-            subject = "정신건강의학과";
-        }else if(MedicalsubCd.equals("04")){
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("외과");
-            subject = "외과";
-        }else if(MedicalsubCd.equals("05")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("정형외과");
-            subject = "정형외과";
-        }else if(MedicalsubCd.equals("06")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("신경외과");
-            subject = "신경외과";
-        }else if(MedicalsubCd.equals("07")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("흉부외과");
-            subject = "흉부외과";
-        }else if(MedicalsubCd.equals("08")){
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("성형외과");
-            subject = "성형외과";
-        }else if(MedicalsubCd.equals("09")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("마취통증의학과");
-            subject = "마취통증의학과";
-        }else if(MedicalsubCd.equals("10")){
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("산부인과");
-            subject = "산부인과";
-        }else if(MedicalsubCd.equals("11")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("소아청소년과");
-            subject = "소아청소년과";
-        }else if(MedicalsubCd.equals("12")){
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("안과");
-            subject = "안과";
-        }else if(MedicalsubCd.equals("13")){
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("이비인후과");
-            subject = "이비인후과";
-        }else if(MedicalsubCd.equals("14")){
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("피부과");
-            subject = "피부과";
-        }else if(MedicalsubCd.equals("15")){
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("비뇨기의학과");
-            subject = "비뇨기의학과";
-        }else if(MedicalsubCd.equals("16")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("영상의학과");
-            subject = "영상의학과";
-        }else if(MedicalsubCd.equals("17")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("방사선종양학과");
-            subject = "방사선종양학과";
-        }else if(MedicalsubCd.equals("19")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("진단검사의학과");
-            subject = "진단검사의학과";
-        }else if(MedicalsubCd.equals("20")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("결핵과");
-            subject = "결핵과";
-        }else if(MedicalsubCd.equals("21")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("재활의학과");
-            subject = "재활의학과";
-        }else if(MedicalsubCd.equals("22")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("핵의학과");
-            subject = "핵의학과";
-        }else if(MedicalsubCd.equals("23")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("가정의학과");
-            subject = "가정의학과";
-        }else if(MedicalsubCd.equals("24")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("응급의학과");
-            subject = "응급의학과";
-        }else if(MedicalsubCd.equals("25")) {
-            Tv_con_titles.setText("의원");
-            Btn_medical_subject.setText("직업환경의학과");
-            subject = "직업환경의학과";
-        }else if(MedicalsubCd.equals("30")) {
+            switch (MedicalsubCd) {
+                case "01":
+                    Btn_medical_subject.setText(" 내과 ");
+                    subject = "내과";
+                    break;
+                case "02":
+                    Btn_medical_subject.setText(" 신경과 ");
+                    subject = "신경과";
+                    break;
+                case "03":
+                    Btn_medical_subject.setText(" 정신건강의학과 ");
+                    subject = "정신건강의학과";
+                    break;
+                case "04":
+                    Btn_medical_subject.setText("외과");
+                    subject = "외과";
+                    break;
+                case "05":
+                    Btn_medical_subject.setText("정형외과");
+                    subject = "정형외과";
+                    break;
+                case "06":
+                    Btn_medical_subject.setText("신경외과");
+                    subject = "신경외과";
+                    break;
+                case "07":
+                    Btn_medical_subject.setText("흉부외과");
+                    subject = "흉부외과";
+                    break;
+                case "08":
+                    Btn_medical_subject.setText("성형외과");
+                    subject = "성형외과";
+                    break;
+                case "09":
+                    Btn_medical_subject.setText("마취통증의학과");
+                    subject = "마취통증의학과";
+                    break;
+                case "10":
+                    Btn_medical_subject.setText("산부인과");
+                    subject = "산부인과";
+                    break;
+                case "11":
+                    Btn_medical_subject.setText("소아청소년과");
+                    subject = "소아청소년과";
+                    break;
+                case "12":
+                    Btn_medical_subject.setText("안과");
+                    subject = "안과";
+                    break;
+                case "13":
+                    Btn_medical_subject.setText("이비인후과");
+                    subject = "이비인후과";
+                    break;
+                case "14":
+                    Btn_medical_subject.setText("피부과");
+                    subject = "피부과";
+                    break;
+                case "15":
+                    Btn_medical_subject.setText("비뇨기의학과");
+                    subject = "비뇨기의학과";
+                    break;
+                case "16":
+                    Btn_medical_subject.setText("영상의학과");
+                    subject = "영상의학과";
+                    break;
+                case "17":
+                    Btn_medical_subject.setText("방사선종양학과");
+                    subject = "방사선종양학과";
+                    break;
+                case "19":
+                    Btn_medical_subject.setText("진단검사의학과");
+                    subject = "진단검사의학과";
+                    break;
+                case "20":
+                    Btn_medical_subject.setText("결핵과");
+                    subject = "결핵과";
+                    break;
+                case "21":
+                    Btn_medical_subject.setText("재활의학과");
+                    subject = "재활의학과";
+                    break;
+                case "22":
+                    Btn_medical_subject.setText("핵의학과");
+                    subject = "핵의학과";
+                    break;
+                case "23":
+                    Btn_medical_subject.setText("가정의학과");
+                    subject = "가정의학과";
+                    break;
+                case "24":
+                    Btn_medical_subject.setText("응급의학과");
+                    subject = "응급의학과";
+                    break;
+                case "25":
+                    Btn_medical_subject.setText("직업환경의학과");
+                    subject = "직업환경의학과";
+                    break;
+            }
+        }else if(Integer.parseInt(MedicalsubCd) <= PHARMACY_RANGE){
             Tv_con_titles.setText("약국");
-            Btn_medical_subject.setText("약국");
-            subject = "약국";
-        }else if(MedicalsubCd.equals("50")) {
+            if(MedicalsubCd.equals("30")) {
+                Btn_medical_subject.setText("약국");
+                subject = "약국";
+            }
+        }else if(Integer.parseInt(MedicalsubCd) <= DENTIST_RANGE){
             Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("구강악안면외과");
-            subject = "구강악안면외과";
-        }else if(MedicalsubCd.equals("51")) {
-            Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("치과보철과");
-            subject = "치과보철과";
-        }else if(MedicalsubCd.equals("52")) {
-            Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("치과교정과");
-            subject = "치과교정과";
-        }else if(MedicalsubCd.equals("53")) {
-            Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("소아치과");
-            subject = "소아치과";
-        }else if(MedicalsubCd.equals("54")) {
-            Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("치주과");
-            subject = "치주과";
-        }else if(MedicalsubCd.equals("55")) {
-            Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("치과보존과");
-            subject = "치과보존과";
-        }else if(MedicalsubCd.equals("56")) {
-            Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("구강내과");
-            subject = "구강내과";
-        }else if(MedicalsubCd.equals("57")) {
-            Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("영상치의학과");
-            subject = "영상치의학과";
-        }else if(MedicalsubCd.equals("58")) {
-            Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("구강병리과");
-            subject = "구강병리과";
-        }else if(MedicalsubCd.equals("59")) {
-            Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("예방치과");
-            subject = "예방치과";
-        }else if(MedicalsubCd.equals("61")) {
-            Tv_con_titles.setText("치과의원");
-            Btn_medical_subject.setText("통합치의학과");
-            subject = "통합치의학과";
-        }else if(MedicalsubCd.equals("80")) {
+            switch (MedicalsubCd) {
+                case "50":
+                    Btn_medical_subject.setText("구강악안면외과");
+                    subject = "구강악안면외과";
+                    break;
+                case "51":
+                    Btn_medical_subject.setText("치과보철과");
+                    subject = "치과보철과";
+                    break;
+                case "52":
+                    Btn_medical_subject.setText("치과교정과");
+                    subject = "치과교정과";
+                    break;
+                case "53":
+                    Btn_medical_subject.setText("소아치과");
+                    subject = "소아치과";
+                    break;
+                case "54":
+                    Btn_medical_subject.setText("치주과");
+                    subject = "치주과";
+                    break;
+                case "55":
+                    Btn_medical_subject.setText("치과보존과");
+                    subject = "치과보존과";
+                    break;
+                case "56":
+                    Btn_medical_subject.setText("구강내과");
+                    subject = "구강내과";
+                    break;
+                case "57":
+                    Btn_medical_subject.setText("영상치의학과");
+                    subject = "영상치의학과";
+                    break;
+                case "58":
+                    Btn_medical_subject.setText("구강병리과");
+                    subject = "구강병리과";
+                    break;
+                case "59":
+                    Btn_medical_subject.setText("예방치과");
+                    subject = "예방치과";
+                    break;
+                case "61":
+                    Btn_medical_subject.setText("통합치의학과");
+                    subject = "통합치의학과";
+                    break;
+            }
+        }else if(Integer.parseInt(MedicalsubCd) <= ORIENTAL_HOSPITAL_RANGE) {
             Tv_con_titles.setText("한의원");
-            Btn_medical_subject.setText("한방내과");
-            subject = "한방내과";
-        }else if(MedicalsubCd.equals("81")) {
-            Tv_con_titles.setText("한의원");
-            Btn_medical_subject.setText("한방부인과");
-            subject = "한방부인과";
-        }else if(MedicalsubCd.equals("82")) {
-            Tv_con_titles.setText("한의원");
-            Btn_medical_subject.setText("한방소아과");
-            subject = "한방소아과";
-        }else if(MedicalsubCd.equals("83")) {
-            Tv_con_titles.setText("한의원");
-            Btn_medical_subject.setText("한방안·이비인후·피부과");
-            subject = "한방안·이비인후·피부과";
-        }else if(MedicalsubCd.equals("84")) {
-            Tv_con_titles.setText("한의원");
-            Btn_medical_subject.setText("한방신경정신과");
-            subject = "한방신경정신과";
-        }else if(MedicalsubCd.equals("85")) {
-            Tv_con_titles.setText("한의원");
-            Btn_medical_subject.setText("침구과");
-            subject = "침구과";
-        }else if(MedicalsubCd.equals("86")) {
-            Tv_con_titles.setText("한의원");
-            Btn_medical_subject.setText("한방재활의학과");
-            subject = "한방재활의학과";
-        }else if(MedicalsubCd.equals("87")) {
-            Tv_con_titles.setText("한의원");
-            Btn_medical_subject.setText("사상체질과");
-            subject = "사상체질과";
+            switch (MedicalsubCd) {
+                case "80":
+                    Btn_medical_subject.setText("한방내과");
+                    subject = "한방내과";
+                    break;
+                case "81":
+                    Btn_medical_subject.setText("한방부인과");
+                    subject = "한방부인과";
+                    break;
+                case "82":
+                    Btn_medical_subject.setText("한방소아과");
+                    subject = "한방소아과";
+                    break;
+                case "83":
+                    Btn_medical_subject.setText("한방안·이비인후·피부과");
+                    subject = "한방안·이비인후·피부과";
+                    break;
+                case "84":
+                    Btn_medical_subject.setText("한방신경정신과");
+                    subject = "한방신경정신과";
+                    break;
+                case "85":
+                    Btn_medical_subject.setText("침구과");
+                    subject = "침구과";
+                    break;
+                case "86":
+                    Btn_medical_subject.setText("한방재활의학과");
+                    subject = "한방재활의학과";
+                    break;
+                case "87":
+                    Btn_medical_subject.setText("사상체질과");
+                    subject = "사상체질과";
+                    break;
+            }
         }
 
-        // geocoder로인해 대구 -> 대구광역시 로 표현됨에 따라 다시 간소화 해주는 코드 필요
         if(city_name == null || gu_name == null){
             city_name = "대구광역시";
             gu_name = "북구";
         }
 
-
-        if(city_name.equals("서울특별시")){
-            city_name_for_text = "서울";
-        }else if(city_name.equals("경기도")){
-            city_name_for_text = "경기";
-        }else if(city_name.equals("부산광역시")){
-            city_name_for_text = "부산";
-        }else if(city_name.equals("인천광역시")){
-            city_name_for_text = "인천";
-        }else if(city_name.equals("대구광역시")){
-            city_name_for_text = "대구";
-        }else if(city_name.equals("대전광역시")){
-            city_name_for_text = "대전";
-        }else if(city_name.equals("광주광역시")){
-            city_name_for_text = "광주";
-        }else if(city_name.equals("울산광역시")){
-            city_name_for_text = "울산";
-        }else if(city_name.equals("세종특별자치시")){
-            city_name_for_text = "세종";
-        }else if(city_name.equals("경상남도")){
-            city_name_for_text = "경남";
-        }else if(city_name.equals("경상북도")){
-            city_name_for_text = "경북";
-        }else if(city_name.equals("전라남도")){
-            city_name_for_text = "전남";
-        }else if(city_name.equals("전라북도")){
-            city_name_for_text = "전북";
-        }else if(city_name.equals("충청남도")){
-            city_name_for_text = "충남";
-        }else if(city_name.equals("충청북도")){
-            city_name_for_text = "충북";
-        }else if(city_name.equals("강원도")){
-            city_name_for_text = "강원";
-        }else if(city_name.equals("제주도")){
-            city_name_for_text = "제주";
-        }else{      // geocoder 문제로 city값이 제대로 전달받지 못한 경우
-            city_name = "대구광역시";
-            gu_name = "북구";
-            city_name_for_text = "대구";
-            Toast.makeText(getApplicationContext(), "Geocoder 오류로 인해 초기위치값이 경북대로 설정되었습니다", Toast.LENGTH_LONG).show();
-            latitude = 35.887515;      // gps 거부한 경우에 초기위치값으로 경대 2호관 설정
-            longitude = 128.611553;
+        if(city_name.length() == 4){
+            city_name_for_text = "" + city_name.charAt(0) + city_name.charAt(2);
+        }else{
+            city_name_for_text = city_name.substring(0,2);
         }
 
         if (city_name != null && gu_name != null) {
@@ -384,43 +315,18 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             Btn_search.setText(" 검색어 : " + search + " ");
         }
 
-
         renewlist();
 
-        /*
-        nested.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                Display display = getWindowManager().getDefaultDisplay();
-                final int stageHeight = display.getHeight();
-                int currentheight = stageHeight+scrollY;
-                int maxheight = recyclerView.getHeight();
-
-                if(currentheight >= 8000){
-                    Fb_totop.setVisibility(View.VISIBLE);
-                }
-                else{
-                    //Hide FAB
-                    Fb_totop.setVisibility(View.GONE);
-                }
-
-            }
-        });*/
-
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
             @Override
             public void onScrolled(final RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 int firstVisibleItem = manager.findFirstVisibleItemPosition();
 
                 if (firstVisibleItem > 1) {
-                    //Show FAB
                     Fb_totop.setVisibility(View.VISIBLE);
                 }
                 else{
-                    //Hide FAB
                     Fb_totop.setVisibility(View.GONE);
                 }
             }
@@ -431,8 +337,6 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                 new RecyclerViewOnItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
-//                        Intent recycler_item = new Intent(getApplicationContext(), Hospital_Detail.class);
-////                        recycler_item.putExtra("array", arr.get(position));
                         final Intent intent = new Intent(getApplicationContext(),ListDialogActivity.class);
                         intent.putExtra("percent",arr.get(position).getPercent());
                         intent.putExtra("hospitalname",arr.get(position).getHospitalname());
@@ -461,15 +365,10 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
     }
 
     private void init() {
-        //nested = (NestedScrollView) findViewById(R.id.scrollview);
-        nested = (ScrollView) findViewById(R.id.scrollview);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerview);
         manager = new LinearLayoutManager(Recyclerview_HospitalList.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         base_progressBar = findViewById(R.id.base_progressBar);
-
-
-
 
         Btn_back = findViewById(R.id.btn_back);
         Btn_back.setOnClickListener(this);
@@ -487,12 +386,9 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         Filter_total_iv = findViewById(R.id.filter_total_iv);
         Filter_distance_iv = findViewById(R.id.filter_distance_iv);
 
-
-
         Btn_search = findViewById(R.id.btn_search);
         Btn_search.setOnClickListener(this);
 
-        //Tv_hospitalCnt = findViewById(R.id.tv_hospitalCnt);
         Tv_con_titles = findViewById(R.id.con_titles_forlist);
         Tv_cnt = findViewById(R.id.tv_cnt);
         Fb_tomap = findViewById(R.id.fb_tomap);
@@ -504,13 +400,16 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         Fb_totop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //nested.smoothScrollTo(0,0);
+                if(manager.findFirstVisibleItemPosition() > 10) {
+                    recyclerView.scrollToPosition(10);
+                }
                 recyclerView.smoothScrollToPosition(0);
             }
         });
         Btn_region_in_list.setOnClickListener(this);
         Btn_medical_subject.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -545,45 +444,53 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
                     Hide_filter_toolbar.setVisibility(View.GONE);
                 }
                 break;
-                // 비율순 - 다른 곳에 버튼 눌려져 있으면 비활성화 시키고 버튼 눌리도록 + 데이터 정렬하고
             case R.id.filter_ratio:
                 filtering_num = 1;
                 Filter_ratio_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_check));
                 Filter_total_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
                 Filter_distance_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
                 Log.d("filter_ratio", "");
-                base_progressBar.setVisibility(View.VISIBLE);
-                renewlist();
+                Collections.sort(arr,new Filtering_for_ratio());
+                Tv_cnt.setText(arr.size()+ "개의 의원을 전문의 비율순으로 나열했어요");
+                adapter.notifyDataSetChanged();
                 Hide_filter_view.setVisibility(View.GONE);
                 Hide_filter_toolbar.setVisibility(View.GONE);
                 break;
-                // 인원순
             case R.id.filter_total:
                 filtering_num = 2;
                 Filter_ratio_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
                 Filter_total_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_check));
                 Filter_distance_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
                 Log.d("filter_total", "");
-                base_progressBar.setVisibility(View.VISIBLE);
-                renewlist();
+                Collections.sort(arr,new Filtering_for_total());
+                Tv_cnt.setText(arr.size()+ "개의 의원을 전문의 인원순으로 나열했어요");
+                adapter.notifyDataSetChanged();
                 Hide_filter_view.setVisibility(View.GONE);
                 Hide_filter_toolbar.setVisibility(View.GONE);
                 break;
-                // 거리순
             case R.id.filter_distance:
                 filtering_num = 3;
                 Filter_ratio_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
                 Filter_total_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_uncheck));
                 Filter_distance_iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_check));
                 Log.d("filter_distance", "");
-                base_progressBar.setVisibility(View.VISIBLE);
-                renewlist();
+                Collections.sort(arr,new Filtering_for_distance());
+                Tv_cnt.setText(arr.size()+ "개의 의원을 가까운 거리순으로 나열했어요");
+                adapter.notifyDataSetChanged();
                 Hide_filter_view.setVisibility(View.GONE);
                 Hide_filter_toolbar.setVisibility(View.GONE);
                 break;
             case R.id.btn_medical_subject:
                 Intent intent2 = new Intent(getApplicationContext(), SubjectSelectActivity.class);
-                intent2.putExtra("pagenumber", 0);  // 의원 - 0, 치과의원 - 1, 한의원 - 2, 약국 - 3
+                if(Integer.parseInt(MedicalsubCd) <= NORMAL_HOSPITAL_RANGE){
+                    intent2.putExtra("pagenumber", 0);
+                }else if(Integer.parseInt(MedicalsubCd) <= PHARMACY_RANGE){
+                    intent2.putExtra("pagenumber", 3);
+                }else if(Integer.parseInt(MedicalsubCd) <= DENTIST_RANGE){
+                    intent2.putExtra("pagenumber", 1);
+                }else{
+                    intent2.putExtra("pagenumber", 2);
+                }
                 intent2.putExtra("Imfrom", "recyclerview");
                 intent2.putExtra("city_name", city_name);
                 intent2.putExtra("gu_name", gu_name);
@@ -610,45 +517,18 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //list = new ArrayList<HospitalItem>();
                 arr = new ArrayList<>();
-                //getXmlData();
                 getcode();
-                try { readDataFromCsv(); } catch (IOException e) { e.printStackTrace(); }
+                readDataFromCsv();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        if (list.isEmpty() == false || list.size() != 0) {
-//                            Log.d("list_check", list.size() + "");
-//                            adapter = new CustomAdapter(getApplicationContext(), list, subject);
-//                            recyclerView.setAdapter(adapter);
-//                            adapter.notifyDataSetChanged();
-//                            Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
-//                        }
-                        Log.d("list_check", arr.size() + "");
                         if(arr.isEmpty() == false || arr.size() != 0){
-                            Log.d("list_check", arr.size() + "");
-
-                            // filtering_num 에 따라서 sorting 하고 어뎁터에 연결
-                            if(filtering_num == 1){
-                                Collections.sort(arr,new Filtering_for_ratio());
-                                Tv_cnt.setText(arr.size()+ "개의 의원을 전문의 비율순으로 나열했어요");
-                            }else if(filtering_num == 2){
-                                Collections.sort(arr,new Filtering_for_total());
-                                Tv_cnt.setText(arr.size()+ "개의 의원을 전문의 인원순으로 나열했어요");
-                            }else if(filtering_num == 3){
-                                Collections.sort(arr,new Filtering_for_distance());
-                                Tv_cnt.setText(arr.size()+ "개의 의원을 가까운 거리순으로 나열했어요");
-                            }else if(filtering_num == 0){
-                                Collections.sort(arr,new Filtering_for_ganada());
-                                Tv_cnt.setText(arr.size()+ "개의 의원을 나열했어요");
-                            }
-
+                            Collections.sort(arr,new Filtering_for_ganada());
+                            Tv_cnt.setText(arr.size()+ "개의 의원을 나열했어요");
                             adapter = new CustomAdapter(getApplicationContext(), arr, subject);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
-                            //Tv_cnt.setText(arr.size()+ "개의 의원을 찾았어요.");
-                            //Tv_hospitalCnt.setText(hospital_Cnt+ "개 검색됨");
                         }else if(arr.size() == 0){
                             Tv_cnt.setText("검색 결과가 없어요.");
                         }
@@ -659,7 +539,7 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
         }).start();
     }
 
-    public void readDataFromCsv() throws IOException {
+    public void readDataFromCsv() {
         // 진료과목 코드에 따라 어떤 csv파일 읽을지 여기서 스위치문 설정
 
         InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.medi17));
@@ -751,10 +631,20 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             is = new InputStreamReader(getResources().openRawResource(R.raw.orie87));
         }
 
-        //InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.dataneakwa2));
 
-        CSVReader reader = new CSVReader(is); // 1
-        List<String[]> list = reader.readAll();
+        CSVReader reader = new CSVReader(is);
+        List<String[]> list = null;
+        try {
+            list = reader.readAll();
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         if(arr.size() != 0){
             arr.clear();
@@ -786,17 +676,6 @@ public class Recyclerview_HospitalList extends AppCompatActivity implements View
             int distance = calculateDistanceInKilometer(latitude,longitude,lat,lng);
             entity.setDistance(String.format("%d",distance));
 
-            // 리사이클러뷰에서는 시도코드, 시군구코드 존재 여부와, 값에 따라서 panjung을 내린 후 arr.add 해야됨
-            //int panjung = calculateDistanceInKilometer(temp_ypos,temp_xpos,lat,lng);
-
-//            if(search != null){
-//                if(entity.getHospitalname().contains(search)){
-//                    arr.add(entity);
-//                }
-//                else{
-//
-//                }
-//            }
 
             if(jagosipda.isEmpty() == false || jagosipda.size() != 0){  // 경기 수원시 같은 사례의 경우 모든 구를 포함해야 하는데, 이런 경우 자고십다가 활성화됨
                 for(int i=0;i<jagosipda.size();i++){
