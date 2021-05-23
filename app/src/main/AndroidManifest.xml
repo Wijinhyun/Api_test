@@ -23,9 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.prodoc.api_test.Medical_subject"></activity>
         <activity android:name="com.prodoc.api_test.QnA_page" />
-        <activity android:name="com.prodoc.api_test.Hospital_Detail" />
         <activity android:name="com.prodoc.api_test.Search_btn" android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name="com.prodoc.api_test.Recyclerview_HospitalList" />
 
@@ -42,11 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.prodoc.api_test.MapActivity" />
         <activity android:name="com.prodoc.api_test.MarkerDialogActivity" android:theme="@style/CustomDialogThemee"/>
         <activity android:name="com.prodoc.api_test.ListDialogActivity" android:theme="@style/Theme.AppCompat.Dialog"/>
         <activity android:name="com.prodoc.api_test.MapActivityGooglemap" />
-        <activity android:name="com.prodoc.api_test.MainActivity"/>
         <activity android:name="com.prodoc.api_test.MainActivity_Ver2"/>
         <activity android:name="com.prodoc.api_test.OnebyoneDialogActivity"/>
         <activity android:name="com.prodoc.api_test.SubjectSelectActivity"/>
